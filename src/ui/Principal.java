@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.SplashScreen;
 import java.awt.geom.Rectangle2D;
+import javax.swing.JPanel;
 
 /**
  *
@@ -37,15 +38,11 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jButton1 = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButton1.setText("jButton1");
-        jTabbedPane1.addTab("tab1", jButton1);
 
         jToolBar1.setRollover(true);
 
@@ -69,8 +66,8 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE))
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -79,8 +76,8 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                .addGap(106, 106, 106))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Inicio");
@@ -111,7 +108,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -191,4 +187,34 @@ public class Principal extends javax.swing.JFrame {
             mySplash.update();
         }
     }
+    
+    public void agregarPestaña(JPanel JPanel, String nombreTab) {
+        boolean fl = false;
+        int tabSeleccionado = 0;
+        try {
+            for (int i = 0; i < jTabbedPane1.getTabCount(); i++) {
+                if (jTabbedPane1.getTitleAt(i).equals(nombreTab)) {
+                    fl = true;
+                    tabSeleccionado = i;
+                }
+            }
+            if (fl) {
+                jTabbedPane1.setSelectedIndex(tabSeleccionado);
+            } else {
+                jTabbedPane1.add(nombreTab, JPanel);
+                jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount() - 1);
+                if (jTabbedPane1.getComponentCount() > 1) {
+                    
+                    //FALTA AGREGAR BOTON DE ELIMINAR
+//                    jBeliminar.setEnabled(true);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Agregando pestaña: " + e);
+        }
+
+    }
+    
+    
+   
 }
