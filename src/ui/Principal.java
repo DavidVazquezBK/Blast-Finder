@@ -26,6 +26,7 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         initComponents();
+        agregarPestaña(new Inicio(), "Inicio");
     }
 
     /**
@@ -42,9 +43,11 @@ public class Principal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        eliminarPestania = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel de trabajo"));
 
         jToolBar1.setFloatable(false);
 
@@ -61,23 +64,23 @@ public class Principal extends javax.swing.JFrame {
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton3);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/toolbar2/eliminar.png"))); // NOI18N
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        eliminarPestania.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/toolbar2/eliminar.png"))); // NOI18N
+        eliminarPestania.setFocusable(false);
+        eliminarPestania.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        eliminarPestania.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1)
+            .addComponent(eliminarPestania)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addComponent(eliminarPestania)
                 .addGap(424, 424, 424))
         );
 
@@ -135,7 +138,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton eliminarPestania;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
@@ -235,7 +238,7 @@ public class Principal extends javax.swing.JFrame {
                 if (jTabbedPane1.getComponentCount() > 1) {
 
                     //FALTA AGREGAR BOTON DE ELIMINAR
-//                    jBeliminar.setEnabled(true);
+                    eliminarPestania.setEnabled(true);
                 }
             }
         } catch (Exception e) {
