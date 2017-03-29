@@ -1,3 +1,6 @@
 /build/
 src/img/splash/Thumbs.db
 nbproject/private/private.xml
+*.db
+src/img/toolbar/Thumbs.db
+src/img/toolbar/Thumbs.db
