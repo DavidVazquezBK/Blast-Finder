@@ -27,6 +27,10 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         initComponents();
+//TODO poner icono de aplicación
+//        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("C:\\Users\\BurnKill\\Desktop\\icon.png")));
+
+        this.setLocationRelativeTo(null);
         agregarPestaña(new Inicio(), "Inicio");
     }
 
@@ -49,6 +53,7 @@ public class Principal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jButton2 = new javax.swing.JButton();
 
+        adminMenuSeleccion.setTitle("Menu de administración");
         adminMenuSeleccion.setResizable(false);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tag.png"))); // NOI18N
