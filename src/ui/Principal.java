@@ -45,7 +45,6 @@ public class Principal extends javax.swing.JFrame {
             }
         }));
         
-        //Añadir segundo botón del pop-up
         
         // Poner listener al boton
         jButton2.addMouseListener(new MouseAdapter() {
