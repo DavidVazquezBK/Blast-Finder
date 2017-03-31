@@ -3,6 +3,8 @@
  */
 package ui.abc;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author BurnKill
@@ -13,7 +15,9 @@ public class Categoria extends javax.swing.JPanel {
      * Creates new form CategoriaPanel
      */
     public Categoria() {
+
         initComponents();
+//          
     }
 
     /**
@@ -60,6 +64,9 @@ public class Categoria extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+
+        agregar.setTitle("Agregar ");
+        agregar.setResizable(false);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Nueva Categoría");
@@ -118,6 +125,9 @@ public class Categoria extends javax.swing.JPanel {
                     .addComponent(jButton5))
                 .addContainerGap())
         );
+
+        editar.setTitle("Editar");
+        editar.setResizable(false);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Editar Categoría");
@@ -239,10 +249,12 @@ public class Categoria extends javax.swing.JPanel {
 
         jLabel2.setText("ID:");
 
+        jTextField1.setEditable(false);
         jTextField1.setText(" ");
 
         jLabel3.setText("Nombre:");
 
+        jTextField2.setEditable(false);
         jTextField2.setText(" ");
 
         jLabel4.setText("Descripción:");
@@ -255,6 +267,7 @@ public class Categoria extends javax.swing.JPanel {
 
         jLabel5.setText("Iniciales:");
 
+        jTextField3.setEditable(false);
         jTextField3.setText(" ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -378,20 +391,24 @@ public class Categoria extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        setEnabled(false);
-        agregar.setVisible(true);
-        agregar.setSize(419+30, 30+134);
+        agregar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../img/icon.png")));
+        agregar.setModal(true);
+        agregar.setSize(419 + 30, 40 + 134);
         agregar.setLocationRelativeTo(editar.getParent());
+        agregar.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../img/icon.png")));
+        editar.setModal(true);
+        editar.setSize(419 + 30, 40 + 170);
+        editar.setLocationRelativeTo(editar.getParent());
+        editar.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfIdActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog agregar;
