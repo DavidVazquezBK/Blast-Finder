@@ -27,8 +27,8 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         initComponents();
-//TODO poner icono de aplicación
-//        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("C:\\Users\\BurnKill\\Desktop\\icon.png")));
+        
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/icon.png")));
 
         this.setLocationRelativeTo(null);
         agregarPestaña(new Inicio(), "Inicio");
