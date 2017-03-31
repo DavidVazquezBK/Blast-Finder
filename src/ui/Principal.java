@@ -58,6 +58,11 @@ public class Principal extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tag.png"))); // NOI18N
         jButton1.setText("Categorías");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/material.png"))); // NOI18N
         jButton3.setText("Materiales");
@@ -149,6 +154,10 @@ public class Principal extends javax.swing.JFrame {
         adminMenuSeleccion.setLocationRelativeTo(adminMenuSeleccion.getParent());
         adminMenuSeleccion.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
