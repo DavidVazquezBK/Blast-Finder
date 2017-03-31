@@ -37,15 +37,14 @@ public class Principal extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/icon.png")));
 
         //      Límite de edición
-         //Añadir segundo botón del pop-up
+        //Añadir primer botón del pop-up
         final JPopupMenu popup = new JPopupMenu();
         popup.add(new JMenuItem(new AbstractAction("Categoría") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Categoria(), "Categoria");
+                agregarPestaña(new Categoria(), "Categoría");
             }
         }));
-        
-        
+
         // Poner listener al boton
         jButton2.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
@@ -55,6 +54,7 @@ public class Principal extends javax.swing.JFrame {
         //      Límite de edición
         this.setLocationRelativeTo(null);
         agregarPestaña(new Inicio(), "Inicio");
+        agregarPestaña(new Categoria(), "Categoría");
     }
 
     /**
@@ -70,7 +70,7 @@ public class Principal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jButton2 = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Blast Finder - Instituto Franklin de Veracruz");
@@ -85,11 +85,11 @@ public class Principal extends javax.swing.JFrame {
 
         jToolBar2.setFloatable(false);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        jButton1.setText("Eliminar pestaña actual");
-        jButton1.setFocusable(false);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar2.add(jButton1);
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        eliminar.setText("Eliminar pestaña actual");
+        eliminar.setFocusable(false);
+        eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(eliminar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,7 +146,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
@@ -251,7 +251,7 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Agregando pestaña: " + e);
         }
-
+        
     }
 
 }
