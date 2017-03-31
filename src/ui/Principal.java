@@ -68,6 +68,7 @@ public class Principal extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jToolBar1 = new javax.swing.JToolBar();
+        jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
         eliminar = new javax.swing.JButton();
@@ -76,6 +77,17 @@ public class Principal extends javax.swing.JFrame {
         setTitle("Blast Finder - Instituto Franklin de Veracruz");
 
         jToolBar1.setFloatable(false);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/inicio.png"))); // NOI18N
+        jButton3.setText("Inicio");
+        jButton3.setFocusable(false);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton3);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/administracion.png"))); // NOI18N
         jButton2.setText("Administración");
@@ -89,6 +101,11 @@ public class Principal extends javax.swing.JFrame {
         eliminar.setText("Eliminar pestaña actual");
         eliminar.setFocusable(false);
         eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
         jToolBar2.add(eliminar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,6 +140,23 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        if (jTabbedPane1.getTabCount() > 1) {
+            jTabbedPane1.removeTabAt(jTabbedPane1.getSelectedIndex());
+            eliminar.setEnabled(true);
+
+        }
+
+        if (jTabbedPane1.getTabCount() == 1) {
+        eliminar.setEnabled(false);
+        }
+
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        agregarPestaña(new Inicio(), "Inicio");        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -148,6 +182,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
@@ -251,7 +286,10 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Agregando pestaña: " + e);
         }
-        eliminar.setEnabled(true);
+        if (jTabbedPane1.getTabCount()>1) {
+                    eliminar.setEnabled(true);
+
+        }
     }
 
 }
