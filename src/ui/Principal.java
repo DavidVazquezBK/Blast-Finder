@@ -19,6 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import ui.abc.Categoria;
+import ui.abc.Producto;
 
 /**
  *
@@ -37,11 +38,19 @@ public class Principal extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/icon.png")));
 
         //      Límite de edición
-        //Añadir primer botón del pop-up
         final JPopupMenu popup = new JPopupMenu();
+        
+        //Añadir primer botón del pop-up
         popup.add(new JMenuItem(new AbstractAction("Categoría") {
             public void actionPerformed(ActionEvent e) {
                 agregarPestaña(new Categoria(), "Categoría");
+            }
+        }));
+
+        //Añadir segundo botón del pop-up
+        popup.add(new JMenuItem(new AbstractAction("Producto") {
+            public void actionPerformed(ActionEvent e) {
+                agregarPestaña(new Producto(), "Producto");
             }
         }));
 
@@ -148,7 +157,7 @@ public class Principal extends javax.swing.JFrame {
         }
 
         if (jTabbedPane1.getTabCount() == 1) {
-        eliminar.setEnabled(false);
+            eliminar.setEnabled(false);
         }
 
     }//GEN-LAST:event_eliminarActionPerformed
@@ -286,8 +295,8 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Agregando pestaña: " + e);
         }
-        if (jTabbedPane1.getTabCount()>1) {
-                    eliminar.setEnabled(true);
+        if (jTabbedPane1.getTabCount() > 1) {
+            eliminar.setEnabled(true);
 
         }
     }
