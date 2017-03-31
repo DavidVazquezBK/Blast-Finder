@@ -10,8 +10,15 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.SplashScreen;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import javax.swing.AbstractAction;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -27,9 +34,26 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         initComponents();
-        
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/icon.png")));
 
+        //      Límite de edición
+         //Añadir segundo botón del pop-up
+        final JPopupMenu popup = new JPopupMenu();
+        popup.add(new JMenuItem(new AbstractAction("Categoría") {
+            public void actionPerformed(ActionEvent e) {
+              
+            }
+        }));
+        
+        //Añadir segundo botón del pop-up
+        
+        // Poner listener al boton
+        jButton2.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                popup.show(e.getComponent(), e.getX(), e.getY());
+            }
+        });
+        //      Límite de edición
         this.setLocationRelativeTo(null);
         agregarPestaña(new Inicio(), "Inicio");
     }
@@ -115,11 +139,6 @@ public class Principal extends javax.swing.JFrame {
         jButton2.setText("Administración");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
         jToolBar1.add(jButton2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,13 +166,6 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        adminMenuSeleccion.setSize(131 + 30, 219 + 30);
-        adminMenuSeleccion.setLocationRelativeTo(adminMenuSeleccion.getParent());
-        adminMenuSeleccion.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
