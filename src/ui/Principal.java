@@ -251,7 +251,7 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Agregando pestaña: " + e);
         }
-        
+        eliminar.setEnabled(true);
     }
 
 }
