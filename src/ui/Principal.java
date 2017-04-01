@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import ui.abc.Categoria;
 import ui.abc.Material;
+import ui.abc.Movimiento;
 import ui.abc.Producto;
 import ui.abc.Ubicacion;
 
@@ -43,26 +44,29 @@ public class Principal extends javax.swing.JFrame {
         final JPopupMenu popup = new JPopupMenu();
         
         //Añadir cada botón del pop-up
-        popup.add(new JMenuItem(new AbstractAction("Categoría") {
+        popup.add(new JMenuItem(new AbstractAction("Categorías") {
             public void actionPerformed(ActionEvent e) {
                 agregarPestaña(new Categoria(), "Categoría");
             }
         }));
-
-        popup.add(new JMenuItem(new AbstractAction("Producto") {
+        popup.add(new JMenuItem(new AbstractAction("Productos") {
             public void actionPerformed(ActionEvent e) {
                 agregarPestaña(new Producto(), "Producto");
             }
         }));
-        
-        popup.add(new JMenuItem(new AbstractAction("Material") {
+        popup.add(new JMenuItem(new AbstractAction("Materiales") {
             public void actionPerformed(ActionEvent e) {
                 agregarPestaña(new Material(), "Material");
             }
         }));
-        popup.add(new JMenuItem(new AbstractAction("Ubicación") {
+        popup.add(new JMenuItem(new AbstractAction("Ubicaciónes") {
             public void actionPerformed(ActionEvent e) {
                 agregarPestaña(new Ubicacion(), "Ubicación");
+            }
+        }));
+        popup.add(new JMenuItem(new AbstractAction("Movimientos") {
+            public void actionPerformed(ActionEvent e) {
+                agregarPestaña(new Movimiento(), "Movimientos");
             }
         }));
 
