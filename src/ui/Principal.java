@@ -47,27 +47,27 @@ public class Principal extends javax.swing.JFrame {
         //Añadir cada botón del pop-up
         popup.add(new JMenuItem(new AbstractAction("Categorías") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Categoria(), "Categoría");
+                agregarPestaña(new Categoria(), "Administrar Categorías");
             }
         }));
         popup.add(new JMenuItem(new AbstractAction("Productos") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Producto(), "Producto");
+                agregarPestaña(new Producto(), "Administrar Productos");
             }
         }));
         popup.add(new JMenuItem(new AbstractAction("Materiales") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Material(), "Material");
+                agregarPestaña(new Material(), "Administrar Materiales");
             }
         }));
-        popup.add(new JMenuItem(new AbstractAction("Ubicaciónes") {
+        popup.add(new JMenuItem(new AbstractAction("Ubicaciones") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Ubicacion(), "Ubicación");
+                agregarPestaña(new Ubicacion(), "Administrar Ubicaciones");
             }
         }));
         popup.add(new JMenuItem(new AbstractAction("Movimientos") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Movimiento(), "Movimientos");
+                agregarPestaña(new Movimiento(), "Administrar Movimientos");
             }
         }));
 
