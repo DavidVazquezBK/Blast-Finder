@@ -21,6 +21,7 @@ import javax.swing.JPopupMenu;
 import ui.abc.Categoria;
 import ui.abc.Material;
 import ui.abc.Producto;
+import ui.abc.Ubicacion;
 
 /**
  *
@@ -57,6 +58,11 @@ public class Principal extends javax.swing.JFrame {
         popup.add(new JMenuItem(new AbstractAction("Material") {
             public void actionPerformed(ActionEvent e) {
                 agregarPestaña(new Material(), "Material");
+            }
+        }));
+        popup.add(new JMenuItem(new AbstractAction("Ubicación") {
+            public void actionPerformed(ActionEvent e) {
+                agregarPestaña(new Ubicacion(), "Ubicación");
             }
         }));
 
