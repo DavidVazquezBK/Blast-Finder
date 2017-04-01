@@ -44,7 +44,7 @@ public class Movimiento extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Editar Movimiento");
+        jLabel1.setText("Editar Movimientos");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

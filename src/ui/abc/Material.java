@@ -245,7 +245,7 @@ public class Material extends javax.swing.JPanel {
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Editar Material");
+        jLabel1.setText("Editar Materiales");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -62,7 +62,6 @@ public class Ubicacion extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
 
         agregar.setTitle("Agregar ");
-        agregar.setPreferredSize(new java.awt.Dimension(566, 256));
         agregar.setResizable(false);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -131,7 +130,6 @@ public class Ubicacion extends javax.swing.JPanel {
         );
 
         editar.setTitle("Editar");
-        editar.setPreferredSize(new java.awt.Dimension(566, 256));
         editar.setResizable(false);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -193,14 +191,15 @@ public class Ubicacion extends javax.swing.JPanel {
                     .addComponent(jLabel15)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9))
+                .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton9)
+                    .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton8)))
                 .addContainerGap())
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Editar Ubicacion");
+        jLabel1.setText("Editar Ubicaciones");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
