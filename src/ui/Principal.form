@@ -97,7 +97,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/img/lupa.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Materiales"/>
+            <Property name="text" type="java.lang.String" value="Vista de Materiales"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="verticalTextPosition" type="int" value="3"/>

@@ -122,7 +122,7 @@ public class Principal extends javax.swing.JFrame {
         jToolBar1.add(jButton2);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa.png"))); // NOI18N
-        jButton1.setText("Materiales");
+        jButton1.setText("Vista de Materiales");
         jButton1.setFocusable(false);
         jButton1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
