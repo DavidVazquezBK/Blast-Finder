@@ -19,6 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import ui.abc.Categoria;
+import ui.abc.Material;
 import ui.abc.Producto;
 
 /**
@@ -40,17 +41,22 @@ public class Principal extends javax.swing.JFrame {
         //      Límite de edición
         final JPopupMenu popup = new JPopupMenu();
         
-        //Añadir primer botón del pop-up
+        //Añadir cada botón del pop-up
         popup.add(new JMenuItem(new AbstractAction("Categoría") {
             public void actionPerformed(ActionEvent e) {
                 agregarPestaña(new Categoria(), "Categoría");
             }
         }));
 
-        //Añadir segundo botón del pop-up
         popup.add(new JMenuItem(new AbstractAction("Producto") {
             public void actionPerformed(ActionEvent e) {
                 agregarPestaña(new Producto(), "Producto");
+            }
+        }));
+        
+        popup.add(new JMenuItem(new AbstractAction("Material") {
+            public void actionPerformed(ActionEvent e) {
+                agregarPestaña(new Material(), "Material");
             }
         }));
 
