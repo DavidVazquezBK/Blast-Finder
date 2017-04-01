@@ -23,6 +23,7 @@ import ui.abc.Material;
 import ui.abc.Movimiento;
 import ui.abc.Producto;
 import ui.abc.Ubicacion;
+import ui.misc.GeneradorQR;
 import ui.misc.MaterialConsulta;
 
 /**
@@ -96,6 +97,7 @@ public class Principal extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
         eliminar = new javax.swing.JButton();
 
@@ -132,6 +134,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton1);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/qr.png"))); // NOI18N
+        jButton4.setText("Generador QR");
+        jButton4.setFocusable(false);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton4);
 
         jToolBar2.setFloatable(false);
 
@@ -199,6 +212,10 @@ public class Principal extends javax.swing.JFrame {
         agregarPestaña(new MaterialConsulta(), "Consulta de Materiales");        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        agregarPestaña(new GeneradorQR(), "Generador QR");        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -226,6 +243,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
