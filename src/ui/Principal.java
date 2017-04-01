@@ -23,6 +23,7 @@ import ui.abc.Material;
 import ui.abc.Movimiento;
 import ui.abc.Producto;
 import ui.abc.Ubicacion;
+import ui.misc.MaterialConsulta;
 
 /**
  *
@@ -94,6 +95,7 @@ public class Principal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
         eliminar = new javax.swing.JButton();
 
@@ -118,6 +120,18 @@ public class Principal extends javax.swing.JFrame {
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jToolBar1.add(jButton2);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lupa.png"))); // NOI18N
+        jButton1.setText("Materiales");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
 
         jToolBar2.setFloatable(false);
 
@@ -181,6 +195,10 @@ public class Principal extends javax.swing.JFrame {
         agregarPestaña(new Inicio(), "Inicio");        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        agregarPestaña(new MaterialConsulta(), "Consulta de Materiales");        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -205,6 +223,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton eliminar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JTabbedPane jTabbedPane1;
