@@ -69,7 +69,6 @@ public class Principal extends javax.swing.JFrame {
         //      Límite de edición
         this.setLocationRelativeTo(null);
         agregarPestaña(new Inicio(), "Inicio");
-        agregarPestaña(new Categoria(), "Categoría");
     }
 
     /**
