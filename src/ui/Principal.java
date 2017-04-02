@@ -23,6 +23,7 @@ import ui.abc.Material;
 import ui.abc.Movimiento;
 import ui.abc.Producto;
 import ui.abc.Ubicacion;
+import ui.misc.Ajustes;
 import ui.misc.GeneradorQR;
 import ui.misc.MaterialConsulta;
 
@@ -98,6 +99,7 @@ public class Principal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
         eliminar = new javax.swing.JButton();
 
@@ -145,6 +147,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton4);
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ajustes.png"))); // NOI18N
+        jButton5.setText("Ajustes");
+        jButton5.setFocusable(false);
+        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton5);
 
         jToolBar2.setFloatable(false);
 
@@ -216,6 +229,10 @@ public class Principal extends javax.swing.JFrame {
         agregarPestaña(new GeneradorQR(), "Generador QR");        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        agregarPestaña(new Ajustes(), "Ajustes");        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -244,6 +261,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
