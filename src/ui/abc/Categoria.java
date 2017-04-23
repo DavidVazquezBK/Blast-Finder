@@ -4,6 +4,10 @@
 package ui.abc;
 
 import java.awt.Toolkit;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import jdbc.CategoriaJDBC;
 
 /**
  *
@@ -17,7 +21,23 @@ public class Categoria extends javax.swing.JPanel {
     public Categoria() {
 
         initComponents();
-//          
+
+        try {
+            DefaultTableModel datos = CategoriaJDBC.cargarTabla();
+            DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+            for (int filas = 0; filas < datos.getRowCount(); filas++) {
+                tm.addRow(new Object[]{null, null, null, null});
+                for (int columnas = 0; columnas < 3; columnas++) {
+                    tm.setValueAt(datos.getValueAt(filas, columnas), filas, columnas + 1);
+                    jTable1.setModel(tm);
+
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error cargando tabla: ui.abc.Categoria", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error cargando tabla ui.abc.Categoria: " + e);
+        }
+
     }
 
     /**
@@ -187,21 +207,7 @@ public class Categoria extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Selección", "ID", "Nombre", "Iniciales"
@@ -256,7 +262,7 @@ public class Categoria extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                     .addComponent(jTextField2)
                     .addComponent(jTextField3))
                 .addContainerGap())
@@ -333,7 +339,7 @@ public class Categoria extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
