@@ -44,11 +44,13 @@ public class Categoria extends javax.swing.JPanel {
         editar = new javax.swing.JDialog();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        tfIniciales = new javax.swing.JTextField();
+        editarIniciales = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        tfNombre = new javax.swing.JTextField();
+        editarId = new javax.swing.JTextField();
+        editarNombre = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -145,11 +147,25 @@ public class Categoria extends javax.swing.JPanel {
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         jButton6.setText("Guardar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
         jButton7.setText("Cancelar");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
-        jLabel12.setText("Nombre:");
+        jLabel12.setText("ID:");
+
+        editarId.setEditable(false);
+
+        jLabel13.setText("Nombre:");
 
         javax.swing.GroupLayout editarLayout = new javax.swing.GroupLayout(editar.getContentPane());
         editar.getContentPane().setLayout(editarLayout);
@@ -169,11 +185,13 @@ public class Categoria extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, editarLayout.createSequentialGroup()
                         .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfIniciales)
-                            .addComponent(tfNombre))))
+                            .addComponent(editarIniciales)
+                            .addComponent(editarId)
+                            .addComponent(editarNombre))))
                 .addContainerGap())
         );
         editarLayout.setVerticalGroup(
@@ -184,11 +202,15 @@ public class Categoria extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editarId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(editarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(tfIniciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editarIniciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
@@ -371,6 +393,9 @@ public class Categoria extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        editarId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+        editarNombre.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
+        editarIniciales.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
         editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../img/icon.png")));
         editar.setModal(true);
         editar.setSize(419 + 30, 40 + 170);
@@ -410,9 +435,34 @@ public class Categoria extends javax.swing.JPanel {
         agregar.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        CategoriaPOJO pojo = new CategoriaPOJO();
+        pojo.setIdCategoria(Integer.parseInt(editarId.getText()));
+        pojo.setNombre(editarNombre.getText());
+        pojo.setIniciales(editarIniciales.getText().toUpperCase());
+
+        try {
+            if (CategoriaJDBC.actualizaCategoria(pojo) == false) {
+                throw new Exception();
+            }
+            cargaTabla();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error editando categoria: ui.abc.Categoria", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error editando categoria ui.abc.Categoria: " + e);
+        }
+        editar.setVisible(false);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        editar.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog agregar;
     private javax.swing.JDialog editar;
+    private javax.swing.JTextField editarId;
+    private javax.swing.JTextField editarIniciales;
+    private javax.swing.JTextField editarNombre;
     private javax.swing.JTextField id;
     private javax.swing.JTextField iniciales;
     private javax.swing.JButton jButton1;
@@ -425,6 +475,7 @@ public class Categoria extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -439,8 +490,6 @@ public class Categoria extends javax.swing.JPanel {
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField nuevaCatIniciales;
     private javax.swing.JTextField nuevaCatNombre;
-    private javax.swing.JTextField tfIniciales;
-    private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
 public void cargaTabla() {
 
