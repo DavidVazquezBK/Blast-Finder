@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import POJO.CategoriaPOJO;
-
+import JDBC.Conexion;
 public class CategoriaJDBC {
 
     private static final String TABLE = "Categoria";
