@@ -73,8 +73,8 @@ public class CategoriaJDBC {
         String encabezados[] = {"ID", "Nombre", "Iniciales"};
         DefaultTableModel dt = null;
         try {
-            con = Conexion.getConnection();
-            st = con.prepareStatement(SQL_QUERY);
+            con = JDBC.Conexion.getConnection();
+            st = con.prepareStatement(SQL_QUERY_ALL);
             dt = new DefaultTableModel();
             dt.setColumnIdentifiers(encabezados);
             ResultSet rs = st.executeQuery();
@@ -89,8 +89,8 @@ public class CategoriaJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            Conexion.close(con);
-            Conexion.close(st);
+            JDBC.Conexion.close(con);
+            JDBC.Conexion.close(st);
 
         }
         return dt;
