@@ -5,6 +5,7 @@ package ui.abc;
 
 import POJO.CategoriaPOJO;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import jdbc.CategoriaJDBC;
@@ -244,6 +245,7 @@ public class Categoria extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setColumnSelectionAllowed(true);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -251,7 +253,7 @@ public class Categoria extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Vista con detalles"));
 
@@ -309,6 +311,11 @@ public class Categoria extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
         jButton1.setText("Eliminar selección");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar.png"))); // NOI18N
         jButton2.setText("Agregar");
@@ -424,7 +431,7 @@ public class Categoria extends javax.swing.JPanel {
             cargaTabla();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error agregando categoria: ui.abc.Categoria", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Error agregando categoria ui.abc.Categoria: " + e);
+            System.out.println("Error agregando categoría ui.abc.Categoria: " + e);
         }
 
         agregar.setVisible(false);
@@ -447,8 +454,8 @@ public class Categoria extends javax.swing.JPanel {
             }
             cargaTabla();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error editando categoria: ui.abc.Categoria", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Error editando categoria ui.abc.Categoria: " + e);
+            JOptionPane.showMessageDialog(this, "Error editando categoría: ui.abc.Categoria", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error editando categoría ui.abc.Categoria: " + e);
         }
         editar.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -456,6 +463,34 @@ public class Categoria extends javax.swing.JPanel {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         editar.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ArrayList<String> seleccionados;
+        seleccionados = new ArrayList<String>();
+
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            if ((boolean) jTable1.getModel().getValueAt(i, 0) == true) {
+                seleccionados.add(jTable1.getModel().getValueAt(i, 1).toString());
+            }
+
+        }
+        try {
+
+            for (int i = 0; i < seleccionados.size(); i++) {
+                if (CategoriaJDBC.eliminarCategoria(seleccionados.get(i))) {
+
+                } else {
+                    throw new Exception();
+                }
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error eliminando categoría(s) : ui.abc.Categoria", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error eliminando categoría(s)ui.abc.Categoria: " + e);
+        }
+        cargaTabla();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog agregar;
@@ -509,6 +544,9 @@ public void cargaTabla() {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error cargando tabla: ui.abc.Categoria", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Error cargando tabla ui.abc.Categoria: " + e);
+        }
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            jTable1.setValueAt(false, i, 0);
         }
     }
 }
