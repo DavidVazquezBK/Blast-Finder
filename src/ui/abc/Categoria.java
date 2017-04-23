@@ -21,23 +21,7 @@ public class Categoria extends javax.swing.JPanel {
     public Categoria() {
 
         initComponents();
-
-        try {
-            DefaultTableModel datos = CategoriaJDBC.cargarTabla();
-            DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
-            for (int filas = 0; filas < datos.getRowCount(); filas++) {
-                tm.addRow(new Object[]{null, null, null, null});
-                for (int columnas = 0; columnas < 3; columnas++) {
-                    tm.setValueAt(datos.getValueAt(filas, columnas), filas, columnas + 1);
-                    jTable1.setModel(tm);
-
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error cargando tabla: ui.abc.Categoria", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Error cargando tabla ui.abc.Categoria: " + e);
-        }
-
+        cargaTabla();
     }
 
     /**
@@ -412,11 +396,12 @@ public class Categoria extends javax.swing.JPanel {
                 throw new Exception();
             }
             JOptionPane.showMessageDialog(this, "Categoría agregada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-
+            cargaTabla();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error agregando categoria: ui.abc.Categoria", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Error agregando categoria ui.abc.Categoria: " + e);
         }
+
         agregar.setVisible(false);
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -457,4 +442,24 @@ public class Categoria extends javax.swing.JPanel {
     private javax.swing.JTextField tfIniciales;
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
+public void cargaTabla() {
+
+        try {
+            DefaultTableModel datos = CategoriaJDBC.cargarTabla();
+            DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+            tm.setRowCount(0);
+
+            for (int filas = 0; filas < datos.getRowCount(); filas++) {
+                tm.addRow(new Object[]{null, null, null, null});
+                for (int columnas = 0; columnas < 3; columnas++) {
+                    tm.setValueAt(datos.getValueAt(filas, columnas), filas, columnas + 1);
+                    jTable1.setModel(tm);
+
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error cargando tabla: ui.abc.Categoria", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error cargando tabla ui.abc.Categoria: " + e);
+        }
+    }
 }
