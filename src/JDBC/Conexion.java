@@ -68,4 +68,23 @@ public class Conexion {
             System.out.println("Error = " + e);
         }
     }
+
+    public static ResultSet customQuery(String query) {
+
+        Connection con = null;
+        PreparedStatement st = null;
+        try {
+
+            con = Conexion.getConnection();
+            st = con.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            return rs;
+        } catch (Exception e) {
+            System.out.println("Custom query error " + e);
+        } finally {
+            Conexion.close(con);
+            Conexion.close(st);
+        }
+        return null;
+    }
 }
