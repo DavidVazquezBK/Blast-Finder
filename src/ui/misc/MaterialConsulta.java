@@ -3,6 +3,12 @@
  */
 package ui.misc;
 
+import JDBC.Conexion;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
 /**
  *
  * @author BurnKill
@@ -14,6 +20,7 @@ public class MaterialConsulta extends javax.swing.JPanel {
      */
     public MaterialConsulta() {
         initComponents();
+
     }
 
     /**
@@ -44,11 +51,34 @@ public class MaterialConsulta extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Materiales");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Categoría 1");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("d");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Categoría 2");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("d");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("dsa");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Categoría 3");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("dwddd");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("dsa");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTree1);
 
         jLabel1.setText("Clasificar por:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoría", "Producto", "Ubicación" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles de material"));
 
@@ -135,7 +165,7 @@ public class MaterialConsulta extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -144,32 +174,70 @@ public class MaterialConsulta extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(10, 10, 10))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(10, 10, 10)
+                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(10, 10, 10))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1))
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        switch (jComboBox1.getSelectedIndex()) {
+            case 0: {
+                try {
+
+                    ArrayList list = new ArrayList();
+                    list.add("Category List");
+
+                    ResultSet rs = Conexion.customQuery("SELECT CONCAT(nombre,'-',iniciales) as Categoria FROM `categoria`");
+
+                    while (rs.next()) {
+                        Object value[] = {rs.getString(1), rs.getString(2)};
+                        list.add(value);
+                    }
+                    Object hierarchy[] = list.toArray();
+                    DefaultMutableTreeNode root = processHierarchy(hierarchy);
+
+                    DefaultTreeModel treeModel = new DefaultTreeModel(root);
+                    jTree1.setModel(treeModel);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+//                
+//                 d = new ();
+
+            break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
@@ -191,4 +259,47 @@ public class MaterialConsulta extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
+
+    public DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(hierarchy[0]);
+        try {
+            int filaActual = 0;
+            int i = 0;
+            try {
+                ResultSet rs = Conexion.customQuery("SELECT idCategoria,CONCAT(nombre,'-',iniciales) as Categoria FROM `categoria`");
+                while (rs.next()) {
+                    filaActual = rs.getRow();
+                }
+                String L1Nombre[] = new String[filaActual];
+                String L1Id[] = new String[filaActual];
+                ResultSet rs1 = Conexion.customQuery("SELECT catid, catname from category");
+
+                while (rs1.next()) {
+                    L1Nombre[i] = rs1.getString("Categoria");
+                    L1Id[i] = rs1.getString("idCategoria");
+                    i++;
+                }
+
+                DefaultMutableTreeNode hijo, nieto;
+
+                for (int indiceHijo = 0; indiceHijo < L1Nombre.length; indiceHijo++) {
+                    hijo = new DefaultMutableTreeNode(L1Nombre[indiceHijo]);
+                    node.add(hijo);//add each created child to root
+
+                    ResultSet rs3 = Conexion.customQuery("SELECT nombre from producto where idProducto='" + L1Id[indiceHijo] + "'");
+                    while (rs3.next()) {
+                        nieto = new DefaultMutableTreeNode(rs3.getString("nombre"));
+                        hijo.add(nieto);//add each grandchild to each child
+                    }
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        } catch (Exception e) {
+        }
+
+        return (node);
+    }
 }
