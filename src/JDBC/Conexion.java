@@ -82,8 +82,8 @@ public class Conexion {
         } catch (Exception e) {
             System.out.println("Custom query error " + e);
         } finally {
-            Conexion.close(con);
-            Conexion.close(st);
+//            Conexion.close(con);
+//            Conexion.close(st);
         }
         return null;
     }
