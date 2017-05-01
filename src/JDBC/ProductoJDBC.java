@@ -28,7 +28,7 @@ public class ProductoJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = Conexion.getConnection();
+            con = JDBC.Conexion.getConnection();
             st = con.prepareStatement(SQL_INSERT);
             st.setString(1, pojo.getNombre());
             st.setInt(2, pojo.getCategoria_idCategoria());
@@ -39,8 +39,8 @@ public class ProductoJDBC {
             System.out.println("Error al insertar " + e);
             return 0;
         } finally {
-            Conexion.close(con);
-            Conexion.close(st);
+            JDBC.Conexion.close(con);
+            JDBC.Conexion.close(st);
         }
     }
 
@@ -50,7 +50,7 @@ public class ProductoJDBC {
         ProductoPOJO pojo = new ProductoPOJO();
         try {
 
-            con = Conexion.getConnection();
+            con = JDBC.Conexion.getConnection();
             st = con.prepareStatement(SQL_QUERY);
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
@@ -63,8 +63,8 @@ public class ProductoJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            Conexion.close(con);
-            Conexion.close(st);
+            JDBC.Conexion.close(con);
+            JDBC.Conexion.close(st);
         }
         return pojo;
     }
@@ -72,11 +72,11 @@ public class ProductoJDBC {
     public static DefaultTableModel cargarTabla() {
         Connection con = null;
         PreparedStatement st = null;
-        String encabezados[] = {"ID", "Nombre", "IDCategoria", "Iniciales"};
+        String encabezados[] = {"ID", "Nombre", "Categoría", "Iniciales"};
         DefaultTableModel dt = null;
         try {
-            con = Conexion.getConnection();
-            st = con.prepareStatement(SQL_QUERY);
+            con = JDBC.Conexion.getConnection();
+            st = con.prepareStatement("SELECT producto.idProducto, producto.nombre,categoria.nombre as 'categoria',producto.iniciales FROM producto,categoria WHERE producto.Categoria_idCategoria=categoria.idCategoria");
             dt = new DefaultTableModel();
             dt.setColumnIdentifiers(encabezados);
             ResultSet rs = st.executeQuery();
@@ -84,7 +84,7 @@ public class ProductoJDBC {
                 Object ob[] = new Object[4];
                 ob[0] = rs.getObject("idProducto");
                 ob[1] = rs.getObject("nombre");
-                ob[2] = rs.getObject("Categoria_idCategoria");
+                ob[2] = rs.getObject("categoria");
                 ob[3] = rs.getObject("iniciales");
                 dt.addRow(ob);
             }
@@ -92,8 +92,8 @@ public class ProductoJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            Conexion.close(con);
-            Conexion.close(st);
+            JDBC.Conexion.close(con);
+            JDBC.Conexion.close(st);
 
         }
         return dt;
@@ -103,7 +103,7 @@ public class ProductoJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = Conexion.getConnection();
+            con = JDBC.Conexion.getConnection();
             st = con.prepareStatement(SQL_DELETE);
             st.setString(1, id);
             int num = st.executeUpdate();
@@ -114,8 +114,8 @@ public class ProductoJDBC {
             System.out.println("Error al eliminar = " + e);
             return false;
         } finally {
-            Conexion.close(con);
-            Conexion.close(st);
+            JDBC.Conexion.close(con);
+            JDBC.Conexion.close(st);
         }
         return true;
     }
@@ -124,7 +124,7 @@ public class ProductoJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = Conexion.getConnection();
+            con = JDBC.Conexion.getConnection();
             st = con.prepareStatement(SQL_UPDATE);
             st.setString(1, pojo.getNombre());
             st.setInt(2, pojo.getCategoria_idCategoria());
@@ -138,8 +138,8 @@ public class ProductoJDBC {
             System.out.println("Error al actualizar = " + e);
             return false;
         } finally {
-            Conexion.close(con);
-            Conexion.close(st);
+            JDBC.Conexion.close(con);
+            JDBC.Conexion.close(st);
         }
         return true;
     }
