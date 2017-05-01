@@ -20,6 +20,7 @@ public class MaterialConsulta extends javax.swing.JPanel {
      */
     public MaterialConsulta() {
         initComponents();
+        cargaJTree();
 
     }
 
@@ -69,6 +70,7 @@ public class MaterialConsulta extends javax.swing.JPanel {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.setRootVisible(false);
         jScrollPane1.setViewportView(jTree1);
 
         jLabel1.setText("Clasificar por:");
@@ -198,45 +200,13 @@ public class MaterialConsulta extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        switch (jComboBox1.getSelectedIndex()) {
-            case 0: {
-                try {
-
-                    ArrayList list = new ArrayList();
-                    list.add("Category List");
-
-                    ResultSet rs = Conexion.customQuery("SELECT CONCAT(nombre,'-',iniciales) as Categoria FROM `categoria`");
-
-                    while (rs.next()) {
-                        Object value[] = {rs.getString(1), rs.getString(2)};
-                        list.add(value);
-                    }
-                    Object hierarchy[] = list.toArray();
-                    DefaultMutableTreeNode root = processHierarchy(hierarchy);
-
-                    DefaultTreeModel treeModel = new DefaultTreeModel(root);
-                    jTree1.setModel(treeModel);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
-//                
-//                 d = new ();
-
-            break;
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-        }
+        cargaJTree();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -260,7 +230,7 @@ public class MaterialConsulta extends javax.swing.JPanel {
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 
-    public DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
+    public DefaultMutableTreeNode jerarquiaAJTreeOld(Object[] hierarchy) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(hierarchy[0]);
         try {
             int filaActual = 0;
@@ -270,12 +240,13 @@ public class MaterialConsulta extends javax.swing.JPanel {
                 while (rs.next()) {
                     filaActual = rs.getRow();
                 }
+
                 String L1Nombre[] = new String[filaActual];
                 String L1Id[] = new String[filaActual];
-                ResultSet rs1 = Conexion.customQuery("SELECT catid, catname from category");
+                ResultSet rs1 = Conexion.customQuery("SELECT idCategoria, nombre FROM categoria");
 
                 while (rs1.next()) {
-                    L1Nombre[i] = rs1.getString("Categoria");
+                    L1Nombre[i] = rs1.getString("nombre");
                     L1Id[i] = rs1.getString("idCategoria");
                     i++;
                 }
@@ -284,9 +255,9 @@ public class MaterialConsulta extends javax.swing.JPanel {
 
                 for (int indiceHijo = 0; indiceHijo < L1Nombre.length; indiceHijo++) {
                     hijo = new DefaultMutableTreeNode(L1Nombre[indiceHijo]);
-                    node.add(hijo);//add each created child to root
+                    node.add(hijo); //add each created child to root
 
-                    ResultSet rs3 = Conexion.customQuery("SELECT nombre from producto where idProducto='" + L1Id[indiceHijo] + "'");
+                    ResultSet rs3 = Conexion.customQuery("SELECT nombre FROM material where idMaterial='" + L1Id[indiceHijo] + "'");
                     while (rs3.next()) {
                         nieto = new DefaultMutableTreeNode(rs3.getString("nombre"));
                         hijo.add(nieto);//add each grandchild to each child
@@ -294,12 +265,48 @@ public class MaterialConsulta extends javax.swing.JPanel {
                 }
 
             } catch (Exception ex) {
-                ex.printStackTrace();
+                System.out.println(ex);
             }
 
         } catch (Exception e) {
+            System.out.println(e);
         }
 
         return (node);
+    }
+
+    private void cargaJTree() {
+        switch (jComboBox1.getSelectedIndex()) {
+            case 0: {
+
+                try {
+                    ArrayList<Object> list = new ArrayList<Object>();
+                    list.add("Root");
+
+                    ResultSet rs = Conexion.customQuery("SELECT idCategoria as 'ID', CONCAT(nombre,'-',iniciales) as Categoria FROM `categoria`");
+
+                    while (rs.next()) {
+                        Object value[] = {rs.getString(1), rs.getString(2)};
+                        list.add(value);
+                    }
+
+                    DefaultMutableTreeNode root = jerarquiaAJTreeOld(list.toArray());
+                    DefaultTreeModel treeModel = new DefaultTreeModel(root);
+                    jTree1.setModel(treeModel);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+//                
+//                 d = new ();
+
+            break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+        }
     }
 }
