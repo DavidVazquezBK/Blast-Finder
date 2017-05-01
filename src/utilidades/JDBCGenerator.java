@@ -19,7 +19,7 @@ public class JDBCGenerator {
         System.out.println("Introduce nombre de tabla");
         String tabla = scanner.next();
 
-        System.out.println("Introduce numero de variables");
+        System.out.println("Introduce numero de variables sin contar ID");
         int numeroPropiedades = scanner.nextInt();
 
         //VARIABLES Y TIPOS
