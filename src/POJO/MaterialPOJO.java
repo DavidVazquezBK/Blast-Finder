@@ -8,9 +8,11 @@ package POJO;
  * @author BurnKill
  */
 public class MaterialPOJO {
+
     private int idMaterial;
     private String notas;
     private int Producto_idProducto;
+    private String nombre;
 
     public int getIdMaterial() {
         return idMaterial;
@@ -34,5 +36,13 @@ public class MaterialPOJO {
 
     public void setProducto_idProducto(int Producto_idProducto) {
         this.Producto_idProducto = Producto_idProducto;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
