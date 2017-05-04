@@ -3,7 +3,15 @@
  */
 package ui.abc;
 
+import POJO.CategoriaPOJO;
+import POJO.UbicacionPOJO;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import jdbc.CategoriaJDBC;
+import jdbc.ProductoJDBC;
+import jdbc.UbicacionJDBC;
 
 /**
  *
@@ -16,6 +24,7 @@ public class Ubicacion extends javax.swing.JPanel {
      */
     public Ubicacion() {
         initComponents();
+        cargaTabla();
     }
 
     /**
@@ -32,30 +41,32 @@ public class Ubicacion extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        agregarNombre = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        agregarDescripcion = new javax.swing.JTextArea();
         editar = new javax.swing.JDialog();
         jLabel10 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        editarDescripcion = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        editarId = new javax.swing.JTextField();
+        editarNombre = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        descripciondsa = new javax.swing.JScrollPane();
+        descripcion = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -69,20 +80,30 @@ public class Ubicacion extends javax.swing.JPanel {
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         jButton4.setText("Guardar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
         jButton5.setText("Cancelar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Nombre:");
 
-        jTextField4.setText(" ");
+        agregarNombre.setText(" ");
 
         jLabel14.setText("Descripción:");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
+        agregarDescripcion.setColumns(20);
+        agregarDescripcion.setLineWrap(true);
+        agregarDescripcion.setRows(5);
+        jScrollPane3.setViewportView(agregarDescripcion);
 
         javax.swing.GroupLayout agregarLayout = new javax.swing.GroupLayout(agregar.getContentPane());
         agregar.getContentPane().setLayout(agregarLayout);
@@ -91,22 +112,21 @@ public class Ubicacion extends javax.swing.JPanel {
             .addGroup(agregarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(agregarLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
                     .addGroup(agregarLayout.createSequentialGroup()
                         .addGroup(agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
-                            .addComponent(jTextField4)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agregarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
+                            .addComponent(agregarNombre))))
+                .addGap(16, 16, 16))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agregarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
                 .addContainerGap())
         );
         agregarLayout.setVerticalGroup(
@@ -117,12 +137,12 @@ public class Ubicacion extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(agregarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(jButton4))
@@ -137,20 +157,35 @@ public class Ubicacion extends javax.swing.JPanel {
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         jButton8.setText("Guardar");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
         jButton9.setText("Cancelar");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jLabel15.setText("Descripción:");
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setLineWrap(true);
-        jTextArea3.setRows(5);
-        jScrollPane4.setViewportView(jTextArea3);
+        editarDescripcion.setColumns(20);
+        editarDescripcion.setLineWrap(true);
+        editarDescripcion.setRows(5);
+        jScrollPane4.setViewportView(editarDescripcion);
 
-        jLabel5.setText("Nombre:");
+        jLabel5.setText("ID:");
 
-        jTextField5.setText(" ");
+        editarId.setEditable(false);
+        editarId.setText(" ");
+
+        editarNombre.setText(" ");
+
+        jLabel7.setText("Nombre:");
 
         javax.swing.GroupLayout editarLayout = new javax.swing.GroupLayout(editar.getContentPane());
         editar.getContentPane().setLayout(editarLayout);
@@ -159,33 +194,39 @@ public class Ubicacion extends javax.swing.JPanel {
             .addGroup(editarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editarLayout.createSequentialGroup()
-                        .addGap(0, 342, Short.MAX_VALUE)
-                        .addComponent(jButton9)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton8))
                     .addGroup(editarLayout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(editarLayout.createSequentialGroup()
                         .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel15))
-                        .addGap(12, 12, 12)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5))
+                        .addGap(10, 10, 10)
                         .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
-                            .addComponent(jScrollPane4))))
-                .addContainerGap())
+                            .addComponent(editarId)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editarLayout.createSequentialGroup()
+                                .addGap(0, 266, Short.MAX_VALUE)
+                                .addComponent(jButton9)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton8))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(editarNombre, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGap(18, 18, 18))
         );
         editarLayout.setVerticalGroup(
             editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editarId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(editarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
@@ -193,8 +234,7 @@ public class Ubicacion extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton9)
-                    .addGroup(editarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton8)))
+                    .addComponent(jButton8))
                 .addContainerGap())
         );
 
@@ -240,6 +280,11 @@ public class Ubicacion extends javax.swing.JPanel {
         });
         jTable1.setColumnSelectionAllowed(true);
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
@@ -247,21 +292,21 @@ public class Ubicacion extends javax.swing.JPanel {
 
         jLabel2.setText("ID:");
 
-        jTextField1.setEditable(false);
-        jTextField1.setText(" ");
+        id.setEditable(false);
+        id.setText(" ");
 
         jLabel3.setText("Nombre:");
 
-        jTextField2.setEditable(false);
-        jTextField2.setText(" ");
+        nombre.setEditable(false);
+        nombre.setText(" ");
 
         jLabel13.setText("Descripción:");
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        descripcion.setEditable(false);
+        descripcion.setColumns(20);
+        descripcion.setLineWrap(true);
+        descripcion.setRows(5);
+        descripciondsa.setViewportView(descripcion);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -275,9 +320,9 @@ public class Ubicacion extends javax.swing.JPanel {
                     .addComponent(jLabel13))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
+                    .addComponent(id, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                    .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                    .addComponent(descripciondsa))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -286,17 +331,17 @@ public class Ubicacion extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2))
+                    .addComponent(descripciondsa))
                 .addContainerGap())
         );
 
@@ -304,6 +349,11 @@ public class Ubicacion extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
         jButton1.setText("Eliminar selección");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar.png"))); // NOI18N
         jButton2.setText("Agregar");
@@ -382,12 +432,15 @@ public class Ubicacion extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         agregar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../img/icon.png")));
         agregar.setModal(true);
-        agregar.setSize(30+566, 40+256);
+        agregar.setSize(30 + 566, 40 + 256);
         agregar.setLocationRelativeTo(editar.getParent());
         agregar.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        editarId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+        editarNombre.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
+        editarDescripcion.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
         editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../img/icon.png")));
         editar.setModal(true);
         editar.setSize(566 + 30, 256 + 40);
@@ -395,10 +448,98 @@ public class Ubicacion extends javax.swing.JPanel {
         editar.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        id.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+        nombre.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
+        descripcion.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        agregar.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        editar.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        try {
+            UbicacionPOJO pojo = new UbicacionPOJO();
+            pojo.setNombre(agregarNombre.getText());
+            pojo.setDescripcion(agregarDescripcion.getText().toUpperCase());
+
+            if (UbicacionJDBC.insertaUbicacion(pojo) == 0) {
+                throw new Exception();
+            }
+            JOptionPane.showMessageDialog(this, "Ubicación agregada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            cargaTabla();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error agregando ubicación : ui.abc.Ubicacion", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error agregando Ubicación ui.abc.Ubicacion: " + e);
+        }
+
+        agregar.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        UbicacionPOJO pojo = new UbicacionPOJO();
+        pojo.setIdUbicacion(Integer.parseInt(editarId.getText()));
+        pojo.setNombre(editarNombre.getText());
+        pojo.setDescripcion(editarDescripcion.getText());
+
+        try {
+            if (UbicacionJDBC.actualizaUbicacion(pojo) == false) {
+                throw new Exception();
+            }
+            cargaTabla();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error editando ubicación: ui.abc.Ubicación", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error editando ubicación ui.abc.ubicación: " + e);
+        }
+        editar.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        ArrayList<String> seleccionados;
+        seleccionados = new ArrayList<String>();
+
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            if ((boolean) jTable1.getModel().getValueAt(i, 0) == true) {
+                seleccionados.add(jTable1.getModel().getValueAt(i, 1).toString());
+            }
+
+        }
+        try {
+
+            for (int i = 0; i < seleccionados.size(); i++) {
+                if (UbicacionJDBC.eliminarUbicacion(seleccionados.get(i))) {
+
+                } else {
+                    throw new Exception();
+                }
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error eliminando ubicación(es) : ui.abc.Ubicación", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error eliminando ubicación(s)ui.abc.Ubicacion: " + e);
+        }
+        cargaTabla();           // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog agregar;
+    private javax.swing.JTextArea agregarDescripcion;
+    private javax.swing.JTextField agregarNombre;
+    private javax.swing.JTextArea descripcion;
+    private javax.swing.JScrollPane descripciondsa;
     private javax.swing.JDialog editar;
+    private javax.swing.JTextArea editarDescripcion;
+    private javax.swing.JTextField editarId;
+    private javax.swing.JTextField editarNombre;
+    private javax.swing.JTextField id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -416,19 +557,36 @@ public class Ubicacion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
+public void cargaTabla() {
+
+        try {
+            DefaultTableModel datos = UbicacionJDBC.cargarTabla();
+            DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+            tm.setRowCount(0);
+
+            for (int filas = 0; filas < datos.getRowCount(); filas++) {
+                tm.addRow(new Object[]{null, null, null, null});
+                for (int columnas = 0; columnas < 3; columnas++) {
+                    tm.setValueAt(datos.getValueAt(filas, columnas), filas, columnas + 1);
+                    jTable1.setModel(tm);
+
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error cargando tabla: ui.abc.Ubicacion", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error cargando tabla ui.abc.Ubicacion: " + e);
+        }
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            jTable1.setValueAt(false, i, 0);
+        }
+    }
 }
