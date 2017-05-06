@@ -18,7 +18,6 @@ public class ProductoJDBC {
 
     private static final String SQL_QUERY_ALL = "Select * from " + TABLE;
 
-    private static final String SQL_QUERY = "Select * from " + TABLE + " where id=?";
 
     private static final String SQL_UPDATE = "UPDATE " + TABLE + " set nombre=?, Categoria_idCategoria=?, iniciales=? where idProducto=?";
     private static final String SQL_DELETE = "Delete from " + TABLE
@@ -51,7 +50,7 @@ public class ProductoJDBC {
         try {
 
             con = JDBC.Conexion.getConnection();
-            st = con.prepareStatement(SQL_QUERY);
+            st = con.prepareStatement(SQL_QUERY_ALL);
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
@@ -72,17 +71,17 @@ public class ProductoJDBC {
     public static DefaultTableModel cargarTabla() {
         Connection con = null;
         PreparedStatement st = null;
-        String encabezados[] = {"ID", "Nombre", "Categoría", "Iniciales"};
+        String encabezados[] = {"ID", "Nombre", "notas", "producto","categoria"};
         DefaultTableModel dt = null;
         try {
             con = JDBC.Conexion.getConnection();
-            st = con.prepareStatement("SELECT producto.idProducto, producto.nombre,categoria.nombre as 'categoria',producto.iniciales FROM producto,categoria WHERE producto.Categoria_idCategoria=categoria.idCategoria");
+            st = con.prepareStatement("SELECT producto.idProducto as 'id', producto.nombre as 'nombre',categoria.nombre as 'categoria',producto.iniciales as 'iniciales' FROM producto,categoria WHERE producto.Categoria_idCategoria=categoria.idCategoria");
             dt = new DefaultTableModel();
             dt.setColumnIdentifiers(encabezados);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Object ob[] = new Object[4];
-                ob[0] = rs.getObject("idProducto");
+                ob[0] = rs.getObject("id");
                 ob[1] = rs.getObject("nombre");
                 ob[2] = rs.getObject("categoria");
                 ob[3] = rs.getObject("iniciales");
