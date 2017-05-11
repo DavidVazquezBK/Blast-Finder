@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Conexion {
 
@@ -16,6 +18,10 @@ public class Conexion {
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String JDBC_URL = "jdbc:mysql://" + JDBC_HOST + "/" + JDBC_BD;
     private static Driver controlador = null;
+
+    static ResultSet rs;
+    static PreparedStatement st = null;
+    static Connection con = null;
 
     public static synchronized Connection getConnection() throws SQLException {
         if (controlador == null) {
@@ -71,20 +77,24 @@ public class Conexion {
 
     public static ResultSet customQuery(String query) {
 
-        Connection con = null;
-        PreparedStatement st = null;
         try {
-
             con = Conexion.getConnection();
             st = con.prepareStatement(query);
-            ResultSet rs = st.executeQuery();
+            rs = st.executeQuery();
             return rs;
         } catch (Exception e) {
             System.out.println("Custom query error " + e);
-        } finally {
-//            Conexion.close(con);
-//            Conexion.close(st);
         }
         return null;
+    }
+
+    public static void closeAll() {
+        try {
+            rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error cerrando recursos: " + ex);
+        }
     }
 }
