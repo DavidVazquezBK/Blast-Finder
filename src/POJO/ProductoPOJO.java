@@ -8,10 +8,16 @@ package POJO;
  * @author BurnKill
  */
 public class ProductoPOJO {
+
     private int idProducto;
     private String nombre;
     private int Categoria_idCategoria;
     private String iniciales;
+
+    @Override
+    public String toString() {
+        return getNombre();
+    }
 
     public int getIdProducto() {
         return idProducto;
@@ -44,5 +50,5 @@ public class ProductoPOJO {
     public void setIniciales(String iniciales) {
         this.iniciales = iniciales;
     }
-    
+
 }
