@@ -73,20 +73,21 @@ public class MaterialJDBC {
     public static DefaultTableModel cargarTabla() {
         Connection con = null;
         PreparedStatement st = null;
-        String encabezados[] = {"ID", "Notas", "IdProducto", "Nombre"};
+        String encabezados[] = {"ID", "Nombre", "Notas", "Producto", "Categoria"};
         DefaultTableModel dt = null;
         try {
             con = JDBC.Conexion.getConnection();
-            st = con.prepareStatement(SQL_QUERY);
+            st = con.prepareStatement("SELECT material.idMaterial as 'id', material.nombre as 'nombre', material.notas as 'notas', producto.nombre as 'producto', categoria.nombre as 'categoria' FROM material,producto,categoria WHERE material.Producto_idProducto=producto.idProducto AND producto.Categoria_idCategoria=categoria.idCategoria");
             dt = new DefaultTableModel();
             dt.setColumnIdentifiers(encabezados);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Object ob[] = new Object[4];
-                ob[0] = rs.getObject("idMaterial");
-                ob[1] = rs.getObject("notas");
-                ob[2] = rs.getObject("Producto_idProducto");
-                ob[3] = rs.getObject("nombre");
+                Object ob[] = new Object[5];
+                ob[0] = rs.getObject("id");
+                ob[1] = rs.getObject("nombre");
+                ob[2] = rs.getObject("notas");
+                ob[3] = rs.getObject("producto");
+                ob[4] = rs.getObject("categoria");
                 dt.addRow(ob);
             }
             rs.close();
