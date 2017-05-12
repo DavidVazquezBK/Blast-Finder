@@ -126,7 +126,7 @@ public class Principal extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Blast Finder - Instituto Franklin de Veracruz");
+        setTitle("Blast Finder - Instituto Franklin de Veracruz A.C.");
 
         jToolBar1.setFloatable(false);
 
