@@ -19,6 +19,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import javax.swing.AbstractAction;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -29,7 +31,7 @@ import ui.abc.Producto;
 import ui.abc.Ubicacion;
 import ui.misc.Ajustes;
 import ui.misc.GeneradorQR;
-import ui.misc.MaterialConsulta;
+import ui.misc.MaterialVista;
 
 /**
  *
@@ -68,27 +70,27 @@ public class Principal extends javax.swing.JFrame {
         //Añadir cada botón del pop-up
         popup.add(new JMenuItem(new AbstractAction("Categorías") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Categoria(), "Administrar Categorías");
+                agregarPestaña(new Categoria(), "Administrar Categorías", createImageIcon("../img/administracion.png"));
             }
         }));
         popup.add(new JMenuItem(new AbstractAction("Productos") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Producto(), "Administrar Productos");
+                agregarPestaña(new Producto(), "Administrar Productos", createImageIcon("../img/administracion.png"));
             }
         }));
         popup.add(new JMenuItem(new AbstractAction("Materiales") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Material(), "Administrar Materiales");
+                agregarPestaña(new Material(), "Administrar Materiales", createImageIcon("../img/administracion.png"));
             }
         }));
         popup.add(new JMenuItem(new AbstractAction("Ubicaciones") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Ubicacion(), "Administrar Ubicaciones");
+                agregarPestaña(new Ubicacion(), "Administrar Ubicaciones", createImageIcon("../img/administracion.png"));
             }
         }));
         popup.add(new JMenuItem(new AbstractAction("Movimientos") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Movimiento(), "Administrar Movimientos");
+                agregarPestaña(new Movimiento(), "Administrar Movimientos", createImageIcon("../img/administracion.png"));
             }
         }));
 
@@ -100,7 +102,7 @@ public class Principal extends javax.swing.JFrame {
         });
         //      Límite de edición
         this.setLocationRelativeTo(null);
-        agregarPestaña(new Inicio(), "Inicio");
+        agregarPestaña(new Inicio(), "Inicio", createImageIcon("../img/inicio.png"));
     }
 
     /**
@@ -244,19 +246,19 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        agregarPestaña(new Inicio(), "Inicio");        // TODO add your handling code here:
+        agregarPestaña(new Inicio(), "Inicio", createImageIcon("../img/inicio.png"));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        agregarPestaña(new MaterialConsulta(), "Consulta de Materiales");        // TODO add your handling code here:
+        agregarPestaña(new MaterialVista(), "Vista de materiales", createImageIcon("../img/lupa.png"));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        agregarPestaña(new GeneradorQR(), "Generador QR");        // TODO add your handling code here:
+        agregarPestaña(new GeneradorQR(), "Generador QR", createImageIcon("../img/qr.png"));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        agregarPestaña(new Ajustes(), "Ajustes");        // TODO add your handling code here:
+        agregarPestaña(new Ajustes(), "Ajustes", createImageIcon("../img/ajustes.png"));
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -371,7 +373,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
-    public void agregarPestaña(JPanel JPanel, String nombreTab) {
+    public void agregarPestaña(JPanel JPanel, String nombreTab, Icon icono) {
         boolean fl = false;
         int tabSeleccionado = 0;
         try {
@@ -384,7 +386,7 @@ public class Principal extends javax.swing.JFrame {
             if (fl) {
                 jTabbedPane1.setSelectedIndex(tabSeleccionado);
             } else {
-                jTabbedPane1.add(nombreTab, JPanel);
+                jTabbedPane1.addTab(nombreTab, icono, JPanel);
                 jTabbedPane1.setSelectedIndex(jTabbedPane1.getTabCount() - 1);
                 if (jTabbedPane1.getComponentCount() > 1) {
 
@@ -401,4 +403,18 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Returns an ImageIcon, or null if the path was invalid.
+     */
+    protected ImageIcon createImageIcon(String ruta) {
+
+        java.net.URL imgURL = getClass().getResource(ruta);
+
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("Archivo no encontrado: " + ruta);
+            return null;
+        }
+    }
 }

@@ -13,12 +13,12 @@ import javax.swing.tree.DefaultTreeModel;
  *
  * @author BurnKill
  */
-public class MaterialConsulta extends javax.swing.JPanel {
+public class MaterialVista extends javax.swing.JPanel {
 
     /**
      * Creates new form MaterialConsulta
      */
-    public MaterialConsulta() {
+    public MaterialVista() {
         initComponents();
         cargaJTree();
 
