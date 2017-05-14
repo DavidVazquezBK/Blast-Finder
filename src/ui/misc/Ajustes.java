@@ -3,17 +3,57 @@
  */
 package ui.misc;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import ui.Principal;
+
 /**
  *
  * @author BurnKill
  */
 public class Ajustes extends javax.swing.JPanel {
 
+    Properties props;
+
     /**
      * Creates new form Ajustes
      */
     public Ajustes() {
         initComponents();
+        props = new Properties();
+        try {
+            InputStream inputStream = Principal.class.getResourceAsStream("/config/prefs.properties");
+            props.load(inputStream);
+            inputStream.close();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "¡Archivo de configuración no encontrado! Inicializando", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Archivo de configuración no encontrado: " + ex);
+
+            Properties defaultProps = new Properties();
+            defaultProps.setProperty("ruta", "Ruta no definida");
+            defaultProps.setProperty("usarRuta", "false");
+            defaultProps.setProperty("iniciarConSo", "false");
+
+            jTextField1.setText(defaultProps.getProperty("ruta"));
+            jCheckBox2.setSelected(Boolean.valueOf(defaultProps.getProperty("usarRuta")));
+            jCheckBox1.setSelected(Boolean.valueOf(defaultProps.getProperty("iniciarConSo")));
+        }
+
+        jTextField1.setText(props.getProperty("ruta"));
+        jCheckBox2.setSelected(Boolean.valueOf(props.getProperty("usarRuta")));
+        jCheckBox1.setSelected(Boolean.valueOf(props.getProperty("iniciarConSo")));
+
+        cambiaEnabled();
     }
 
     /**
@@ -25,22 +65,40 @@ public class Ajustes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
+        jCheckBox2 = new javax.swing.JCheckBox();
 
-        jLabel1.setText("Ruta predeterminada al guardar archivos QR:");
+        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         jButton1.setText("Buscar...");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setText(" ");
+        jTextField1.setText("Ruta no definida");
 
-        jCheckBox1.setText("Iniciar Blast Finder al iniciar Windows");
+        jCheckBox1.setText("Iniciar Blast Finder junto con sistema operativo");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         jButton2.setText("Guardar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox2.setText("Usar ruta predeterminada al guardar archivos QR:");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -53,39 +111,88 @@ public class Ajustes extends javax.swing.JPanel {
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBox1)
-                            .addComponent(jLabel1))
-                        .addGap(0, 161, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                            .addComponent(jCheckBox2))
+                        .addGap(0, 266, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jCheckBox2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jFileChooser1.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            if (jFileChooser1.getSelectedFile().isDirectory()) {
+                jTextField1.setText("" + jFileChooser1.getSelectedFile());
+            }else{
+             JOptionPane.showMessageDialog(null, "Seleccione un directorio","Error",JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        File file = new File("src\\config\\prefs.properties");
+        try {
+            FileWriter writer = new FileWriter(file);
+
+            props.setProperty("ruta", jTextField1.getText());
+            props.setProperty("usarRuta", String.valueOf(jCheckBox2.isSelected()));
+            props.setProperty("iniciarConSo", String.valueOf(jCheckBox1.isSelected()));
+
+            props.store(writer, "Preferencias");
+            JOptionPane.showMessageDialog(null, "Configuración guardada correctamente", "Hecho", JOptionPane.PLAIN_MESSAGE);
+            writer.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("No existe el archivo: " + ex);
+        } catch (IOException ex) {
+            System.out.println("Error guardando: " + ex);
+        } finally {
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        cambiaEnabled();
+
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    private void cambiaEnabled() {
+        if (jCheckBox2.isSelected()) {
+            jButton1.setEnabled(true);
+            jTextField1.setEnabled(true);
+        } else {
+            jButton1.setEnabled(false);
+            jTextField1.setEnabled(false);
+        }
+    }
 }
