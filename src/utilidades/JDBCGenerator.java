@@ -8,8 +8,8 @@ package utilidades;
 import java.util.Scanner;
 
 /**
- * Creador de JDBC's para base de datos.
- * Versión: 1.3
+ * Creador de JDBC's para aplicaciones Java y MySQL.
+ * Versión: 1.3.1
  *
  * @author BurnKill
  */
