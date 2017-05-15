@@ -103,6 +103,7 @@ public class Principal extends javax.swing.JFrame {
         //      Límite de edición
         this.setLocationRelativeTo(null);
         agregarPestaña(new Inicio(), "Inicio", createImageIcon("../img/inicio.png"));
+        agregarPestaña(new Movimiento(), "Administrar Movimientos", createImageIcon("../img/administracion.png"));
     }
 
     /**
@@ -120,6 +121,7 @@ public class Principal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
         eliminar = new javax.swing.JButton();
         jToolBar3 = new javax.swing.JToolBar();
@@ -170,6 +172,12 @@ public class Principal extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton5);
 
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/movimiento.png"))); // NOI18N
+        jButton6.setText("Mover materiales");
+        jButton6.setFocusable(false);
+        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton6);
+
         jToolBar2.setFloatable(false);
 
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
@@ -208,7 +216,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(10, 10, 10)
                         .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)))
@@ -293,6 +301,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
