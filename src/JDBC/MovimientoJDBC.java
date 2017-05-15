@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import POJO.MovimientoPOJO;
+import java.sql.Timestamp;
 
 public class MovimientoJDBC {
 
@@ -77,16 +78,20 @@ public class MovimientoJDBC {
         DefaultTableModel dt = null;
         try {
             con = JDBC.Conexion.getConnection();
-            st = con.prepareStatement(SQL_QUERY_ALL);
+            st = con.prepareStatement("SELECT movimiento.idMovimiento,material.nombre,ubicacion.nombre,movimiento.fechaHora FROM movimiento,ubicacion,material WHERE ubicacion.idUbicacion=movimiento.Ubicacion_idUbicacion AND material.idMaterial=movimiento.Material_idMaterial ORDER BY `movimiento`.`fechaHora` DESC");
             dt = new DefaultTableModel();
             dt.setColumnIdentifiers(encabezados);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Object ob[] = new Object[4];
-                ob[0] = rs.getObject("idMovimiento");
-                ob[1] = rs.getObject("Material_idMaterial");
-                ob[2] = rs.getObject("Ubicacion_idUbicacion");
-                ob[3] = rs.getObject("fechaHora");
+                ob[0] = rs.getObject(1);
+                ob[1] = rs.getObject(2);
+                ob[2] = rs.getObject(3);
+                ob[3] = rs.getObject(4);
+//                Timestamp timestamp = rs.getTimestamp(4);
+//                java.util.Date date =new java.util.Date();
+//                date.setTime(timestamp.getTime());
+//                ob[3] = date;
                 dt.addRow(ob);
             }
             rs.close();
