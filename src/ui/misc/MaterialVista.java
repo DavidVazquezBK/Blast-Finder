@@ -4,8 +4,17 @@
 package ui.misc;
 
 import JDBC.Conexion;
+import POJO.CategoriaPOJO;
+import POJO.MaterialPOJO;
+import POJO.ProductoPOJO;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -15,13 +24,73 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class MaterialVista extends javax.swing.JPanel {
 
+    ArrayList<CategoriaPOJO> categorias;
+    ArrayList<ProductoPOJO> productos;
+    ArrayList<MaterialPOJO> materiales;
+
     /**
      * Creates new form MaterialConsulta
      */
     public MaterialVista() {
         initComponents();
-        cargaJTree();
+        this.productos = new ArrayList<ProductoPOJO>();
+        this.categorias = new ArrayList<CategoriaPOJO>();
+        this.materiales = new ArrayList<MaterialPOJO>();
 
+        ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
+        try {
+            while (rs.next()) {
+
+                CategoriaPOJO categoriaPOJO = new CategoriaPOJO();
+
+                categoriaPOJO.setIdCategoria(rs.getInt(1));
+                categoriaPOJO.setNombre(rs.getString(2));
+                categoriaPOJO.setIniciales(rs.getString(3));
+
+                categorias.add(categoriaPOJO);
+            }
+            rs.close();
+            Conexion.closeAll();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        ResultSet rs2 = Conexion.customQuery("SELECT * FROM producto");
+        try {
+            while (rs2.next()) {
+                ProductoPOJO productoPOJO = new ProductoPOJO();
+                productoPOJO.setIdProducto(rs2.getInt(1));
+                productoPOJO.setNombre(rs2.getString(2));
+                productoPOJO.setCategoria_idCategoria(rs2.getInt(3));
+                productoPOJO.setIniciales(rs2.getString(4));
+
+                productos.add(productoPOJO);
+            }
+            rs2.close();
+            Conexion.closeAll();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        ResultSet rs3 = Conexion.customQuery("SELECT * FROM material");
+        try {
+
+            while (rs3.next()) {
+                MaterialPOJO materialPOJO = new MaterialPOJO();
+
+                materialPOJO.setIdMaterial(rs3.getInt(1));
+                materialPOJO.setNotas(rs3.getString(2));
+                materialPOJO.setProducto_idProducto(rs3.getInt(3));
+                materialPOJO.setNombre(rs3.getString(4));
+
+                materiales.add(materialPOJO);
+            }
+
+            rs3.close();
+            Conexion.closeAll();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        cargaModoCategorias();
     }
 
     /**
@@ -39,43 +108,24 @@ public class MaterialVista extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        producto = new javax.swing.JTextField();
+        categoria = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        notas = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Materiales");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Categoría 1");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("d");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Categoría 2");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("d");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("dsa");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Categoría 3");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("dwddd");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("dsa");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jTree1.setRootVisible(false);
         jScrollPane1.setViewportView(jTree1);
 
         jLabel1.setText("Clasificar por:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoría", "Producto", "Ubicación" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoría", "Producto" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -86,23 +136,23 @@ public class MaterialVista extends javax.swing.JPanel {
 
         jLabel20.setText("Producto:");
 
-        jTextField6.setEditable(false);
-        jTextField6.setText(" ");
+        producto.setEditable(false);
+        producto.setText(" ");
 
-        jTextField11.setEditable(false);
-        jTextField11.setText(" ");
+        categoria.setEditable(false);
+        categoria.setText(" ");
 
         jLabel21.setText("Categoría:");
 
         jLabel2.setText("ID:");
 
-        jTextField1.setEditable(false);
-        jTextField1.setText(" ");
+        id.setEditable(false);
+        id.setText(" ");
 
         jLabel3.setText("Nombre:");
 
-        jTextField2.setEditable(false);
-        jTextField2.setText(" ");
+        nombre.setEditable(false);
+        nombre.setText(" ");
 
         jLabel13.setText("Notas:");
 
@@ -110,12 +160,7 @@ public class MaterialVista extends javax.swing.JPanel {
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
-
-        jLabel4.setText("Última ubicación:");
-
-        jTextField3.setEditable(false);
-        jTextField3.setText(" ");
+        notas.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -128,16 +173,14 @@ public class MaterialVista extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(jLabel13)
                     .addComponent(jLabel20)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel4))
-                .addGap(12, 12, 12)
+                    .addComponent(jLabel21))
+                .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
+                    .addComponent(id, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                    .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                    .addComponent(producto, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                    .addComponent(categoria, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                    .addComponent(notas))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -146,26 +189,22 @@ public class MaterialVista extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(notas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -180,7 +219,7 @@ public class MaterialVista extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -210,6 +249,8 @@ public class MaterialVista extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField categoria;
+    private javax.swing.JTextField id;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
@@ -217,96 +258,82 @@ public class MaterialVista extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTree jTree1;
+    private javax.swing.JTextField nombre;
+    private javax.swing.JScrollPane notas;
+    private javax.swing.JTextField producto;
     // End of variables declaration//GEN-END:variables
-
-    public DefaultMutableTreeNode jerarquiaAJTreeOld(Object[] hierarchy) {
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(hierarchy[0]);
-        try {
-            int filaActual = 0;
-            int i = 0;
-            try {
-                ResultSet rs = Conexion.customQuery("SELECT idCategoria,CONCAT(nombre,'-',iniciales) as Categoria FROM `categoria`");
-                while (rs.next()) {
-                    filaActual = rs.getRow();
-                }
-
-                String L1Nombre[] = new String[filaActual];
-                String L1Id[] = new String[filaActual];
-                ResultSet rs1 = Conexion.customQuery("SELECT idCategoria, nombre FROM categoria");
-
-                while (rs1.next()) {
-                    L1Nombre[i] = rs1.getString("nombre");
-                    L1Id[i] = rs1.getString("idCategoria");
-                    i++;
-                }
-
-                DefaultMutableTreeNode hijo, nieto;
-
-                for (int indiceHijo = 0; indiceHijo < L1Nombre.length; indiceHijo++) {
-                    hijo = new DefaultMutableTreeNode(L1Nombre[indiceHijo]);
-                    node.add(hijo); //add each created child to root
-
-                    ResultSet rs3 = Conexion.customQuery("SELECT nombre FROM material where idMaterial='" + L1Id[indiceHijo] + "'");
-                    while (rs3.next()) {
-                        nieto = new DefaultMutableTreeNode(rs3.getString("nombre"));
-                        hijo.add(nieto);//add each grandchild to each child
-                    }
-                }
-
-            } catch (Exception ex) {
-                System.out.println(ex);
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        return (node);
-    }
 
     private void cargaJTree() {
         switch (jComboBox1.getSelectedIndex()) {
             case 0: {
+                cargaModoCategorias();
+                break;
 
-                try {
-                    ArrayList<Object> list = new ArrayList<Object>();
-                    list.add("Root");
-
-                    ResultSet rs = Conexion.customQuery("SELECT idCategoria as 'ID', CONCAT(nombre,'-',iniciales) as Categoria FROM `categoria`");
-
-                    while (rs.next()) {
-                        Object value[] = {rs.getString(1), rs.getString(2)};
-                        list.add(value);
-                    }
-
-                    DefaultMutableTreeNode root = jerarquiaAJTreeOld(list.toArray());
-                    DefaultTreeModel treeModel = new DefaultTreeModel(root);
-                    jTree1.setModel(treeModel);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
             }
-//                
-//                 d = new ();
 
-            break;
-            case 1:
-
+            case 1: {
+                cargaModoProductos();
                 break;
-            case 2:
+            }
 
-                break;
         }
     }
+
+    private void cargaModoCategorias() {
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Categorías");
+        for (int i = 0; i < categorias.size(); i++) {
+            // Agregar CategoriasPOJO al root
+            DefaultMutableTreeNode categoria = new DefaultMutableTreeNode();
+            categoria.setUserObject(categorias.get(i));
+
+            //Agregar materiales a cada categoria
+            ResultSet rs = Conexion.customQuery("SELECT * FROM material WHERE material.Producto_idProducto in (SELECT producto.idProducto FROM producto WHERE producto.Categoria_idCategoria = " + categorias.get(i).getIdCategoria() + ")");
+            try {
+                while (rs.next()) {
+                    categoria.add(new DefaultMutableTreeNode(new MaterialPOJO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4))));
+
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(MaterialVista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            //Agregar cada categoria al root
+            root.add(categoria);
+        }
+
+        jTree1.setModel(new DefaultTreeModel(root));
+    }
+
+    private void cargaModoProductos() {
+
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Productos");
+        for (int i = 0; i < productos.size(); i++) {
+            // Agregar ProductosPOJO al root
+            DefaultMutableTreeNode producto = new DefaultMutableTreeNode();
+            producto.setUserObject(productos.get(i));
+
+            //Agregar materiales a cada categoria
+            ResultSet rs = Conexion.customQuery("SELECT * FROM material WHERE material.Producto_idProducto=" + productos.get(i).getIdProducto());
+            try {
+                while (rs.next()) {
+                    producto.add(new DefaultMutableTreeNode(new MaterialPOJO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4))));
+
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(MaterialVista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            //Agregar cada categoria al root
+            root.add(producto);
+        }
+
+        jTree1.setModel(new DefaultTreeModel(root));
+    }
+
 }
