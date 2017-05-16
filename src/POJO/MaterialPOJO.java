@@ -14,6 +14,17 @@ public class MaterialPOJO {
     private int Producto_idProducto;
     private String nombre;
 
+    public MaterialPOJO(int idMaterial, String notas, int Producto_idProducto, String nombre) {
+        this.idMaterial = idMaterial;
+        this.notas = notas;
+        this.Producto_idProducto = Producto_idProducto;
+        this.nombre = nombre;
+    }
+
+    public MaterialPOJO() {
+
+    }
+
     public int getIdMaterial() {
         return idMaterial;
     }
