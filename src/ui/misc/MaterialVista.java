@@ -116,11 +116,16 @@ public class MaterialVista extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         nombre = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        notas = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        no = new javax.swing.JScrollPane();
+        notas = new javax.swing.JTextArea();
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTree1);
 
         jLabel1.setText("Clasificar por:");
@@ -156,11 +161,11 @@ public class MaterialVista extends javax.swing.JPanel {
 
         jLabel13.setText("Notas:");
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        notas.setViewportView(jTextArea1);
+        notas.setEditable(false);
+        notas.setColumns(20);
+        notas.setLineWrap(true);
+        notas.setRows(5);
+        no.setViewportView(notas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,7 +185,7 @@ public class MaterialVista extends javax.swing.JPanel {
                     .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                     .addComponent(producto, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                     .addComponent(categoria, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                    .addComponent(notas))
+                    .addComponent(no))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -197,7 +202,7 @@ public class MaterialVista extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
-                    .addComponent(notas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,6 +253,33 @@ public class MaterialVista extends javax.swing.JPanel {
         cargaJTree();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+
+        DefaultMutableTreeNode nodeSeleccionado = (DefaultMutableTreeNode) jTree1.getLastSelectedPathComponent();
+
+        if (nodeSeleccionado.getUserObject() instanceof MaterialPOJO) {
+            MaterialPOJO materialPOJO = (MaterialPOJO) nodeSeleccionado.getUserObject();
+            id.setText("" + materialPOJO.getIdMaterial());
+            nombre.setText("" + materialPOJO.getNombre());
+            notas.setText("" + materialPOJO.getNotas());
+
+            ProductoPOJO productoSeleccionado = new ProductoPOJO();
+            for (int i = 0; i < productos.size(); i++) {
+                if (productos.get(i).getIdProducto() == materialPOJO.getProducto_idProducto()) {
+                    producto.setText("" + productos.get(i).getNombre());
+                    productoSeleccionado = productos.get(i);
+                }
+            }
+            for (int i = 0; i < categorias.size(); i++) {
+                if (productoSeleccionado.getCategoria_idCategoria() == categorias.get(i).getIdCategoria()) {
+                    categoria.setText(categorias.get(i).getNombre());
+                }
+            }
+        }
+
+
+    }//GEN-LAST:event_jTree1MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField categoria;
     private javax.swing.JTextField id;
@@ -260,10 +292,10 @@ public class MaterialVista extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTree jTree1;
+    private javax.swing.JScrollPane no;
     private javax.swing.JTextField nombre;
-    private javax.swing.JScrollPane notas;
+    private javax.swing.JTextArea notas;
     private javax.swing.JTextField producto;
     // End of variables declaration//GEN-END:variables
 
