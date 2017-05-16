@@ -32,6 +32,7 @@ import ui.abc.Ubicacion;
 import ui.misc.Ajustes;
 import ui.misc.GeneradorQR;
 import ui.misc.MaterialVista;
+import ui.misc.MoverMaterial;
 
 /**
  *
@@ -176,6 +177,11 @@ public class Principal extends javax.swing.JFrame {
         jButton6.setText("Mover materiales");
         jButton6.setFocusable(false);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton6);
 
         jToolBar2.setFloatable(false);
@@ -268,6 +274,10 @@ public class Principal extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         agregarPestaña(new Ajustes(), "Ajustes", createImageIcon("../img/ajustes.png"));
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        agregarPestaña(new MoverMaterial(), "Mover Materiales", createImageIcon("../img/movimiento.png"));
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
