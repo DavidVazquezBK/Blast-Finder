@@ -8,9 +8,15 @@ package POJO;
  * @author BurnKill
  */
 public class UbicacionPOJO {
+
     private int idUbicacion;
     private String nombre;
     private String descripcion;
+
+    @Override
+    public String toString() {
+        return getNombre();
+    }
 
     public int getIdUbicacion() {
         return idUbicacion;
