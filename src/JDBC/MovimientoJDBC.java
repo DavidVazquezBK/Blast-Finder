@@ -16,7 +16,7 @@ public class MovimientoJDBC {
 
     private static final String TABLE = "Movimiento";
 
-    private static final String SQL_INSERT = "INSERT INTO " + TABLE + "(Material_idMaterial, Ubicacion_idUbicacion, fechaHora) VALUES (?,?,?)";
+    private static final String SQL_INSERT = "INSERT INTO " + TABLE + "(Material_idMaterial, Ubicacion_idUbicacion) VALUES (?,?)";
 
     private static final String SQL_QUERY_ALL = "Select * from " + TABLE;
 
@@ -34,7 +34,6 @@ public class MovimientoJDBC {
             st = con.prepareStatement(SQL_INSERT);
             st.setInt(1, pojo.getMaterial_idMaterial());
             st.setInt(2, pojo.getUbicacion_idUbicacion());
-            st.setTimestamp(3, pojo.getFechaHora());
             int id = st.executeUpdate();
             return id;
         } catch (Exception e) {
