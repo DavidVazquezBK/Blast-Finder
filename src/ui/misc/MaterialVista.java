@@ -277,7 +277,7 @@ public class MaterialVista extends javax.swing.JPanel {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Material vista: No seleccionado");
+//            System.out.println("Material vista: No seleccionado");
         }
 
     }//GEN-LAST:event_jTree1MouseClicked
