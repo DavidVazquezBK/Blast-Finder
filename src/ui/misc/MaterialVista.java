@@ -255,28 +255,30 @@ public class MaterialVista extends javax.swing.JPanel {
 
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
 
-        DefaultMutableTreeNode nodeSeleccionado = (DefaultMutableTreeNode) jTree1.getLastSelectedPathComponent();
+        try {
+            DefaultMutableTreeNode nodeSeleccionado = (DefaultMutableTreeNode) jTree1.getLastSelectedPathComponent();
+            if (nodeSeleccionado.getUserObject() instanceof MaterialPOJO) {
+                MaterialPOJO materialPOJO = (MaterialPOJO) nodeSeleccionado.getUserObject();
+                id.setText("" + materialPOJO.getIdMaterial());
+                nombre.setText("" + materialPOJO.getNombre());
+                notas.setText("" + materialPOJO.getNotas());
 
-        if (nodeSeleccionado.getUserObject() instanceof MaterialPOJO) {
-            MaterialPOJO materialPOJO = (MaterialPOJO) nodeSeleccionado.getUserObject();
-            id.setText("" + materialPOJO.getIdMaterial());
-            nombre.setText("" + materialPOJO.getNombre());
-            notas.setText("" + materialPOJO.getNotas());
-
-            ProductoPOJO productoSeleccionado = new ProductoPOJO();
-            for (int i = 0; i < productos.size(); i++) {
-                if (productos.get(i).getIdProducto() == materialPOJO.getProducto_idProducto()) {
-                    producto.setText("" + productos.get(i).getNombre());
-                    productoSeleccionado = productos.get(i);
+                ProductoPOJO productoSeleccionado = new ProductoPOJO();
+                for (int i = 0; i < productos.size(); i++) {
+                    if (productos.get(i).getIdProducto() == materialPOJO.getProducto_idProducto()) {
+                        producto.setText("" + productos.get(i).getNombre());
+                        productoSeleccionado = productos.get(i);
+                    }
+                }
+                for (int i = 0; i < categorias.size(); i++) {
+                    if (productoSeleccionado.getCategoria_idCategoria() == categorias.get(i).getIdCategoria()) {
+                        categoria.setText(categorias.get(i).getNombre());
+                    }
                 }
             }
-            for (int i = 0; i < categorias.size(); i++) {
-                if (productoSeleccionado.getCategoria_idCategoria() == categorias.get(i).getIdCategoria()) {
-                    categoria.setText(categorias.get(i).getNombre());
-                }
-            }
+        } catch (Exception e) {
+            System.out.println("Material vista: No seleccionado");
         }
-
 
     }//GEN-LAST:event_jTree1MouseClicked
 
