@@ -10,10 +10,15 @@ import java.sql.Timestamp;
  * @author BurnKill
  */
 public class MovimientoPOJO {
+
     private int idMovimiento;
     private int Material_idMaterial;
     private int Ubicacion_idUbicacion;
     private Timestamp fechaHora;
+
+    public String toString() {
+        return "Material: " + Material_idMaterial + " movido a ubicación: " + Ubicacion_idUbicacion;
+    }
 
     public int getIdMovimiento() {
         return idMovimiento;
@@ -46,5 +51,5 @@ public class MovimientoPOJO {
     public void setFechaHora(Timestamp fechaHora) {
         this.fechaHora = fechaHora;
     }
-    
+
 }
