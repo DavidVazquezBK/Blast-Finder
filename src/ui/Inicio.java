@@ -4,10 +4,14 @@
 package ui;
 
 import JDBC.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -36,6 +40,7 @@ public class Inicio extends javax.swing.JPanel {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+        cargaTabla();
     }
 
     /**
@@ -159,7 +164,7 @@ public class Inicio extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Material", "Origen", "Destino", "Fecha y Hora"
+                "ID", "Material", "Última Ubicación", "Fecha y Hora"
             }
         ) {
             Class[] types = new Class [] {
@@ -236,4 +241,53 @@ public class Inicio extends javax.swing.JPanel {
     private javax.swing.JPanel panelEstadisticas;
     private javax.swing.JPanel panelUltimosMovimientos;
     // End of variables declaration//GEN-END:variables
+    public void cargaTabla() {
+        try {
+            DefaultTableModel datos = obtenDefaultTableModelDeVista();
+            DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
+            tm.setRowCount(0);
+
+            for (int filas = 0; filas < datos.getRowCount(); filas++) {
+                tm.addRow(new Object[]{null, null, null, null});
+                for (int columnas = 0; columnas < 4; columnas++) {
+                    tm.setValueAt(datos.getValueAt(filas, columnas), filas, columnas);
+                    jTable1.setModel(tm);
+
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error cargando tabla: ui.abc.Inicio", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error cargando tabla ui.abc.Inicio: " + e);
+        }
+    }
+
+    public static DefaultTableModel obtenDefaultTableModelDeVista() {
+        Connection con = null;
+        PreparedStatement st = null;
+        String encabezados[] = {"ID", "Material", "Movido a", "Fecha y Hora"};
+        DefaultTableModel dt = null;
+        try {
+            con = JDBC.Conexion.getConnection();
+            st = con.prepareStatement("Select * from ultimomovimientonombres");
+            dt = new DefaultTableModel();
+            dt.setColumnIdentifiers(encabezados);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Object ob[] = new Object[4];
+                ob[0] = rs.getObject(1);
+                ob[1] = rs.getObject(2);
+                ob[2] = rs.getObject(3);
+                ob[3] = rs.getObject(4);
+                dt.addRow(ob);
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("Error al consultar " + e);
+        } finally {
+            JDBC.Conexion.close(con);
+            JDBC.Conexion.close(st);
+
+        }
+        return dt;
+    }
 }
