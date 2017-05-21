@@ -8,8 +8,11 @@ import POJO.CategoriaPOJO;
 import POJO.MaterialPOJO;
 import POJO.ProductoPOJO;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Objects;
 import javax.swing.DefaultComboBoxModel;
@@ -665,25 +668,62 @@ public class Material extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void agregarGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarGuardarActionPerformed
-        MaterialPOJO materialPOJO = new MaterialPOJO();
+        //Material a insertar
+        MaterialPOJO materialIns = new MaterialPOJO();
 
-        ProductoPOJO productoPOJO = (ProductoPOJO) agregarComboProducto.getSelectedItem();
-        materialPOJO.setProducto_idProducto(productoPOJO.getIdProducto());
+        //Poner datos a materialCreado e iniciales 'Generando'
+        ProductoPOJO productoIns = (ProductoPOJO) agregarComboProducto.getSelectedItem();
+        materialIns.setProducto_idProducto(productoIns.getIdProducto());
+        materialIns.setNotas(agregarNotas.getText());
+        //Iniciales temporales
+        materialIns.setNombre("Generando");
 
-        materialPOJO.setNotas(agregarNotas.getText());
-        materialPOJO.setNombre("Generando");
-
+        //Obtener CategoriaPOJO del material
+        CategoriaPOJO categoriaIns = new CategoriaPOJO();
+        for (int i = 0; i < categorias.size(); i++) {
+            if (categorias.get(i).getIdCategoria() == productoIns.getCategoria_idCategoria()) {
+                categoriaIns = categorias.get(i);
+            }
+        }
+        //Insertar el material
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet generatedKeys = null;
         try {
-            if (MaterialJDBC.insertaMaterial(materialPOJO) == 0) {
+            con = JDBC.Conexion.getConnection();
+            st = con.prepareStatement("INSERT INTO Material (notas, Producto_idProducto, nombre) VALUES (?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            st.setString(1, materialIns.getNotas());
+            st.setInt(2, materialIns.getProducto_idProducto());
+            st.setString(3, materialIns.getNombre());
+
+            int affectedRows = st.executeUpdate();
+
+            if (affectedRows == 0) {
                 throw new Exception();
             }
+
+            generatedKeys = st.getGeneratedKeys();
+
+            int idGenerado = -1;
+            if (generatedKeys.next()) {
+                idGenerado = generatedKeys.getInt(1);
+            }
+
+            //Actualizar el registro
+            MaterialPOJO materialAActualizar = new MaterialPOJO();
+            materialAActualizar.setIdMaterial(idGenerado);
+            materialAActualizar.setNombre(categoriaIns.getIniciales() + " > " + productoIns.getIniciales() + " > " + idGenerado);
+            materialAActualizar.setNotas(materialIns.getNotas());
+            materialAActualizar.setProducto_idProducto(materialIns.getProducto_idProducto());
+            MaterialJDBC.actualizaMaterial(materialAActualizar);
+
             JOptionPane.showMessageDialog(this, "Material agregado correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
             cargaTabla();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error agregando Material: ui.abc.Material", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Error agregando Materialui.abc.Material: " + e);
         }
-        agregar.setVisible(false);        // TODO add your handling code here:
+        agregar.setVisible(false);
     }//GEN-LAST:event_agregarGuardarActionPerformed
 
     private void agregarCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCerrarActionPerformed
