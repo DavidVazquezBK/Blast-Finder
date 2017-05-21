@@ -104,7 +104,6 @@ public class Principal extends javax.swing.JFrame {
         //      Límite de edición
         this.setLocationRelativeTo(null);
         agregarPestaña(new Inicio(), "Inicio", createImageIcon("../img/inicio.png"));
-        agregarPestaña(new Movimiento(), "Administrar Movimientos", createImageIcon("../img/administracion.png"));
     }
 
     /**
@@ -120,9 +119,9 @@ public class Principal extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
         eliminar = new javax.swing.JButton();
         jToolBar3 = new javax.swing.JToolBar();
@@ -151,6 +150,17 @@ public class Principal extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton1);
 
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/movimiento.png"))); // NOI18N
+        jButton6.setText("Mover materiales");
+        jButton6.setFocusable(false);
+        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton6);
+
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/qr.png"))); // NOI18N
         jButton4.setText("Generador QR");
         jButton4.setFocusable(false);
@@ -172,17 +182,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton5);
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/movimiento.png"))); // NOI18N
-        jButton6.setText("Mover materiales");
-        jButton6.setFocusable(false);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton6);
 
         jToolBar2.setFloatable(false);
 
