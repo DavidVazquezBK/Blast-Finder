@@ -712,7 +712,7 @@ public class Material extends javax.swing.JPanel {
             //Actualizar el registro
             MaterialPOJO materialAActualizar = new MaterialPOJO();
             materialAActualizar.setIdMaterial(idGenerado);
-            materialAActualizar.setNombre(categoriaIns.getIniciales() + "_" + productoIns.getIniciales() + "_" + idGenerado);
+            materialAActualizar.setNombre(categoriaIns.getIniciales() + "+" + productoIns.getIniciales() + "+" + idGenerado);
             materialAActualizar.setNotas(materialIns.getNotas());
             materialAActualizar.setProducto_idProducto(materialIns.getProducto_idProducto());
             MaterialJDBC.actualizaMaterial(materialAActualizar);
