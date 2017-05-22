@@ -30,8 +30,8 @@ INSERT INTO `producto` (`idProducto`,`nombre`, `Categoria_idCategoria`,`iniciale
 --
 
 INSERT INTO `material` (`idMaterial`, `Producto_idProducto`,`notas`,`nombre`) VALUES
-(1,1,'Está desgastado de los lados','TAPE_TAP-VRD-1X1_1'),
-(2,1,'Un poco roto','TAPE_TAP-VRD-1X1_2'),
+(1,1,'Está desgastado de los lados','TAPE_TAP-VRD-1X1+1'),
+(2,1,'Un poco roto','TAPE_TAP-VRD-1X1+2'),
 (3,1,'En buen estado','TAPE+TAP-VRD-1X1+3'),
 (4,2,'Una mitad se ve azul y la otra blanca','TAPE+TAP-AZL-2X1+4'),
 (5,2,'Un poco dañado pero sirve bien','TAPE+TAP-AZL-2X1+5'),
