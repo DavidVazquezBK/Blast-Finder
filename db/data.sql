@@ -1,4 +1,4 @@
-USE blastfinder;
+﻿USE blastfinder;
 --
 -- Base de datos: `blastfinder`
 --
@@ -29,25 +29,25 @@ INSERT INTO `producto` (`idProducto`,`nombre`, `Categoria_idCategoria`,`iniciale
 -- Volcado de datos para la tabla `material`
 --
 
-INSERT INTO `material` (`idMaterial`, `Producto_idProducto`,`notas`) VALUES
-(1,1,'Está desgastado de los lados'),
-(2,1,'Un poco roto'),
-(3,1,'En buen estado'),
-(4,2,'Una mitad se ve azul y la otra blanca'),
-(5,2,'Un poco dañado pero sirve bien'),
-(6,2,'Hay que repararlo, está partido en 2'),
-(7,3,'Aveces se apaga de la nada'),
-(8,3,'No tiene cable de alimentación'),
-(9,3,'Rayado y con estickers'),
-(10,4,'No prende'),
-(11,4,'Se traba al conectar VGA'),
-(12,4,'No prende'),
-(13,5,'Tiene chicles debajo'),
-(14,5,'Una pata está rota'),
-(15,5,'Rechina mucho'),
-(16,6,'Ya no tiene paleta'),
-(17,6,'El portavasos está sucio'),
-(18,6,'Se robaron el portavasos');
+INSERT INTO `material` (`idMaterial`, `Producto_idProducto`,`notas`,`nombre`) VALUES
+(1,1,'Está desgastado de los lados','TAPE_TAP-VRD-1X1_1'),
+(2,1,'Un poco roto','TAPE_TAP-VRD-1X1_2'),
+(3,1,'En buen estado','TAPE+TAP-VRD-1X1+3'),
+(4,2,'Una mitad se ve azul y la otra blanca','TAPE+TAP-AZL-2X1+4'),
+(5,2,'Un poco dañado pero sirve bien','TAPE+TAP-AZL-2X1+5'),
+(6,2,'Hay que repararlo, está partido en 2','TAPE+TAP-AZL-2X1+6'),
+(7,3,'Aveces se apaga de la nada','PROY+EPSN-20LUM-FHD+7'),
+(8,3,'No tiene cable de alimentación','PROY+EPSN-20LUM-FHD+8'),
+(9,3,'Rayado y con estickers','PROY+EPSN-20LUM-FHD+9'),
+(10,4,'No prende','PROY+CSIO-15LUM-HD+10'),
+(11,4,'Se traba al conectar VGA','PROY+CSIO-15LUM-HD+11'),
+(12,4,'No prende','PROY+CSIO-15LUM-HD+12'),
+(13,5,'Tiene chicles debajo','MOBI+MBCO-PLTA+13'),
+(14,5,'Una pata está rota','MOBI+MBCO-PLTA+14'),
+(15,5,'Rechina mucho','MOBI+MBCO-PLTA+15'),
+(16,6,'Ya no tiene paleta','MOBI+MBCO-PVSO+16'),
+(17,6,'El portavasos está sucio','MOBI+MBCO-PVSO+17'),
+(18,6,'Se robaron el portavasos','MOBI+MBCO-PVSO+18');
 
 --
 -- Volcado de datos para la tabla `ubicacion`
