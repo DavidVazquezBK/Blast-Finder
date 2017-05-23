@@ -7,27 +7,61 @@ import JDBC.Conexion;
 import POJO.CategoriaPOJO;
 import POJO.MaterialPOJO;
 import POJO.ProductoPOJO;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import java.awt.Cursor;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import ui.Principal;
+import utilidades.QRCodeFactory;
 
 /**
  *
  * @author BurnKill
  */
 public class GeneradorQR extends javax.swing.JPanel {
+
     ArrayList<CategoriaPOJO> categorias;
     ArrayList<ProductoPOJO> productos;
     ArrayList<MaterialPOJO> materiales;
+    Properties props;
+
     /**
      * Creates new form GeneradorQR
      */
     public GeneradorQR() {
         initComponents();
+
+        props = new Properties();
+        try {
+            InputStream inputStream = Principal.class.getResourceAsStream("/config/prefs.properties");
+            props.load(inputStream);
+            inputStream.close();
+            if (Boolean.valueOf(props.getProperty("usarRuta"))) {
+                jTextField1.setText(props.getProperty("ruta"));
+            } else {
+                jTextField1.setText(null);
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "¡Archivo de configuración no encontrado! Inicializando", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Archivo de configuración no encontrado: " + ex);
+        }
 
         this.productos = new ArrayList<ProductoPOJO>();
         this.categorias = new ArrayList<CategoriaPOJO>();
@@ -86,7 +120,8 @@ public class GeneradorQR extends javax.swing.JPanel {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        cargaModoCategorias();    }
+        cargaModoCategorias();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,37 +132,154 @@ public class GeneradorQR extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        imagen = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        documento = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTree5 = new javax.swing.JTree();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        imagen = new javax.swing.JPanel();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
+        jLabel5 = new javax.swing.JLabel();
+        jSpinner2 = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
+        documento = new javax.swing.JPanel();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+
+        jFileChooser1.setAccessory(jButton1);
+        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoría", "Producto" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Clasificar por:");
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Todos los materiales"));
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(jTree1);
+        jTree5.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane5.setViewportView(jTree5);
 
-        jLabel3.setText("Carpeta de exportación:");
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Material(es) seleccionado(s)"));
+
+        jList1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jList1PropertyChange(evt);
+            }
+        });
+        jScrollPane6.setViewportView(jList1);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/derecha.png"))); // NOI18N
+        jButton3.setText("Agregar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/izquierda.png"))); // NOI18N
+        jButton4.setText("Retirar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addContainerGap())
+        );
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/check.png"))); // NOI18N
+        jButton5.setText("Crear etiquetas");
+        jButton5.setEnabled(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Configuración"));
 
         jButton1.setText("Buscar...");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTextField1.setEditable(false);
+
+        jLabel3.setText("Carpeta de exportación:");
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PNG", "JPEG", "GIF" }));
 
         jLabel4.setText("Formato de archivo:");
+
+        jLabel2.setText("Resolución");
+
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(500, 0, 10000, 1));
+
+        jLabel5.setText("Horizontal:");
+
+        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(500, 0, 10000, 1));
+
+        jLabel7.setText("Vertical:");
 
         javax.swing.GroupLayout imagenLayout = new javax.swing.GroupLayout(imagen);
         imagen.setLayout(imagenLayout);
@@ -137,16 +289,21 @@ public class GeneradorQR extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(imagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(imagenLayout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(imagenLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1))
-                    .addComponent(jLabel3)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, Short.MAX_VALUE)
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSpinner2)
+                        .addGap(8, 8, 8))
                     .addGroup(imagenLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox3, 0, 275, Short.MAX_VALUE)
-                        .addGap(1, 1, 1)))
-                .addContainerGap())
+                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         imagenLayout.setVerticalGroup(
             imagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,23 +312,19 @@ public class GeneradorQR extends javax.swing.JPanel {
                 .addGroup(imagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(imagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(195, Short.MAX_VALUE))
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Imagen", new javax.swing.ImageIcon(getClass().getResource("/img/img.png")), imagen); // NOI18N
         imagen.getAccessibleContext().setAccessibleName("");
-
-        jLabel5.setText("Carpeta de exportación:");
-
-        jButton2.setText("Buscar...");
-
-        jTextField2.setEditable(false);
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PDF", "DOCX" }));
 
@@ -183,18 +336,10 @@ public class GeneradorQR extends javax.swing.JPanel {
             documentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(documentoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(documentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(documentoLayout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2))
-                    .addComponent(jLabel5)
-                    .addGroup(documentoLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox4, 0, 275, Short.MAX_VALUE)
-                        .addGap(1, 1, 1)))
-                .addContainerGap())
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox4, 0, 151, Short.MAX_VALUE)
+                .addGap(11, 11, 11))
         );
         documentoLayout.setVerticalGroup(
             documentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,42 +348,64 @@ public class GeneradorQR extends javax.swing.JPanel {
                 .addGroup(documentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(documentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Documento", new javax.swing.ImageIcon(getClass().getResource("/img/doc.png")), documento); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoría", "Producto" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Clasificar por:");
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jTabbedPane1)
+                        .addContainerGap())
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1)
+                        .addGap(7, 7, 7))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane1)
+                .addGap(16, 16, 16))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTabbedPane1))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,9 +418,13 @@ public class GeneradorQR extends javax.swing.JPanel {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jTabbedPane1))
-                .addGap(14, 14, 14))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton5)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -261,27 +432,154 @@ public class GeneradorQR extends javax.swing.JPanel {
         cargaJTree();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jList1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jList1PropertyChange
+        cambiaEstadoBotonAceptar();
+    }//GEN-LAST:event_jList1PropertyChange
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        //Checar si ya está en la lista
+        DefaultMutableTreeNode nodoSeleccionado = (DefaultMutableTreeNode) jTree5.getLastSelectedPathComponent();
+        if (Objects.nonNull(nodoSeleccionado)) {
+            if (nodoSeleccionado.getUserObject() instanceof MaterialPOJO) {
+                //Obtener nodo seleccionado
+                DefaultMutableTreeNode nodoSeleccionado2 = (DefaultMutableTreeNode) jTree5.getLastSelectedPathComponent();
+                //Obtener material seleccionado
+                MaterialPOJO materialSeleccionado = (MaterialPOJO) nodoSeleccionado2.getUserObject();
+                //Si la lista está vacía, se agrega el material, si no, se buscan coincidencias
+                if (jList1.getModel().getSize() == 0) {
+                    //                    System.out.println("Lista vacia, agregando...");
+                    agrega(materialSeleccionado);
+                    //Que hacer si la lista tiene mas de 0 materiales
+                } else if (jList1.getModel().getSize() > 0) {
+                    //Obtener modelo de jList, en el cual hay que buscar coincidencias de material
+                    ListModel listModel1 = jList1.getModel();
+                    //Comparar cada material con el seleccionado
+                    boolean listo;
+                    listo = true;
+                    for (int i = 0; i < jList1.getModel().getSize(); i++) {
+                        if (((MaterialPOJO) listModel1.getElementAt(i)).getIdMaterial() == materialSeleccionado.getIdMaterial()) {
+                            listo = false;
+                        }
+                    }
+                    if (listo) {
+                        agrega(materialSeleccionado);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if (jList1.getModel().getSize() > 0) {
+            //Crear modelo nuevo
+            DefaultListModel<MaterialPOJO> defaultListModel = new DefaultListModel<MaterialPOJO>();
+            //Obtener modelo de jList1
+            ListModel listModel = jList1.getModel();
+            //Agregar registros de jList al modelo nuevo
+            for (int i = 0; i < jList1.getModel().getSize(); i++) {
+                defaultListModel.addElement((MaterialPOJO) listModel.getElementAt(i));
+            }
+            //Eliminar
+            defaultListModel.remove(jList1.getSelectedIndex());
+            //Definir nuevo modelo
+            jList1.setModel((ListModel) defaultListModel);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+//Donde almacenar materiales seleccionados
+        MaterialPOJO[] materialesSeleccionado = new MaterialPOJO[jList1.getModel().getSize()];
+        //Obtener modelo de jList1 para obtener cada objeto
+        ListModel listModel = jList1.getModel();
+        //Almacenar cada objeto casteado a su posición en materialesSeleccionado
+        Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+        boolean fl = false;
+        for (int i = 0; i < materialesSeleccionado.length; i++) {
+            materialesSeleccionado[i] = (MaterialPOJO) listModel.getElementAt(i);
+            try {
+                QRCodeFactory.createQRCode(materialesSeleccionado[i].getNombre(), materialesSeleccionado[i].getNombre() + "." + jComboBox3.getSelectedItem().toString(), "UTF-8", hintMap, (Integer) jSpinner2.getValue(), (Integer) jSpinner1.getValue());
+                fl = true;
+            } catch (WriterException ex) {
+                Logger.getLogger(GeneradorQR.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
+                fl = false;
+                break;
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
+                fl = false;
+                break;
+            }
+        }
+        if (fl) {
+            JOptionPane.showMessageDialog(this, "Etiquetas generadas correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            jList1.setModel(new DefaultListModel<String>());
+        }
+        try {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        } finally {
+            setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jFileChooser1.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            if (jFileChooser1.getSelectedFile().isDirectory()) {
+                jTextField1.setText("" + jFileChooser1.getSelectedFile());
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione un directorio", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        cambiaEstadoBotonAceptar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel documento;
     private javax.swing.JPanel imagen;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTree jTree1;
+    private javax.swing.JTree jTree2;
+    private javax.swing.JTree jTree3;
+    private javax.swing.JTree jTree4;
+    private javax.swing.JTree jTree5;
     // End of variables declaration//GEN-END:variables
-private void cargaJTree() {
+
+    private void cargaJTree() {
         switch (jComboBox1.getSelectedIndex()) {
             case 0: {
                 cargaModoCategorias();
@@ -296,7 +594,8 @@ private void cargaJTree() {
 
         }
     }
-private void cargaModoCategorias() {
+
+    private void cargaModoCategorias() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Categorías");
         for (int i = 0; i < categorias.size(); i++) {
             // Agregar CategoriasPOJO al root
@@ -319,7 +618,7 @@ private void cargaModoCategorias() {
             root.add(categoria);
         }
 
-        jTree1.setModel(new DefaultTreeModel(root));
+        jTree5.setModel(new DefaultTreeModel(root));
     }
 
     private void cargaModoProductos() {
@@ -346,7 +645,29 @@ private void cargaModoCategorias() {
             root.add(producto);
         }
 
-        jTree1.setModel(new DefaultTreeModel(root));
+        jTree5.setModel(new DefaultTreeModel(root));
     }
 
+    private void cambiaEstadoBotonAceptar() {
+        if (jList1.getModel().getSize() > 0 && !jTextField1.getText().isEmpty()) {
+            jButton5.setEnabled(true);
+        } else {
+            jButton5.setEnabled(false);
+        }
+    }
+
+    public void agrega(MaterialPOJO materialSeleccionado) {
+        //Crear modelo nuevo
+        DefaultListModel<MaterialPOJO> defaultListModel = new DefaultListModel<MaterialPOJO>();
+        //Obtener modelo de jList1
+        ListModel listModel = jList1.getModel();
+        //Agregar registros de jList al modelo nuevo
+        for (int i = 0; i < jList1.getModel().getSize(); i++) {
+            defaultListModel.addElement((MaterialPOJO) listModel.getElementAt(i));
+        }
+        //Agregar material seleccionado
+        defaultListModel.addElement(materialSeleccionado);
+        //Definir nuevo modelo
+        jList1.setModel((ListModel) defaultListModel);
+    }
 }
