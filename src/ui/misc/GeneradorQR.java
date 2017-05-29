@@ -11,6 +11,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import java.awt.Cursor;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
@@ -499,7 +500,13 @@ public class GeneradorQR extends javax.swing.JPanel {
         for (int i = 0; i < materialesSeleccionado.length; i++) {
             materialesSeleccionado[i] = (MaterialPOJO) listModel.getElementAt(i);
             try {
-                QRCodeFactory.createQRCode(materialesSeleccionado[i].getNombre(), materialesSeleccionado[i].getNombre() + "." + jComboBox3.getSelectedItem().toString(), "UTF-8", hintMap, (Integer) jSpinner2.getValue(), (Integer) jSpinner1.getValue());
+                QRCodeFactory.createQRCode(materialesSeleccionado[i].getNombre(),
+                        jTextField1.getText() + File.separator + materialesSeleccionado[i].getNombre() + "." + jComboBox3.getSelectedItem().toString(),
+                        "UTF-8",
+                        hintMap,
+                        (Integer) jSpinner2.getValue(),
+                        (Integer) jSpinner1.getValue()
+                );
                 fl = true;
             } catch (WriterException ex) {
                 Logger.getLogger(GeneradorQR.class.getName()).log(Level.SEVERE, null, ex);
