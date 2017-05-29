@@ -186,7 +186,7 @@ public class Principal extends javax.swing.JFrame {
         jToolBar2.setFloatable(false);
 
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        eliminar.setText("Eliminar pestaña actual");
+        eliminar.setText("Eliminar Pestaña Actual");
         eliminar.setFocusable(false);
         eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         eliminar.addActionListener(new java.awt.event.ActionListener() {

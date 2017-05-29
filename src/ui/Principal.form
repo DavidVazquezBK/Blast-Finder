@@ -149,7 +149,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/img/eliminar.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Eliminar pesta&#xf1;a actual"/>
+            <Property name="text" type="java.lang.String" value="Eliminar Pesta&#xf1;a Actual"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
