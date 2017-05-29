@@ -505,46 +505,10 @@ public class GeneradorQR extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//Donde almacenar materiales seleccionados
-        MaterialPOJO[] materialesSeleccionado = new MaterialPOJO[jList1.getModel().getSize()];
-        //Obtener modelo de jList1 para obtener cada objeto
-        ListModel listModel = jList1.getModel();
-        //Almacenar cada objeto casteado a su posición en materialesSeleccionado
-        Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
-        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-        boolean fl = false;
-        for (int i = 0; i < materialesSeleccionado.length; i++) {
-            materialesSeleccionado[i] = (MaterialPOJO) listModel.getElementAt(i);
-            try {
-                QRCodeFactory.createQRCode(materialesSeleccionado[i].getNombre(),
-                        jTextField1.getText() + File.separator + materialesSeleccionado[i].getNombre() + "." + jComboBox3.getSelectedItem().toString(),
-                        "UTF-8",
-                        hintMap,
-                        (Integer) jSpinner2.getValue(),
-                        (Integer) jSpinner1.getValue()
-                );
-                fl = true;
-            } catch (WriterException ex) {
-                Logger.getLogger(GeneradorQR.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
-                fl = false;
-                break;
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
-                fl = false;
-                break;
-            }
-        }
-        if (fl) {
-            JOptionPane.showMessageDialog(this, "Etiquetas generadas correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-            jList1.setModel(new DefaultListModel<String>());
-        }
-        try {
-            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        } finally {
-            setCursor(Cursor.getDefaultCursor());
+        if (jTabbedPane1.getSelectedIndex() == 0) {
+            exportaImagenes();
+        } else {
+            exportaDocumento();
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -683,5 +647,56 @@ public class GeneradorQR extends javax.swing.JPanel {
         defaultListModel.addElement(materialSeleccionado);
         //Definir nuevo modelo
         jList1.setModel((ListModel) defaultListModel);
+    }
+
+    public void exportaImagenes() {
+
+        //Poner cursor de espera
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        //Donde almacenar materiales seleccionados
+        MaterialPOJO[] materialesSeleccionado = new MaterialPOJO[jList1.getModel().getSize()];
+        //Obtener modelo de jList1 para obtener cada objeto
+        ListModel listModel = jList1.getModel();
+        //Almacenar cada objeto casteado a su posición en materialesSeleccionado
+        Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+        boolean fl = false;
+        for (int i = 0; i < materialesSeleccionado.length; i++) {
+            materialesSeleccionado[i] = (MaterialPOJO) listModel.getElementAt(i);
+            try {
+                QRCodeFactory.createQRCode(materialesSeleccionado[i].getNombre(),
+                        jTextField1.getText() + File.separator + materialesSeleccionado[i].getNombre() + "." + jComboBox3.getSelectedItem().toString(),
+                        "UTF-8",
+                        hintMap,
+                        (Integer) jSpinner2.getValue(),
+                        (Integer) jSpinner1.getValue()
+                );
+                fl = true;
+            } catch (WriterException ex) {
+                ex.printStackTrace();
+                Logger.getLogger(GeneradorQR.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
+                fl = false;
+                break;
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.INFORMATION_MESSAGE);
+                fl = false;
+                break;
+            }
+        }
+        if (fl) {
+            JOptionPane.showMessageDialog(this, "Etiquetas generadas correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            jList1.setModel(new DefaultListModel<String>());
+        }
+        try {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        } finally {
+            setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
+    private void exportaDocumento() {
+        
     }
 }
