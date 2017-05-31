@@ -7,11 +7,28 @@ import JDBC.Conexion;
 import POJO.CategoriaPOJO;
 import POJO.MaterialPOJO;
 import POJO.ProductoPOJO;
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Cursor;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
@@ -23,6 +40,7 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -159,10 +177,13 @@ public class GeneradorQR extends javax.swing.JPanel {
         jSpinner2 = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
         documento = new javax.swing.JPanel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jComboBox5 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jSpinner3 = new javax.swing.JSpinner();
+        jLabel9 = new javax.swing.JLabel();
+        jSpinner4 = new javax.swing.JSpinner();
+        jLabel10 = new javax.swing.JLabel();
 
         jFileChooser1.setAccessory(jButton1);
         jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
@@ -188,7 +209,7 @@ public class GeneradorQR extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -231,7 +252,7 @@ public class GeneradorQR extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -297,7 +318,7 @@ public class GeneradorQR extends javax.swing.JPanel {
                     .addGroup(imagenLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, Short.MAX_VALUE)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, Short.MAX_VALUE)
                         .addGap(16, 16, 16)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -329,13 +350,19 @@ public class GeneradorQR extends javax.swing.JPanel {
         jTabbedPane1.addTab("Imagen", new javax.swing.ImageIcon(getClass().getResource("/img/img.png")), imagen); // NOI18N
         imagen.getAccessibleContext().setAccessibleName("");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PDF", "DOCX" }));
-
-        jLabel6.setText("Formato de archivo:");
-
         jLabel8.setText("Tamaño de hoja:");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Carta", "Tabloide" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tabloide", "Carta" }));
+
+        jLabel6.setText("Horizontal:");
+
+        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(300, 0, 10000, 1));
+
+        jLabel9.setText("Vertical:");
+
+        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(300, 0, 10000, 1));
+
+        jLabel10.setText("Resolución");
 
         javax.swing.GroupLayout documentoLayout = new javax.swing.GroupLayout(documento);
         documento.setLayout(documentoLayout);
@@ -344,32 +371,42 @@ public class GeneradorQR extends javax.swing.JPanel {
             .addGroup(documentoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(documentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(documentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(documentoLayout.createSequentialGroup()
-                        .addComponent(jComboBox4, 0, 151, Short.MAX_VALUE)
-                        .addGap(11, 11, 11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, documentoLayout.createSequentialGroup()
-                        .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(documentoLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, Short.MAX_VALUE)
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSpinner4))
+                    .addGroup(documentoLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         documentoLayout.setVerticalGroup(
             documentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(documentoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(documentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(documentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(documentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Documento", new javax.swing.ImageIcon(getClass().getResource("/img/doc.png")), documento); // NOI18N
+        jTabbedPane1.addTab("PDF", new javax.swing.ImageIcon(getClass().getResource("/img/doc.png")), documento); // NOI18N
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -403,6 +440,8 @@ public class GeneradorQR extends javax.swing.JPanel {
                 .addComponent(jTabbedPane1)
                 .addGap(16, 16, 16))
         );
+
+        jTabbedPane1.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -508,7 +547,21 @@ public class GeneradorQR extends javax.swing.JPanel {
         if (jTabbedPane1.getSelectedIndex() == 0) {
             exportaImagenes();
         } else {
-            exportaDocumento();
+            try {
+                exportaDocumento(jComboBox5.getSelectedIndex());
+            } catch (DocumentException ex) {
+                muestraError(ex);
+            } catch (FileNotFoundException ex) {
+                muestraError(ex);
+            } catch (WriterException ex) {
+                muestraError(ex);
+                muestraError(ex);
+            } catch (IOException ex) {
+                muestraError(ex);
+            } catch (Exception ex) {
+                muestraError(ex);
+            }
+
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -533,10 +586,10 @@ public class GeneradorQR extends javax.swing.JPanel {
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -544,6 +597,7 @@ public class GeneradorQR extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
@@ -552,6 +606,8 @@ public class GeneradorQR extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinner3;
+    private javax.swing.JSpinner jSpinner4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree5;
@@ -696,7 +752,80 @@ public class GeneradorQR extends javax.swing.JPanel {
         }
     }
 
-    private void exportaDocumento() {
-        
+    private void exportaDocumento(int tamano) throws DocumentException, FileNotFoundException, WriterException, IOException, Exception {
+        //Nota: el tamano empieza desde 0 
+        //Poner cursor de espera
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        //Donde almacenar materiales seleccionados
+        MaterialPOJO[] materialesSeleccionado = new MaterialPOJO[jList1.getModel().getSize()];
+        //Obtener modelo de jList1 para obtener cada objeto
+        ListModel listModel = jList1.getModel();
+        //Bandera por si sucede algún error
+        boolean bien = false;
+        //Obtener POJOs de materiales seleccionados
+        for (int i = 0; i < materialesSeleccionado.length; i++) {
+            materialesSeleccionado[i] = (MaterialPOJO) listModel.getElementAt(i);
+        }
+        //Inicializar documento
+        Document document = null;
+        //Asignar tamano de documento
+        switch (jComboBox5.getSelectedIndex()) {
+            case 0:
+                document = new Document(PageSize.TABLOID);
+                break;
+            case 1:
+                document = new Document(PageSize.LETTER);
+                break;
+            default:
+                throw new Exception("Error setteando documento");
+        }
+        //Inicializar documento y abrirlo
+        PdfWriter.getInstance(document,
+                new FileOutputStream(
+                        jTextField1.getText() + File.separator + materialesSeleccionado.length + " Material(es).pdf"));
+        document.open();
+        //Preparar variables para exportar QR
+        Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+        //Anadir cada imagen al documento
+        for (int i = 0; i < materialesSeleccionado.length; i++) {
+            BufferedImage bufferedImage = getBufferedImageFromQR(materialesSeleccionado[i].getNombre(), hintMap, (Integer) jSpinner3.getValue(), (Integer) jSpinner4.getValue());
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", baos);
+            Image iTextImage = Image.getInstance(baos.toByteArray());
+            document.add(iTextImage);
+
+            //Crear el titulo de cada QR
+            Paragraph p = new Paragraph(materialesSeleccionado[i].getNombre(), new Font(FontFamily.HELVETICA, 22));
+            p.setAlignment(Element.ALIGN_LEFT);
+            document.add(p);
+            bien = true;
+        }
+        //Terminar
+        document.close();
+
+        if (bien) {
+            JOptionPane.showMessageDialog(this, "Etiquetas generadas correctamente", "Error", JOptionPane.INFORMATION_MESSAGE);
+            jList1.setModel(new DefaultListModel<String>());
+        }
+        try {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        } finally {
+            setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
+    public static BufferedImage getBufferedImageFromQR(String qrCodeData, Map hintMap, int qrCodeheight, int qrCodewidth) throws WriterException, IOException {
+        BitMatrix matrix = new MultiFormatWriter().encode(new String(qrCodeData.getBytes("UTF-8"), "UTF-8"), BarcodeFormat.QR_CODE, qrCodewidth, qrCodeheight, hintMap);
+        return MatrixToImageWriter.toBufferedImage(matrix);
+    }
+
+    private void muestraError(Exception ex) {
+        try {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        } finally {
+            setCursor(Cursor.getDefaultCursor());
+        }
+        JOptionPane.showMessageDialog(this, ex, "Exito", JOptionPane.ERROR_MESSAGE);
     }
 }
