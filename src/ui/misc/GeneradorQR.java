@@ -826,6 +826,6 @@ public class GeneradorQR extends javax.swing.JPanel {
         } finally {
             setCursor(Cursor.getDefaultCursor());
         }
-        JOptionPane.showMessageDialog(this, ex, "Exito", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
