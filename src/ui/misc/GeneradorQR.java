@@ -33,7 +33,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -60,6 +63,9 @@ public class GeneradorQR extends javax.swing.JPanel {
     ArrayList<ProductoPOJO> productos;
     ArrayList<MaterialPOJO> materiales;
     Properties props;
+
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
+    Date date = new Date();
 
     /**
      * Creates new form GeneradorQR
@@ -782,7 +788,7 @@ public class GeneradorQR extends javax.swing.JPanel {
         //Inicializar documento y abrirlo
         PdfWriter.getInstance(document,
                 new FileOutputStream(
-                        jTextField1.getText() + File.separator + materialesSeleccionado.length + " Material(es).pdf"));
+                        jTextField1.getText() + File.separator + materialesSeleccionado.length + " Material(es), " + dateFormat.format(date) + ".pdf"));
         document.open();
         //Preparar variables para exportar QR
         Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
