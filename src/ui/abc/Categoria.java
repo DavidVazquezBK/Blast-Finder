@@ -7,6 +7,7 @@ import POJO.CategoriaPOJO;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import jdbc.CategoriaJDBC;
 
@@ -75,7 +76,19 @@ public class Categoria extends javax.swing.JPanel {
 
         jLabel7.setText("Nombre:");
 
+        nuevaCatNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nuevaCatNombreKeyTyped(evt);
+            }
+        });
+
         jLabel9.setText("Iniciales:");
+
+        nuevaCatIniciales.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nuevaCatInicialesKeyTyped(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         jButton4.setText("Guardar");
@@ -146,6 +159,12 @@ public class Categoria extends javax.swing.JPanel {
 
         jLabel11.setText("Iniciales:");
 
+        editarIniciales.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                editarInicialesKeyTyped(evt);
+            }
+        });
+
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         jButton6.setText("Guardar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -165,6 +184,12 @@ public class Categoria extends javax.swing.JPanel {
         jLabel12.setText("ID:");
 
         editarId.setEditable(false);
+
+        editarNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                editarNombreKeyTyped(evt);
+            }
+        });
 
         jLabel13.setText("Nombre:");
 
@@ -491,6 +516,34 @@ public class Categoria extends javax.swing.JPanel {
         cargaTabla();
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void nuevaCatNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nuevaCatNombreKeyTyped
+        int limite = 15;
+        if (nuevaCatNombre.getText().length() > limite - 1) {
+            nuevaCatNombre.setText(nuevaCatNombre.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_nuevaCatNombreKeyTyped
+
+    private void nuevaCatInicialesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nuevaCatInicialesKeyTyped
+        int limite = 4;
+        if (nuevaCatIniciales.getText().length() > limite - 1) {
+            nuevaCatIniciales.setText(nuevaCatIniciales.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_nuevaCatInicialesKeyTyped
+
+    private void editarNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_editarNombreKeyTyped
+        int limite = 15;
+        if (editarNombre.getText().length() > limite - 1) {
+            editarNombre.setText(editarNombre.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_editarNombreKeyTyped
+
+    private void editarInicialesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_editarInicialesKeyTyped
+int limite = 4;
+        if (editarIniciales.getText().length() > limite - 1) {
+            editarIniciales.setText(editarIniciales.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_editarInicialesKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog agregar;

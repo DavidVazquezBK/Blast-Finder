@@ -80,6 +80,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="nuevaCatNombre">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nuevaCatNombreKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
@@ -87,6 +90,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="nuevaCatIniciales">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nuevaCatInicialesKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
@@ -197,6 +203,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="editarIniciales">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="editarInicialesKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton6">
           <Properties>
@@ -231,6 +240,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="editarNombre">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="editarNombreKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
