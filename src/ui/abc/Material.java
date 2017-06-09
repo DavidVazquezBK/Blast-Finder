@@ -200,6 +200,11 @@ public class Material extends javax.swing.JPanel {
 
         agregarNotas.setColumns(20);
         agregarNotas.setRows(5);
+        agregarNotas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                agregarNotasKeyTyped(evt);
+            }
+        });
         jScrollPane3.setViewportView(agregarNotas);
 
         jLabel8.setText("+");
@@ -340,6 +345,11 @@ public class Material extends javax.swing.JPanel {
 
         editarNotas.setColumns(20);
         editarNotas.setRows(5);
+        editarNotas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                editarNotasKeyTyped(evt);
+            }
+        });
         jScrollPane4.setViewportView(editarNotas);
 
         jLabel4.setText("+");
@@ -831,6 +841,19 @@ public class Material extends javax.swing.JPanel {
         }
         cargaTabla();
         editar.setVisible(false);    }//GEN-LAST:event_editarGuardarActionPerformed
+
+    private void agregarNotasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agregarNotasKeyTyped
+        int limite = 60;
+        if (agregarNotas.getText().length() > limite - 1) {
+            agregarNotas.setText(agregarNotas.getText().substring(0, limite - 1));
+        }    }//GEN-LAST:event_agregarNotasKeyTyped
+
+    private void editarNotasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_editarNotasKeyTyped
+        int limite = 60;
+        if (editarNotas.getText().length() > limite - 1) {
+            editarNotas.setText(editarNotas.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_editarNotasKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
