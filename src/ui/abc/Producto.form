@@ -114,6 +114,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nombreAgregarKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
@@ -124,6 +127,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inicialesAgregarKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel15">
           <Properties>
@@ -267,6 +273,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inicialesEditarKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel18">
           <Properties>
@@ -303,6 +312,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nombreEditarKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

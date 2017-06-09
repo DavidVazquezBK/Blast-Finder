@@ -125,10 +125,20 @@ public class Producto extends javax.swing.JPanel {
         });
 
         nombreAgregar.setText(" ");
+        nombreAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreAgregarKeyTyped(evt);
+            }
+        });
 
         jLabel14.setText("Iniciales:");
 
         inicialesAgregar.setText(" ");
+        inicialesAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inicialesAgregarKeyTyped(evt);
+            }
+        });
 
         jLabel15.setText("Categoria:");
 
@@ -214,6 +224,11 @@ public class Producto extends javax.swing.JPanel {
         jLabel17.setText("Iniciales:");
 
         inicialesEditar.setText(" ");
+        inicialesEditar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                inicialesEditarKeyTyped(evt);
+            }
+        });
 
         jLabel18.setText("Categoria:");
 
@@ -225,6 +240,11 @@ public class Producto extends javax.swing.JPanel {
         jLabel20.setText("Nombre:");
 
         nombreEditar.setText(" ");
+        nombreEditar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreEditarKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout editarLayout = new javax.swing.GroupLayout(editar.getContentPane());
         editar.getContentPane().setLayout(editarLayout);
@@ -598,6 +618,34 @@ public class Producto extends javax.swing.JPanel {
         cargaTabla();
         editar.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void nombreAgregarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreAgregarKeyTyped
+        int limite = 50;
+        if (nombreAgregar.getText().length() > limite - 1) {
+            nombreAgregar.setText(nombreAgregar.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_nombreAgregarKeyTyped
+
+    private void inicialesAgregarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inicialesAgregarKeyTyped
+        int limite = 15;
+        if (inicialesAgregar.getText().length() > limite - 1) {
+            inicialesAgregar.setText(inicialesAgregar.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_inicialesAgregarKeyTyped
+
+    private void nombreEditarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreEditarKeyTyped
+        int limite = 50;
+        if (nombreEditar.getText().length() > limite - 1) {
+            nombreEditar.setText(nombreEditar.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_nombreEditarKeyTyped
+
+    private void inicialesEditarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inicialesEditarKeyTyped
+        int limite = 15;
+        if (inicialesEditar.getText().length() > limite - 1) {
+            inicialesEditar.setText(inicialesEditar.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_inicialesEditarKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
