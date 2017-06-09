@@ -97,12 +97,22 @@ public class Ubicacion extends javax.swing.JPanel {
         jLabel4.setText("Nombre:");
 
         agregarNombre.setText(" ");
+        agregarNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                agregarNombreKeyTyped(evt);
+            }
+        });
 
         jLabel14.setText("Descripción:");
 
         agregarDescripcion.setColumns(20);
         agregarDescripcion.setLineWrap(true);
         agregarDescripcion.setRows(5);
+        agregarDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                agregarDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane3.setViewportView(agregarDescripcion);
 
         javax.swing.GroupLayout agregarLayout = new javax.swing.GroupLayout(agregar.getContentPane());
@@ -176,6 +186,11 @@ public class Ubicacion extends javax.swing.JPanel {
         editarDescripcion.setColumns(20);
         editarDescripcion.setLineWrap(true);
         editarDescripcion.setRows(5);
+        editarDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                editarDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane4.setViewportView(editarDescripcion);
 
         jLabel5.setText("ID:");
@@ -184,6 +199,11 @@ public class Ubicacion extends javax.swing.JPanel {
         editarId.setText(" ");
 
         editarNombre.setText(" ");
+        editarNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                editarNombreKeyTyped(evt);
+            }
+        });
 
         jLabel7.setText("Nombre:");
 
@@ -527,6 +547,34 @@ public class Ubicacion extends javax.swing.JPanel {
         }
         cargaTabla();           // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void agregarNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agregarNombreKeyTyped
+        int limite = 20;
+        if (agregarNombre.getText().length() > limite - 1) {
+            agregarNombre.setText(agregarNombre.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_agregarNombreKeyTyped
+
+    private void agregarDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agregarDescripcionKeyTyped
+        int limite = 60;
+        if (agregarDescripcion.getText().length() > limite - 1) {
+            agregarDescripcion.setText(agregarDescripcion.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_agregarDescripcionKeyTyped
+
+    private void editarNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_editarNombreKeyTyped
+        int limite = 20;
+        if (editarNombre.getText().length() > limite - 1) {
+            editarNombre.setText(editarNombre.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_editarNombreKeyTyped
+
+    private void editarDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_editarDescripcionKeyTyped
+        int limite = 60;
+        if (editarDescripcion.getText().length() > limite - 1) {
+            editarDescripcion.setText(editarDescripcion.getText().substring(0, limite - 1));
+        }
+    }//GEN-LAST:event_editarDescripcionKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
