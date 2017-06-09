@@ -467,7 +467,7 @@ public class Ubicacion extends javax.swing.JPanel {
         try {
             UbicacionPOJO pojo = new UbicacionPOJO();
             pojo.setNombre(agregarNombre.getText());
-            pojo.setDescripcion(agregarDescripcion.getText().toUpperCase());
+            pojo.setDescripcion(agregarDescripcion.getText());
 
             if (UbicacionJDBC.insertaUbicacion(pojo) == 0) {
                 throw new Exception();
