@@ -296,9 +296,7 @@ public class Principal extends javax.swing.JFrame {
             public void run() {
 
                 WebLookAndFeel.install();
-                Principal principal = new Principal();
-                principal.setVisible(true);
-
+                new Principal().setVisible(true);
             }
         });
     }
