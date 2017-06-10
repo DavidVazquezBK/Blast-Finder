@@ -66,6 +66,8 @@ public class Inicio extends javax.swing.JPanel {
         panelUltimosMovimientos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         panelEstadisticas.setBorder(javax.swing.BorderFactory.createTitledBorder("Objetos de base de datos"));
 
@@ -185,20 +187,38 @@ public class Inicio extends javax.swing.JPanel {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "50", "100", "500", "1000", "Todo" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+
+        jLabel1.setText("Límite:");
+
         javax.swing.GroupLayout panelUltimosMovimientosLayout = new javax.swing.GroupLayout(panelUltimosMovimientos);
         panelUltimosMovimientos.setLayout(panelUltimosMovimientosLayout);
         panelUltimosMovimientosLayout.setHorizontalGroup(
             panelUltimosMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUltimosMovimientosLayout.createSequentialGroup()
+            .addGroup(panelUltimosMovimientosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                .addGroup(panelUltimosMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                    .addGroup(panelUltimosMovimientosLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelUltimosMovimientosLayout.setVerticalGroup(
             panelUltimosMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUltimosMovimientosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                .addGroup(panelUltimosMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -224,8 +244,14 @@ public class Inicio extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        cargaTabla();
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -261,14 +287,40 @@ public class Inicio extends javax.swing.JPanel {
         }
     }
 
-    public static DefaultTableModel obtenDefaultTableModelDeVista() {
+    public DefaultTableModel obtenDefaultTableModelDeVista() {
         Connection con = null;
         PreparedStatement st = null;
         String encabezados[] = {"ID", "Material", "Movido a", "Fecha y Hora"};
         DefaultTableModel dt = null;
         try {
             con = JDBC.Conexion.getConnection();
-            st = con.prepareStatement("Select * from ultimomovimientonombres");
+
+            switch (jComboBox1.getSelectedIndex()) {
+                case 0:
+                    st = con.prepareStatement("Select * from ultimomovimientonombres LIMIT 10");
+                    System.out.println("0");
+                    break;
+                case 1:
+                    st = con.prepareStatement("Select * from ultimomovimientonombres LIMIT 50");
+                    System.out.println("1");
+                    break;
+                case 2:
+                    st = con.prepareStatement("Select * from ultimomovimientonombres LIMIT 100");
+                    System.out.println("2");
+                    break;
+                case 3:
+                    st = con.prepareStatement("Select * from ultimomovimientonombres LIMIT 500");
+                    System.out.println("3");
+                    break;
+                case 4:
+                    st = con.prepareStatement("Select * from ultimomovimientonombres LIMIT 1000");
+                    System.out.println("5");
+                    break;
+                default:
+                    st = con.prepareStatement("Select * from ultimomovimientonombres");
+                    System.out.println("def");
+            }
+
             dt = new DefaultTableModel();
             dt.setColumnIdentifiers(encabezados);
             ResultSet rs = st.executeQuery();
@@ -281,6 +333,7 @@ public class Inicio extends javax.swing.JPanel {
                 dt.addRow(ob);
             }
             rs.close();
+            con.close();
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
