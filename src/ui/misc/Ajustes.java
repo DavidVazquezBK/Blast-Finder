@@ -46,12 +46,10 @@ public class Ajustes extends javax.swing.JPanel {
 
             jTextField1.setText(defaultProps.getProperty("ruta"));
             jCheckBox2.setSelected(Boolean.valueOf(defaultProps.getProperty("usarRuta")));
-            jCheckBox1.setSelected(Boolean.valueOf(defaultProps.getProperty("iniciarConSo")));
         }
 
         jTextField1.setText(props.getProperty("ruta"));
         jCheckBox2.setSelected(Boolean.valueOf(props.getProperty("usarRuta")));
-        jCheckBox1.setSelected(Boolean.valueOf(props.getProperty("iniciarConSo")));
 
         cambiaEnabled();
     }
@@ -68,7 +66,6 @@ public class Ajustes extends javax.swing.JPanel {
         jFileChooser1 = new javax.swing.JFileChooser();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
         jCheckBox2 = new javax.swing.JCheckBox();
 
@@ -82,8 +79,6 @@ public class Ajustes extends javax.swing.JPanel {
         });
 
         jTextField1.setText("Ruta no definida");
-
-        jCheckBox1.setText("Iniciar Blast Finder junto con sistema operativo");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         jButton2.setText("Guardar");
@@ -115,9 +110,7 @@ public class Ajustes extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2))
+                        .addComponent(jCheckBox2)
                         .addGap(0, 266, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -130,9 +123,7 @@ public class Ajustes extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -142,8 +133,8 @@ public class Ajustes extends javax.swing.JPanel {
         if (jFileChooser1.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             if (jFileChooser1.getSelectedFile().isDirectory()) {
                 jTextField1.setText("" + jFileChooser1.getSelectedFile());
-            }else{
-             JOptionPane.showMessageDialog(null, "Seleccione un directorio","Error",JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione un directorio", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         }
@@ -157,8 +148,7 @@ public class Ajustes extends javax.swing.JPanel {
 
             props.setProperty("ruta", jTextField1.getText());
             props.setProperty("usarRuta", String.valueOf(jCheckBox2.isSelected()));
-            props.setProperty("iniciarConSo", String.valueOf(jCheckBox1.isSelected()));
-
+          
             props.store(writer, "Preferencias");
             JOptionPane.showMessageDialog(null, "Configuración guardada correctamente", "Hecho", JOptionPane.PLAIN_MESSAGE);
             writer.close();
@@ -180,7 +170,6 @@ public class Ajustes extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JTextField jTextField1;
