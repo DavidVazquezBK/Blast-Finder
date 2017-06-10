@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Conexion {
 
@@ -83,6 +84,7 @@ public class Conexion {
             rs = st.executeQuery();
             return rs;
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Custom query error " + e);
         }
         return null;
