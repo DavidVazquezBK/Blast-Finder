@@ -298,27 +298,21 @@ public class Inicio extends javax.swing.JPanel {
             switch (jComboBox1.getSelectedIndex()) {
                 case 0:
                     st = con.prepareStatement("Select * from ultimomovimientonombres LIMIT 10");
-                    System.out.println("0");
                     break;
                 case 1:
                     st = con.prepareStatement("Select * from ultimomovimientonombres LIMIT 50");
-                    System.out.println("1");
                     break;
                 case 2:
                     st = con.prepareStatement("Select * from ultimomovimientonombres LIMIT 100");
-                    System.out.println("2");
                     break;
                 case 3:
                     st = con.prepareStatement("Select * from ultimomovimientonombres LIMIT 500");
-                    System.out.println("3");
                     break;
                 case 4:
                     st = con.prepareStatement("Select * from ultimomovimientonombres LIMIT 1000");
-                    System.out.println("5");
                     break;
                 default:
                     st = con.prepareStatement("Select * from ultimomovimientonombres");
-                    System.out.println("def");
             }
 
             dt = new DefaultTableModel();
