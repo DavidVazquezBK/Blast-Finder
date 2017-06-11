@@ -29,7 +29,7 @@ public class UbicacionJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_INSERT);
             st.setString(1, pojo.getNombre());
             st.setString(2, pojo.getDescripcion());
@@ -39,8 +39,8 @@ public class UbicacionJDBC {
             System.out.println("Error al insertar " + e);
             return 0;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
     }
 
@@ -50,7 +50,7 @@ public class UbicacionJDBC {
         UbicacionPOJO pojo = new UbicacionPOJO();
         try {
 
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_QUERY);
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
@@ -62,8 +62,8 @@ public class UbicacionJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return pojo;
     }
@@ -74,7 +74,7 @@ public class UbicacionJDBC {
         String encabezados[] = {"ID", "Nombre", "Descripci�n"};
         DefaultTableModel dt = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_QUERY_ALL);
             dt = new DefaultTableModel();
             dt.setColumnIdentifiers(encabezados);
@@ -90,8 +90,8 @@ public class UbicacionJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
 
         }
         return dt;
@@ -101,7 +101,7 @@ public class UbicacionJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_DELETE);
             st.setString(1, id);
             int num = st.executeUpdate();
@@ -112,8 +112,8 @@ public class UbicacionJDBC {
             System.out.println("Error al eliminar = " + e);
             return false;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return true;
     }
@@ -122,7 +122,7 @@ public class UbicacionJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_UPDATE);
             st.setString(1, pojo.getNombre());
             st.setString(2, pojo.getDescripcion());
@@ -135,8 +135,8 @@ public class UbicacionJDBC {
             System.out.println("Error al actualizar = " + e);
             return false;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return true;
     }

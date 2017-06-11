@@ -29,7 +29,7 @@ public class MaterialJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_INSERT);
             st.setString(1, pojo.getNotas());
             st.setInt(2, pojo.getProducto_idProducto());
@@ -40,8 +40,8 @@ public class MaterialJDBC {
             System.out.println("Error al insertar " + e);
             return 0;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
     }
 
@@ -51,7 +51,7 @@ public class MaterialJDBC {
         MaterialPOJO pojo = new MaterialPOJO();
         try {
 
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_QUERY);
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
@@ -64,8 +64,8 @@ public class MaterialJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return pojo;
     }
@@ -76,7 +76,7 @@ public class MaterialJDBC {
         String encabezados[] = {"ID", "Nombre", "Notas", "Producto", "Categoria"};
         DefaultTableModel dt = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement("SELECT material.idMaterial as 'id', material.nombre as 'nombre', material.notas as 'notas', producto.nombre as 'producto', categoria.nombre as 'categoria' FROM material,producto,categoria WHERE material.Producto_idProducto=producto.idProducto AND producto.Categoria_idCategoria=categoria.idCategoria");
             dt = new DefaultTableModel();
             dt.setColumnIdentifiers(encabezados);
@@ -94,8 +94,8 @@ public class MaterialJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
 
         }
         return dt;
@@ -105,7 +105,7 @@ public class MaterialJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_DELETE);
             st.setString(1, id);
             int num = st.executeUpdate();
@@ -116,8 +116,8 @@ public class MaterialJDBC {
             System.out.println("Error al eliminar = " + e);
             return false;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return true;
     }
@@ -126,7 +126,7 @@ public class MaterialJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_UPDATE);
             st.setString(1, pojo.getNotas());
             st.setInt(2, pojo.getProducto_idProducto());
@@ -140,8 +140,8 @@ public class MaterialJDBC {
             System.out.println("Error al actualizar = " + e);
             return false;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return true;
     }

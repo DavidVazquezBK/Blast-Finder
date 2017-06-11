@@ -27,7 +27,7 @@ public class ProductoJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_INSERT);
             st.setString(1, pojo.getNombre());
             st.setInt(2, pojo.getCategoria_idCategoria());
@@ -38,8 +38,8 @@ public class ProductoJDBC {
             System.out.println("Error al insertar " + e);
             return 0;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
     }
 
@@ -49,7 +49,7 @@ public class ProductoJDBC {
         ProductoPOJO pojo = new ProductoPOJO();
         try {
 
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_QUERY_ALL);
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
@@ -62,8 +62,8 @@ public class ProductoJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return pojo;
     }
@@ -74,7 +74,7 @@ public class ProductoJDBC {
         String encabezados[] = {"ID", "Nombre", "notas", "producto","categoria"};
         DefaultTableModel dt = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement("SELECT producto.idProducto as 'id', producto.nombre as 'nombre',categoria.nombre as 'categoria',producto.iniciales as 'iniciales' FROM producto,categoria WHERE producto.Categoria_idCategoria=categoria.idCategoria");
             dt = new DefaultTableModel();
             dt.setColumnIdentifiers(encabezados);
@@ -91,8 +91,8 @@ public class ProductoJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
 
         }
         return dt;
@@ -102,7 +102,7 @@ public class ProductoJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_DELETE);
             st.setString(1, id);
             int num = st.executeUpdate();
@@ -113,8 +113,8 @@ public class ProductoJDBC {
             System.out.println("Error al eliminar = " + e);
             return false;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return true;
     }
@@ -123,7 +123,7 @@ public class ProductoJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_UPDATE);
             st.setString(1, pojo.getNombre());
             st.setInt(2, pojo.getCategoria_idCategoria());
@@ -137,8 +137,8 @@ public class ProductoJDBC {
             System.out.println("Error al actualizar = " + e);
             return false;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return true;
     }

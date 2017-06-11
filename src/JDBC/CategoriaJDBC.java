@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import POJO.CategoriaPOJO;
-import JDBC.Conexion;
+
 public class CategoriaJDBC {
 
     private static final String TABLE = "Categoria";
@@ -73,7 +73,7 @@ public class CategoriaJDBC {
         String encabezados[] = {"ID", "Nombre", "Iniciales"};
         DefaultTableModel dt = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_QUERY_ALL);
             dt = new DefaultTableModel();
             dt.setColumnIdentifiers(encabezados);
@@ -89,8 +89,8 @@ public class CategoriaJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
 
         }
         return dt;

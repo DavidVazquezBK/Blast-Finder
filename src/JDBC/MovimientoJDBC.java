@@ -30,7 +30,7 @@ public class MovimientoJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_INSERT);
             st.setInt(1, pojo.getMaterial_idMaterial());
             st.setInt(2, pojo.getUbicacion_idUbicacion());
@@ -40,8 +40,8 @@ public class MovimientoJDBC {
             System.out.println("Error al insertar " + e);
             return 0;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
     }
 
@@ -51,7 +51,7 @@ public class MovimientoJDBC {
         MovimientoPOJO pojo = new MovimientoPOJO();
         try {
 
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_QUERY);
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
@@ -64,8 +64,8 @@ public class MovimientoJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return pojo;
     }
@@ -76,7 +76,7 @@ public class MovimientoJDBC {
         String encabezados[] = {"ID", "Material", "Ubicacion", "FechaHora"};
         DefaultTableModel dt = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement("SELECT movimiento.idMovimiento,material.nombre,ubicacion.nombre,movimiento.fechaHora FROM movimiento,ubicacion,material WHERE ubicacion.idUbicacion=movimiento.Ubicacion_idUbicacion AND material.idMaterial=movimiento.Material_idMaterial ORDER BY `movimiento`.`fechaHora` DESC");
             dt = new DefaultTableModel();
             dt.setColumnIdentifiers(encabezados);
@@ -97,8 +97,8 @@ public class MovimientoJDBC {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
 
         }
         return dt;
@@ -108,7 +108,7 @@ public class MovimientoJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_DELETE);
             st.setString(1, id);
             int num = st.executeUpdate();
@@ -119,8 +119,8 @@ public class MovimientoJDBC {
             System.out.println("Error al eliminar = " + e);
             return false;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return true;
     }
@@ -129,7 +129,7 @@ public class MovimientoJDBC {
         Connection con = null;
         PreparedStatement st = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement(SQL_UPDATE);
             st.setInt(1, pojo.getMaterial_idMaterial());
             st.setInt(2, pojo.getUbicacion_idUbicacion());
@@ -143,8 +143,8 @@ public class MovimientoJDBC {
             System.out.println("Error al actualizar = " + e);
             return false;
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
         }
         return true;
     }
