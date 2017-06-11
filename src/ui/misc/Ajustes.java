@@ -204,7 +204,7 @@ public class Ajustes extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        File file = new File("src\\config\\prefs.properties");
+        File file = new File("prefs.properties");
         try {
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
