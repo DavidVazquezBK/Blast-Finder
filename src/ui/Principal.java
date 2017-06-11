@@ -283,7 +283,7 @@ public class Principal extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, ex, "Error de base de datos", JOptionPane.ERROR_MESSAGE);
                     System.exit(0);
                 }catch (Exception ex){
-                    JOptionPane.showMessageDialog(null, ex, "Error inicializando", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex, "Error iniciando", JOptionPane.ERROR_MESSAGE);
                     System.exit(0);
                 }
             }
