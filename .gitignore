@@ -1,4 +1,5 @@
 /build/
+/dist/
 src/img/splash/Thumbs.db
 nbproject/private/private.xml
 *.db
