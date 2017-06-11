@@ -4,16 +4,12 @@
 package ui;
 
 import com.alee.laf.WebLookAndFeel;
-import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.SplashScreen;
-import java.awt.SystemTray;
 import java.awt.Toolkit;
-import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -45,26 +41,10 @@ public class Principal extends javax.swing.JFrame {
     static Rectangle2D.Double splashTextArea;
     static Rectangle2D.Double splashProgressArea;
     static Font font;
-    SystemTray tray;
-    TrayIcon trayIcon;
 
     public Principal() {
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/icon.png")));
-
-        tray = SystemTray.getSystemTray();
-
-        Image image = (Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/icon.png")));
-        trayIcon = new TrayIcon(image, "Blast Finder");
-        trayIcon.setImageAutoSize(true);
-        trayIcon.setToolTip("Blast Finder");
-
-        try {
-            tray.add(trayIcon);
-        } catch (AWTException ex) {
-            System.out.println(ex);
-        }
-
         //      Límite de edición
         final JPopupMenu popup = new JPopupMenu();
 
