@@ -51,7 +51,6 @@ import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import ui.Principal;
 import utilidades.QRCodeFactory;
 
 /**
