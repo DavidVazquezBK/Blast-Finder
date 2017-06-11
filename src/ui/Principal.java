@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.SplashScreen;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -44,7 +45,7 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         initComponents();
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../img/icon.png")));
+        this.setIconImage(new ImageIcon(this.getClass().getResource("/img/icon.png")).getImage());
         //      Límite de edición
         final JPopupMenu popup = new JPopupMenu();
 
