@@ -3,7 +3,7 @@
  */
 package ui.misc;
 
-import JDBC.Conexion;
+import jdbc.Conexion;
 import POJO.CategoriaPOJO;
 import POJO.MaterialPOJO;
 import POJO.MovimientoPOJO;

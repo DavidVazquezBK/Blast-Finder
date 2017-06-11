@@ -129,7 +129,7 @@ public class JDBCGenerator {
                 + "        Connection con = null;\n"
                 + "        PreparedStatement st = null;\n"
                 + "        try {\n"
-                + "            con = JDBC.Conexion.getConnection();\n"
+                + "            con = Conexion.getConnection();\n"
                 + "            st = con.prepareStatement(SQL_INSERT);");
         for (int i = 0; i < numeroPropiedades; i++) {
             System.out.println("st.set" + tipoPropiedades[i] + "(" + (i + 1) + ", pojo.get" + Character.toUpperCase(nombrePropiedades[i].charAt(0)) + nombrePropiedades[i].substring(1) + "());");
@@ -141,8 +141,8 @@ public class JDBCGenerator {
                 + "            System.out.println(\"Error al insertar \" + e);\n"
                 + "            return 0;\n"
                 + "        } finally {\n"
-                + "            JDBC.Conexion.close(con);\n"
-                + "            JDBC.Conexion.close(st);\n"
+                + "            Conexion.close(con);\n"
+                + "            Conexion.close(st);\n"
                 + "        }\n"
                 + "    }");
         System.out.println("");
@@ -156,7 +156,7 @@ public class JDBCGenerator {
 
         System.out.println(" try {\n"
                 + "\n"
-                + "            con = JDBC.Conexion.getConnection();\n"
+                + "            con = Conexion.getConnection();\n"
                 + "            st = con.prepareStatement(SQL_QUERY);\n"
                 + "            st.setString(1, id);\n"
                 + "            ResultSet rs = st.executeQuery();\n"
@@ -172,8 +172,8 @@ public class JDBCGenerator {
                 + "        } catch (Exception e) {\n"
                 + "            System.out.println(\"Error al consultar \" + e);\n"
                 + "        } finally {\n"
-                + "            JDBC.Conexion.close(con);\n"
-                + "            JDBC.Conexion.close(st);\n"
+                + "            Conexion.close(con);\n"
+                + "            Conexion.close(st);\n"
                 + "        }\n"
                 + "        return pojo;\n}");
         System.out.println("");
@@ -197,7 +197,7 @@ public class JDBCGenerator {
 
         System.out.println(" DefaultTableModel dt = null;\n"
                 + "        try {\n"
-                + "            con = JDBC.Conexion.getConnection();\n"
+                + "            con = Conexion.getConnection();\n"
                 + "            st = con.prepareStatement(SQL_QUERY);\n"
                 + "            dt = new DefaultTableModel();\n"
                 + "            dt.setColumnIdentifiers(encabezados);\n"
@@ -215,8 +215,8 @@ public class JDBCGenerator {
                 + "        } catch (Exception e) {\n"
                 + "            System.out.println(\"Error al consultar \" + e);\n"
                 + "        } finally {\n"
-                + "            JDBC.Conexion.close(con);\n"
-                + "            JDBC.Conexion.close(st);\n"
+                + "            Conexion.close(con);\n"
+                + "            Conexion.close(st);\n"
                 + "            \n"
                 + "        }\n"
                 + "        return dt;\n"
@@ -229,7 +229,7 @@ public class JDBCGenerator {
                 + "        Connection con = null;\n"
                 + "        PreparedStatement st = null;\n"
                 + "        try {\n"
-                + "            con = JDBC.Conexion.getConnection();\n"
+                + "            con = Conexion.getConnection();\n"
                 + "            st = con.prepareStatement(SQL_DELETE);\n"
                 + "            st.setString(1, id);\n"
                 + "            int num = st.executeUpdate();\n"
@@ -240,8 +240,8 @@ public class JDBCGenerator {
                 + "            System.out.println(\"Error al eliminar = \" + e);\n"
                 + "            return false;\n"
                 + "        } finally {\n"
-                + "            JDBC.Conexion.close(con);\n"
-                + "            JDBC.Conexion.close(st);\n"
+                + "            Conexion.close(con);\n"
+                + "            Conexion.close(st);\n"
                 + "        }\n"
                 + "        return true;\n"
                 + "    }");
@@ -253,7 +253,7 @@ public class JDBCGenerator {
                 + "        Connection con = null;\n"
                 + "        PreparedStatement st = null;\n"
                 + "        try {\n"
-                + "            con = JDBC.Conexion.getConnection();\n"
+                + "            con = Conexion.getConnection();\n"
                 + "            st = con.prepareStatement(SQL_UPDATE);");
         int i = 0;
         for (; i < numeroPropiedades; i++) {
@@ -269,8 +269,8 @@ public class JDBCGenerator {
                 + "            System.out.println(\"Error al actualizar = \" + e);\n"
                 + "            return false;\n"
                 + "        } finally {\n"
-                + "            JDBC.Conexion.close(con);\n"
-                + "            JDBC.Conexion.close(st);\n"
+                + "            Conexion.close(con);\n"
+                + "            Conexion.close(st);\n"
                 + "        }\n"
                 + "        return true;\n"
                 + "    }");

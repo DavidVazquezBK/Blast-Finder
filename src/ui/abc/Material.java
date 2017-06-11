@@ -3,7 +3,7 @@
  */
 package ui.abc;
 
-import JDBC.Conexion;
+import jdbc.Conexion;
 import POJO.CategoriaPOJO;
 import POJO.MaterialPOJO;
 import POJO.ProductoPOJO;
@@ -700,7 +700,7 @@ public class Material extends javax.swing.JPanel {
         PreparedStatement st = null;
         ResultSet generatedKeys = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
             st = con.prepareStatement("INSERT INTO Material (notas, Producto_idProducto, nombre) VALUES (?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             st.setString(1, materialIns.getNotas());
             st.setInt(2, materialIns.getProducto_idProducto());

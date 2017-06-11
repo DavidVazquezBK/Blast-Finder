@@ -3,7 +3,7 @@
  */
 package ui.abc;
 
-import JDBC.Conexion;
+import jdbc.Conexion;
 import POJO.CategoriaPOJO;
 import POJO.ProductoPOJO;
 import java.awt.Toolkit;

@@ -3,13 +3,11 @@
  */
 package ui;
 
-import JDBC.Conexion;
+import jdbc.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -293,7 +291,7 @@ public class Inicio extends javax.swing.JPanel {
         String encabezados[] = {"ID", "Material", "Movido a", "Fecha y Hora"};
         DefaultTableModel dt = null;
         try {
-            con = JDBC.Conexion.getConnection();
+            con = Conexion.getConnection();
 
             switch (jComboBox1.getSelectedIndex()) {
                 case 0:
@@ -331,8 +329,8 @@ public class Inicio extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println("Error al consultar " + e);
         } finally {
-            JDBC.Conexion.close(con);
-            JDBC.Conexion.close(st);
+            Conexion.close(con);
+            Conexion.close(st);
 
         }
         return dt;
