@@ -27,6 +27,7 @@ import java.awt.Cursor;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -75,7 +76,7 @@ public class GeneradorQR extends javax.swing.JPanel {
 
         props = new Properties();
         try {
-            InputStream inputStream = Principal.class.getResourceAsStream("/config/prefs.properties");
+            InputStream inputStream = new FileInputStream(new File("prefs.properties"));
             props.load(inputStream);
             inputStream.close();
             if (Boolean.valueOf(props.getProperty("usarRuta"))) {
