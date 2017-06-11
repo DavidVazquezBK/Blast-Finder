@@ -399,7 +399,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     /**
-     * Returns an ImageIcon, or null if the path was invalid.
+     * Devuelve Icon con la ruta dada o null si es inválida
      */
     public Icon createIcon(String ruta) {
         java.net.URL imgURL = getClass().getResource(ruta);
