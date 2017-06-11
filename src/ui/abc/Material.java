@@ -39,8 +39,8 @@ public class Material extends javax.swing.JPanel {
         this.categorias = new ArrayList<CategoriaPOJO>();
 
         //Cargar datos de padres: categoría y producto
-        ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
         try {
+        ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
             while (rs.next()) {
 
                 CategoriaPOJO categoriaPOJO = new CategoriaPOJO();
@@ -56,8 +56,8 @@ public class Material extends javax.swing.JPanel {
             System.out.println(ex);
         }
 
-        ResultSet rs2 = Conexion.customQuery("SELECT * FROM producto");
         try {
+        ResultSet rs2 = Conexion.customQuery("SELECT * FROM producto");
             while (rs2.next()) {
                 ProductoPOJO productoPOJO = new ProductoPOJO();
                 productoPOJO.setIdProducto(rs2.getInt(1));

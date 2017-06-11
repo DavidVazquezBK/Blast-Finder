@@ -13,10 +13,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import ui.abc.Categoria;
@@ -41,7 +45,7 @@ public class Principal extends javax.swing.JFrame {
     static Rectangle2D.Double splashProgressArea;
     static Font font;
 
-    public Principal() {
+    public Principal() throws SQLException {
         initComponents();
         this.setIconImage(new ImageIcon(this.getClass().getResource("/img/icon.png")).getImage());
         //      Límite de edición
@@ -228,17 +232,19 @@ public class Principal extends javax.swing.JFrame {
         if (jTabbedPane1.getTabCount() > 1) {
             jTabbedPane1.removeTabAt(jTabbedPane1.getSelectedIndex());
             eliminar.setEnabled(true);
-
         }
 
         if (jTabbedPane1.getTabCount() == 1) {
             eliminar.setEnabled(false);
         }
-
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        agregarPestaña(new Inicio(), "Inicio", createIcon("/img/inicio.png"));
+        try {
+            agregarPestaña(new Inicio(), "Inicio", createIcon("/img/inicio.png"));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error de base de datos", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -271,7 +277,15 @@ public class Principal extends javax.swing.JFrame {
             public void run() {
 
                 WebLookAndFeel.install();
-                new Principal().setVisible(true);
+                try {
+                    new Principal().setVisible(true);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, ex, "Error de base de datos", JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }catch (Exception ex){
+                    JOptionPane.showMessageDialog(null, ex, "Error iniciando", JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
             }
         });
     }

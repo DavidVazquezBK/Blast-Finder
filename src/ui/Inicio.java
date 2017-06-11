@@ -20,24 +20,20 @@ public class Inicio extends javax.swing.JPanel {
     /**
      * Creates new form Inicio
      */
-    public Inicio() {
+    public Inicio() throws SQLException {
         initComponents();
         ResultSet datos = Conexion.customQuery("SELECT table_name, TABLE_ROWS FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'blastfinder' LIMIT 5");
-        try {
-            datos.next();
-            l1.setText(datos.getString(2));
-            datos.next();
-            l3.setText(datos.getString(2));
-            datos.next();
-            l4.setText(datos.getString(2));
-            datos.next();
-            l2.setText(datos.getString(2));
-            datos.next();
-            l5.setText(datos.getString(2));
-            Conexion.closeAll();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
+        datos.next();
+        l1.setText(datos.getString(2));
+        datos.next();
+        l3.setText(datos.getString(2));
+        datos.next();
+        l4.setText(datos.getString(2));
+        datos.next();
+        l2.setText(datos.getString(2));
+        datos.next();
+        l5.setText(datos.getString(2));
+        Conexion.closeAll();
         cargaTabla();
     }
 

@@ -32,11 +32,9 @@ public class Producto extends javax.swing.JPanel {
         initComponents();
         cargaTabla();
 
-        ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
-
-        categorias = new ArrayList<CategoriaPOJO>();
-
         try {
+            ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
+            categorias = new ArrayList<CategoriaPOJO>();
             while (rs.next()) {
                 CategoriaPOJO categoriaPOJO = new CategoriaPOJO();
 
@@ -491,10 +489,10 @@ public class Producto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
-        categorias = new ArrayList<CategoriaPOJO>();
-        categorias.clear();
         try {
+            ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
+            categorias = new ArrayList<CategoriaPOJO>();
+            categorias.clear();
             while (rs.next()) {
                 CategoriaPOJO categoriaPOJO = new CategoriaPOJO();
 
