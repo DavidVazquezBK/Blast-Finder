@@ -458,14 +458,16 @@ public class Ubicacion extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        editarId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-        editarNombre.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
-        editarDescripcion.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-        editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
-        editar.setModal(true);
-        editar.setSize(566 + 30, 256 + 40);
-        editar.setLocationRelativeTo(editar.getParent());
-        editar.setVisible(true);
+        if (jTable1.getSelectedRow() != -1) {
+            editarId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+            editarNombre.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
+            editarDescripcion.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+            editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
+            editar.setModal(true);
+            editar.setSize(566 + 30, 256 + 40);
+            editar.setLocationRelativeTo(editar.getParent());
+            editar.setVisible(true);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

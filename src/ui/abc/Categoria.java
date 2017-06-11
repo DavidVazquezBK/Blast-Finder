@@ -425,14 +425,16 @@ public class Categoria extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        editarId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-        editarNombre.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
-        editarIniciales.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-        editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
-        editar.setModal(true);
-        editar.setSize(419 + 30, 40 + 170);
-        editar.setLocationRelativeTo(editar.getParent());
-        editar.setVisible(true);
+        if (jTable1.getSelectedRow() != -1) {
+            editarId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+            editarNombre.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
+            editarIniciales.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+            editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
+            editar.setModal(true);
+            editar.setSize(419 + 30, 40 + 170);
+            editar.setLocationRelativeTo(editar.getParent());
+            editar.setVisible(true);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -539,7 +541,7 @@ public class Categoria extends javax.swing.JPanel {
     }//GEN-LAST:event_editarNombreKeyTyped
 
     private void editarInicialesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_editarInicialesKeyTyped
-int limite = 4;
+        int limite = 4;
         if (editarIniciales.getText().length() > limite - 1) {
             editarIniciales.setText(editarIniciales.getText().substring(0, limite - 1));
         }

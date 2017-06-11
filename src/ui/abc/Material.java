@@ -653,19 +653,21 @@ public class Material extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        editarNotas.setText(notas.getText());
-        editarId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-        for (int i = 0; i < categorias.size(); i++) {
-            if (categorias.get(i).getNombre().equals(jTable1.getValueAt(jTable1.getSelectedRow(), 5))) {
-                editarComboCategoria.setSelectedIndex(i);
+        if (jTable1.getSelectedRow() != -1) {
+            editarNotas.setText(notas.getText());
+            editarId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+            for (int i = 0; i < categorias.size(); i++) {
+                if (categorias.get(i).getNombre().equals(jTable1.getValueAt(jTable1.getSelectedRow(), 5))) {
+                    editarComboCategoria.setSelectedIndex(i);
+                }
             }
-        }
 
-        editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
-        editar.setModal(true);
-        editar.setSize(566 + 30, 40 + 345);
-        editar.setLocationRelativeTo(editar.getParent());
-        editar.setVisible(true);
+            editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
+            editar.setModal(true);
+            editar.setSize(566 + 30, 40 + 345);
+            editar.setLocationRelativeTo(editar.getParent());
+            editar.setVisible(true);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

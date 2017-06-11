@@ -518,21 +518,23 @@ public class Producto extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        idEditar.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-        nombreEditar.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
-        inicialesEditar.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+        if (jTable1.getSelectedRow() != -1) {
+            idEditar.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+            nombreEditar.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
+            inicialesEditar.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
 
-        for (int i = 0; i < categorias.size(); i++) {
-            if (categorias.get(i).getNombre().equals(jTable1.getValueAt(jTable1.getSelectedRow(), 3))) {
-                comboEditar.setSelectedIndex(i);
+            for (int i = 0; i < categorias.size(); i++) {
+                if (categorias.get(i).getNombre().equals(jTable1.getValueAt(jTable1.getSelectedRow(), 3))) {
+                    comboEditar.setSelectedIndex(i);
+                }
             }
-        }
 
-        editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
-        editar.setModal(true);
-        editar.setSize(419 + 30, 198 + 45);
-        editar.setLocationRelativeTo(editar.getParent());
-        editar.setVisible(true);
+            editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
+            editar.setModal(true);
+            editar.setSize(419 + 30, 198 + 45);
+            editar.setLocationRelativeTo(editar.getParent());
+            editar.setVisible(true);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
