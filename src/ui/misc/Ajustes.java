@@ -206,6 +206,7 @@ public class Ajustes extends javax.swing.JPanel {
 
         File file = new File("src\\config\\prefs.properties");
         try {
+            file.createNewFile();
             FileWriter writer = new FileWriter(file);
 
             props.setProperty("ruta", jTextField1.getText());
