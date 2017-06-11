@@ -645,7 +645,7 @@ public class Material extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         agregarComboCategoriaActionPerformed(evt);
 
-        agregar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../img/icon.png")));
+        agregar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
         agregar.setModal(true);
         agregar.setSize(590 + 30, 40 + 300);
         agregar.setLocationRelativeTo(editar.getParent());
@@ -661,7 +661,7 @@ public class Material extends javax.swing.JPanel {
             }
         }
 
-        editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../img/icon.png")));
+        editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
         editar.setModal(true);
         editar.setSize(566 + 30, 40 + 345);
         editar.setLocationRelativeTo(editar.getParent());

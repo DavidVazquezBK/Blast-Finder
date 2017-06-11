@@ -450,7 +450,7 @@ public class Ubicacion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        agregar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../img/icon.png")));
+        agregar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
         agregar.setModal(true);
         agregar.setSize(30 + 566, 40 + 256);
         agregar.setLocationRelativeTo(editar.getParent());
@@ -461,7 +461,7 @@ public class Ubicacion extends javax.swing.JPanel {
         editarId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
         editarNombre.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
         editarDescripcion.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-        editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../img/icon.png")));
+        editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
         editar.setModal(true);
         editar.setSize(566 + 30, 256 + 40);
         editar.setLocationRelativeTo(editar.getParent());

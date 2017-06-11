@@ -510,7 +510,7 @@ public class Producto extends javax.swing.JPanel {
             System.out.println(ex);
         }
 
-        agregar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../img/icon.png")));
+        agregar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
         agregar.setModal(true);
         agregar.setSize(419 + 30, 40 + 158);
         agregar.setLocationRelativeTo(editar.getParent());
@@ -528,7 +528,7 @@ public class Producto extends javax.swing.JPanel {
             }
         }
 
-        editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../../img/icon.png")));
+        editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
         editar.setModal(true);
         editar.setSize(419 + 30, 198 + 45);
         editar.setLocationRelativeTo(editar.getParent());
