@@ -84,7 +84,7 @@ public class GeneradorQR extends javax.swing.JPanel {
                 jTextField1.setText(null);
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "¡Archivo de configuración no encontrado! Inicializando", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "¡Archivo de configuración inexistente! Inicializando", "Error", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Archivo de configuración no encontrado: " + ex);
         }
 
