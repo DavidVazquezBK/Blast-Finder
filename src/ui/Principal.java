@@ -261,15 +261,11 @@ public class Principal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
         splashInit();
         appInit();
-
-        if (mySplash != null) // check if we really had a spash screen
-        {
-            mySplash.close();   // we're done with it
+        if (mySplash != null) {
+            mySplash.close();
         }
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
