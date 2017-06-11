@@ -1,23 +1,24 @@
 package JDBC;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Properties;
 import javax.swing.JOptionPane;
 
 public class Conexion {
 
-    private static final String JDBC_HOST = "localhost";
-    private static final String JDBC_USER = "root";
-    private static final String JDBC_PASS = "";
+    private static String jdbcHost;
+    private static String jdbcUser;
+    private static String jdbcPass;
     private static final String JDBC_BD = "blastfinder";
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String JDBC_URL = "jdbc:mysql://" + JDBC_HOST + "/" + JDBC_BD;
+    private static String jdbcUrl;
     private static Driver controlador = null;
 
     static ResultSet rs;
@@ -34,7 +35,8 @@ public class Conexion {
                 System.out.println("Error en el driver " + e);
             }
         }
-        return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
+        inicializa();
+        return DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPass);
     }
 
     public static void close(Connection rs) {
@@ -68,6 +70,21 @@ public class Conexion {
     }
 
     public static void main(String[] args) {
+        Properties props = new Properties();
+        try {
+            InputStream inputStream = Conexion.class.getResourceAsStream("/config/prefs.properties");
+            props.load(inputStream);
+            inputStream.close();
+            jdbcHost = props.getProperty("host");
+            jdbcUser = props.getProperty("user");
+            jdbcPass = props.getProperty("pass");
+            System.out.println(jdbcPass);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.ERROR_MESSAGE);
+            jdbcHost = "localhost";
+            jdbcUser = "root";
+            jdbcPass = "";
+        }
         try {
             Connection con = Conexion.getConnection();
             System.out.println(con);
@@ -98,6 +115,26 @@ public class Conexion {
             con.close();
         } catch (SQLException ex) {
             System.out.println("Error cerrando recursos: " + ex);
+        }
+    }
+
+    public static void inicializa() {
+
+        Properties props = new Properties();
+        try {
+            InputStream inputStream = Conexion.class.getResourceAsStream("/config/prefs.properties");
+            props.load(inputStream);
+            inputStream.close();
+            jdbcHost = props.getProperty("host");
+            jdbcUser = props.getProperty("user");
+            jdbcPass = props.getProperty("pass");
+            jdbcUrl = "jdbc:mysql://" + jdbcHost + "/" + JDBC_BD;
+            System.out.println(jdbcPass);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.ERROR_MESSAGE);
+            jdbcHost = "localhost";
+            jdbcUser = "root";
+            jdbcPass = "";
         }
     }
 }
