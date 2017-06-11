@@ -4,18 +4,14 @@
 package ui.misc;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import ui.Principal;
 
 /**
  *
@@ -32,12 +28,34 @@ public class Ajustes extends javax.swing.JPanel {
         initComponents();
         props = new Properties();
         try {
-            InputStream inputStream = Principal.class.getResourceAsStream("/config/prefs.properties");
+            InputStream inputStream = new FileInputStream(new File("prefs.properties"));
             props.load(inputStream);
             inputStream.close();
+            jTextField1.setText(props.getProperty("ruta"));
+            jCheckBox2.setSelected(Boolean.valueOf(props.getProperty("usarRuta")));
+            host.setText(props.getProperty("host"));
+            user.setText(props.getProperty("user"));
+            pass.setText(props.getProperty("pass"));
+
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Archivo de configuración no encontrado: " + ex);
+            JOptionPane.showMessageDialog(null, "Error cargando archivo, inicializando: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
+
+            Properties defaultProps = new Properties();
+            defaultProps.setProperty("ruta", "Ruta no definida");
+            defaultProps.setProperty("usarRuta", "false");
+            defaultProps.setProperty("iniciarConSo", "false");
+            defaultProps.setProperty("host", "localhost");
+            defaultProps.setProperty("user", "root");
+            defaultProps.setProperty("pass", "");
+
+            jTextField1.setText(defaultProps.getProperty("ruta"));
+            jCheckBox2.setSelected(Boolean.valueOf(defaultProps.getProperty("usarRuta")));
+            host.setText(defaultProps.getProperty("host"));
+            user.setText(defaultProps.getProperty("user"));
+            pass.setText(defaultProps.getProperty("pass"));
+        } catch (NullPointerException ex) {
+
+            JOptionPane.showMessageDialog(null, "Archivo de configuración inxistente, inicializando: " + ex, "Error", JOptionPane.INFORMATION_MESSAGE);
 
             Properties defaultProps = new Properties();
             defaultProps.setProperty("ruta", "Ruta no definida");
@@ -53,13 +71,6 @@ public class Ajustes extends javax.swing.JPanel {
             user.setText(defaultProps.getProperty("user"));
             pass.setText(defaultProps.getProperty("pass"));
         }
-
-        jTextField1.setText(props.getProperty("ruta"));
-        jCheckBox2.setSelected(Boolean.valueOf(props.getProperty("usarRuta")));
-        host.setText(props.getProperty("host"));
-        user.setText(props.getProperty("user"));
-        pass.setText(props.getProperty("pass"));
-
         cambiaEnabled();
     }
 
