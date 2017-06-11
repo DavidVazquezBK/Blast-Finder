@@ -87,10 +87,6 @@ public class MovimientoJDBC {
                 ob[1] = rs.getObject(2);
                 ob[2] = rs.getObject(3);
                 ob[3] = rs.getObject(4);
-//                Timestamp timestamp = rs.getTimestamp(4);
-//                java.util.Date date =new java.util.Date();
-//                date.setTime(timestamp.getTime());
-//                ob[3] = date;
                 dt.addRow(ob);
             }
             rs.close();
