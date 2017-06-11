@@ -73,6 +73,7 @@ public class Conexion {
             System.out.println(con);
         } catch (Exception e) {
             System.out.println("Error = " + e);
+            e.printStackTrace();
         }
     }
 
