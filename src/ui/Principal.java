@@ -50,27 +50,27 @@ public class Principal extends javax.swing.JFrame {
         //Añadir cada botón del pop-up
         popup.add(new JMenuItem(new AbstractAction("Categorías") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Categoria(), "Administrar Categorías", createImageIcon("../img/administracion.png"));
+                agregarPestaña(new Categoria(), "Administrar Categorías", createImageIcon("/img/administracion.png"));
             }
         }));
         popup.add(new JMenuItem(new AbstractAction("Productos") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Producto(), "Administrar Productos", createImageIcon("../img/administracion.png"));
+                agregarPestaña(new Producto(), "Administrar Productos", createImageIcon("/img/administracion.png"));
             }
         }));
         popup.add(new JMenuItem(new AbstractAction("Materiales") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Material(), "Administrar Materiales", createImageIcon("../img/administracion.png"));
+                agregarPestaña(new Material(), "Administrar Materiales", createImageIcon("/img/administracion.png"));
             }
         }));
         popup.add(new JMenuItem(new AbstractAction("Ubicaciones") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Ubicacion(), "Administrar Ubicaciones", createImageIcon("../img/administracion.png"));
+                agregarPestaña(new Ubicacion(), "Administrar Ubicaciones", createImageIcon("/img/administracion.png"));
             }
         }));
         popup.add(new JMenuItem(new AbstractAction("Movimientos") {
             public void actionPerformed(ActionEvent e) {
-                agregarPestaña(new Movimiento(), "Administrar Movimientos", createImageIcon("../img/administracion.png"));
+                agregarPestaña(new Movimiento(), "Administrar Movimientos", createImageIcon("/img/administracion.png"));
             }
         }));
 
@@ -82,7 +82,7 @@ public class Principal extends javax.swing.JFrame {
         });
         //      Límite de edición
         this.setLocationRelativeTo(null);
-        agregarPestaña(new Inicio(), "Inicio", createImageIcon("../img/inicio.png"));
+        agregarPestaña(new Inicio(), "Inicio", createImageIcon("/img/inicio.png"));
     }
 
     /**
@@ -238,23 +238,23 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        agregarPestaña(new Inicio(), "Inicio", createImageIcon("../img/inicio.png"));
+        agregarPestaña(new Inicio(), "Inicio", createImageIcon("/img/inicio.png"));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        agregarPestaña(new MaterialVista(), "Vista de materiales", createImageIcon("../img/lupa.png"));
+        agregarPestaña(new MaterialVista(), "Vista de materiales", createImageIcon("/img/lupa.png"));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        agregarPestaña(new GeneradorQR(), "Generador QR", createImageIcon("../img/qr.png"));
+        agregarPestaña(new GeneradorQR(), "Generador QR", createImageIcon("/img/qr.png"));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        agregarPestaña(new Ajustes(), "Ajustes", createImageIcon("../img/ajustes.png"));
+        agregarPestaña(new Ajustes(), "Ajustes", createImageIcon("/img/ajustes.png"));
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        agregarPestaña(new MoverMaterial(), "Mover Materiales", createImageIcon("../img/movimiento.png"));
+        agregarPestaña(new MoverMaterial(), "Mover Materiales", createImageIcon("/img/movimiento.png"));
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
