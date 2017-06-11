@@ -36,7 +36,7 @@ public class Ajustes extends javax.swing.JPanel {
             props.load(inputStream);
             inputStream.close();
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "¡Archivo de configuración no encontrado! Inicializando", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Archivo de configuración no encontrado: " + ex);
 
             Properties defaultProps = new Properties();
@@ -148,7 +148,7 @@ public class Ajustes extends javax.swing.JPanel {
 
             props.setProperty("ruta", jTextField1.getText());
             props.setProperty("usarRuta", String.valueOf(jCheckBox2.isSelected()));
-          
+
             props.store(writer, "Preferencias");
             JOptionPane.showMessageDialog(null, "Configuración guardada correctamente", "Hecho", JOptionPane.PLAIN_MESSAGE);
             writer.close();
