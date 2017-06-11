@@ -54,8 +54,8 @@ public class MoverMaterial extends javax.swing.JPanel {
         this.materiales = new ArrayList<MaterialPOJO>();
         this.ubicaciones = new ArrayList<UbicacionPOJO>();
 
-        ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
         try {
+            ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
             while (rs.next()) {
 
                 CategoriaPOJO categoriaPOJO = new CategoriaPOJO();
@@ -71,8 +71,8 @@ public class MoverMaterial extends javax.swing.JPanel {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        ResultSet rs2 = Conexion.customQuery("SELECT * FROM producto");
         try {
+            ResultSet rs2 = Conexion.customQuery("SELECT * FROM producto");
             while (rs2.next()) {
                 ProductoPOJO productoPOJO = new ProductoPOJO();
                 productoPOJO.setIdProducto(rs2.getInt(1));
@@ -88,8 +88,8 @@ public class MoverMaterial extends javax.swing.JPanel {
             System.out.println(ex);
         }
 
-        ResultSet rs3 = Conexion.customQuery("SELECT * FROM material");
         try {
+            ResultSet rs3 = Conexion.customQuery("SELECT * FROM material");
 
             while (rs3.next()) {
                 MaterialPOJO materialPOJO = new MaterialPOJO();
@@ -107,8 +107,8 @@ public class MoverMaterial extends javax.swing.JPanel {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        ResultSet rs4 = Conexion.customQuery("SELECT * FROM ubicacion");
         try {
+            ResultSet rs4 = Conexion.customQuery("SELECT * FROM ubicacion");
 
             while (rs4.next()) {
                 UbicacionPOJO ubicacionPOJO = new UbicacionPOJO();
@@ -465,8 +465,8 @@ private void cargaJTree() {
             categoria.setUserObject(categorias.get(i));
 
             //Agregar materiales a cada categoria
-            ResultSet rs = Conexion.customQuery("SELECT * FROM material WHERE material.Producto_idProducto in (SELECT producto.idProducto FROM producto WHERE producto.Categoria_idCategoria = " + categorias.get(i).getIdCategoria() + ")");
             try {
+                ResultSet rs = Conexion.customQuery("SELECT * FROM material WHERE material.Producto_idProducto in (SELECT producto.idProducto FROM producto WHERE producto.Categoria_idCategoria = " + categorias.get(i).getIdCategoria() + ")");
                 while (rs.next()) {
                     categoria.add(new DefaultMutableTreeNode(new MaterialPOJO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4))));
 
@@ -492,8 +492,8 @@ private void cargaJTree() {
             producto.setUserObject(productos.get(i));
 
             //Agregar materiales a cada categoria
-            ResultSet rs = Conexion.customQuery("SELECT * FROM material WHERE material.Producto_idProducto=" + productos.get(i).getIdProducto());
             try {
+                ResultSet rs = Conexion.customQuery("SELECT * FROM material WHERE material.Producto_idProducto=" + productos.get(i).getIdProducto());
                 while (rs.next()) {
                     producto.add(new DefaultMutableTreeNode(new MaterialPOJO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4))));
 

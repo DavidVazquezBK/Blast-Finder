@@ -94,18 +94,11 @@ public class Conexion {
         }
     }
 
-    public static ResultSet customQuery(String query) {
-
-        try {
-            con = Conexion.getConnection();
-            st = con.prepareStatement(query);
-            rs = st.executeQuery();
-            return rs;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Custom query error " + e);
-        }
-        return null;
+    public static ResultSet customQuery(String query) throws SQLException {
+        con = Conexion.getConnection();
+        st = con.prepareStatement(query);
+        rs = st.executeQuery();
+        return rs;
     }
 
     public static void closeAll() {
