@@ -111,7 +111,7 @@ public class Principal extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Blast Finder - Instituto Franklin de Veracruz A.C.");
+        setTitle("Blast Finder");
 
         jToolBar1.setFloatable(false);
 
@@ -295,7 +295,7 @@ public class Principal extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, ex, "Error de base de datos", JOptionPane.ERROR_MESSAGE);
                     System.exit(0);
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex, "Error iniciando", JOptionPane.ERROR_MESSAGE);
                     System.exit(0);
                 }
@@ -318,7 +318,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar3;
     private javax.swing.JToolBar jToolBar4;
     // End of variables declaration//GEN-END:variables
- private static void splashInit() {
+    private static void splashInit() {
 
         mySplash = SplashScreen.getSplashScreen();
 
