@@ -73,7 +73,6 @@ public class MoverMaterial extends javax.swing.JPanel {
             rs.close();
             st.close();
             con.close();
-            Conexion.closeAll();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -93,7 +92,6 @@ public class MoverMaterial extends javax.swing.JPanel {
             rs2.close();
             st.close();
             con.close();
-            Conexion.closeAll();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -117,7 +115,6 @@ public class MoverMaterial extends javax.swing.JPanel {
             rs3.close();
             st.close();
             con.close();
-            Conexion.closeAll();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -139,7 +136,6 @@ public class MoverMaterial extends javax.swing.JPanel {
             rs4.close();
             st.close();
             con.close();
-            Conexion.closeAll();
         } catch (SQLException ex) {
             System.out.println(ex);
         }

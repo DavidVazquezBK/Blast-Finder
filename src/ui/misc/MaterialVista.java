@@ -56,7 +56,6 @@ public class MaterialVista extends javax.swing.JPanel {
             rs.close();
             st.close();
             con.close();
-            Conexion.closeAll();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -76,7 +75,6 @@ public class MaterialVista extends javax.swing.JPanel {
             rs2.close();
             st.close();
             con.close();
-            Conexion.closeAll();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -100,7 +98,6 @@ public class MaterialVista extends javax.swing.JPanel {
             rs3.close();
             st.close();
             con.close();
-            Conexion.closeAll();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
