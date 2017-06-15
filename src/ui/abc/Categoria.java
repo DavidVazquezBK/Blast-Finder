@@ -7,7 +7,6 @@ import POJO.CategoriaPOJO;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import jdbc.CategoriaJDBC;
 

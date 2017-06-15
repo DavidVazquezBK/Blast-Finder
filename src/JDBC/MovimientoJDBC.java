@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import POJO.MovimientoPOJO;
-import java.sql.Timestamp;
 
 public class MovimientoJDBC {
 

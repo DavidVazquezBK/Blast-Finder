@@ -3,14 +3,11 @@
  */
 package ui.abc;
 
-import POJO.CategoriaPOJO;
 import POJO.UbicacionPOJO;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import jdbc.CategoriaJDBC;
-import jdbc.ProductoJDBC;
 import jdbc.UbicacionJDBC;
 
 /**
