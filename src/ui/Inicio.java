@@ -22,7 +22,9 @@ public class Inicio extends javax.swing.JPanel {
      */
     public Inicio() throws SQLException {
         initComponents();
-        ResultSet datos = Conexion.customQuery("SELECT table_name, TABLE_ROWS FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'blastfinder' LIMIT 5");
+        Connection con = Conexion.getConnection();
+        PreparedStatement st = con.prepareStatement("SELECT table_name, TABLE_ROWS FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'blastfinder' LIMIT 5");
+        ResultSet datos = st.executeQuery();
         datos.next();
         l1.setText(datos.getString(2));
         datos.next();
@@ -33,7 +35,11 @@ public class Inicio extends javax.swing.JPanel {
         l2.setText(datos.getString(2));
         datos.next();
         l5.setText(datos.getString(2));
-        Conexion.closeAll();
+
+        datos.close();
+        st.close();
+        con.close();
+
         cargaTabla();
     }
 
