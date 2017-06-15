@@ -7,6 +7,8 @@ import jdbc.Conexion;
 import POJO.CategoriaPOJO;
 import POJO.ProductoPOJO;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,7 +35,9 @@ public class Producto extends javax.swing.JPanel {
         cargaTabla();
 
         try {
-            ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
+            Connection con = Conexion.getConnection();
+            PreparedStatement st = con.prepareStatement("SELECT * FROM categoria");
+            ResultSet rs = st.executeQuery();
             categorias = new ArrayList<CategoriaPOJO>();
             while (rs.next()) {
                 CategoriaPOJO categoriaPOJO = new CategoriaPOJO();
@@ -46,6 +50,9 @@ public class Producto extends javax.swing.JPanel {
 
                 comboEditar.addItem(categoriaPOJO.getNombre());
             }
+            rs.close();
+            st.close();
+            con.close();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -490,7 +497,9 @@ public class Producto extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
+            Connection con = Conexion.getConnection();
+            PreparedStatement st = con.prepareStatement("SELECT * FROM categoria");
+            ResultSet rs = st.executeQuery();
             categorias = new ArrayList<CategoriaPOJO>();
             categorias.clear();
             while (rs.next()) {
@@ -504,6 +513,9 @@ public class Producto extends javax.swing.JPanel {
 
                 agregarComboCategoria.addItem(categoriaPOJO.getNombre());
             }
+            rs.close();
+            st.close();
+            con.close();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
