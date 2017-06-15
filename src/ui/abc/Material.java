@@ -40,7 +40,9 @@ public class Material extends javax.swing.JPanel {
 
         //Cargar datos de padres: categoría y producto
         try {
-        ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
+            Connection con = Conexion.getConnection();
+            PreparedStatement st = con.prepareStatement("SELECT * FROM categoria");
+            ResultSet rs = st.executeQuery();
             while (rs.next()) {
 
                 CategoriaPOJO categoriaPOJO = new CategoriaPOJO();
@@ -51,13 +53,17 @@ public class Material extends javax.swing.JPanel {
 
                 categorias.add(categoriaPOJO);
             }
-            Conexion.closeAll();
+            rs.close();
+            st.close();
+            con.close();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
 
         try {
-        ResultSet rs2 = Conexion.customQuery("SELECT * FROM producto");
+            Connection con = Conexion.getConnection();
+            PreparedStatement st = con.prepareStatement("SELECT * FROM producto");
+            ResultSet rs2 = st.executeQuery();
             while (rs2.next()) {
                 ProductoPOJO productoPOJO = new ProductoPOJO();
                 productoPOJO.setIdProducto(rs2.getInt(1));
@@ -68,7 +74,8 @@ public class Material extends javax.swing.JPanel {
                 productos.add(productoPOJO);
             }
             rs2.close();
-            Conexion.closeAll();
+            st.close();
+            con.close();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
