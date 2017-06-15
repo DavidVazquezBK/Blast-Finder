@@ -32,6 +32,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -93,7 +95,9 @@ public class GeneradorQR extends javax.swing.JPanel {
         this.materiales = new ArrayList<MaterialPOJO>();
 
         try {
-            ResultSet rs = Conexion.customQuery("SELECT * FROM categoria");
+            Connection con = Conexion.getConnection();
+            PreparedStatement st = con.prepareStatement("SELECT * FROM categoria");
+            ResultSet rs = st.executeQuery();
             while (rs.next()) {
 
                 CategoriaPOJO categoriaPOJO = new CategoriaPOJO();
@@ -105,12 +109,16 @@ public class GeneradorQR extends javax.swing.JPanel {
                 categorias.add(categoriaPOJO);
             }
             rs.close();
+            st.close();
+            con.close();
             Conexion.closeAll();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
         try {
-            ResultSet rs2 = Conexion.customQuery("SELECT * FROM producto");
+            Connection con = Conexion.getConnection();
+            PreparedStatement st = con.prepareStatement("SELECT * FROM producto");
+            ResultSet rs2 = st.executeQuery();
             while (rs2.next()) {
                 ProductoPOJO productoPOJO = new ProductoPOJO();
                 productoPOJO.setIdProducto(rs2.getInt(1));
@@ -121,13 +129,17 @@ public class GeneradorQR extends javax.swing.JPanel {
                 productos.add(productoPOJO);
             }
             rs2.close();
+            st.close();
+            con.close();
             Conexion.closeAll();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
 
         try {
-            ResultSet rs3 = Conexion.customQuery("SELECT * FROM material");
+            Connection con = Conexion.getConnection();
+            PreparedStatement st = con.prepareStatement("SELECT * FROM material");
+            ResultSet rs3 = st.executeQuery();
 
             while (rs3.next()) {
                 MaterialPOJO materialPOJO = new MaterialPOJO();
@@ -141,6 +153,8 @@ public class GeneradorQR extends javax.swing.JPanel {
             }
 
             rs3.close();
+            st.close();
+            con.close();
             Conexion.closeAll();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -644,12 +658,16 @@ public class GeneradorQR extends javax.swing.JPanel {
 
             //Agregar materiales a cada categoria
             try {
-                ResultSet rs = Conexion.customQuery("SELECT * FROM material WHERE material.Producto_idProducto in (SELECT producto.idProducto FROM producto WHERE producto.Categoria_idCategoria = " + categorias.get(i).getIdCategoria() + ")");
+                Connection con = Conexion.getConnection();
+                PreparedStatement st = con.prepareStatement("SELECT * FROM material WHERE material.Producto_idProducto in (SELECT producto.idProducto FROM producto WHERE producto.Categoria_idCategoria = " + categorias.get(i).getIdCategoria() + ")");
+                ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     categoria.add(new DefaultMutableTreeNode(new MaterialPOJO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4))));
 
                 }
-
+                rs.close();
+                st.close();
+                con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(MaterialVista.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -671,12 +689,16 @@ public class GeneradorQR extends javax.swing.JPanel {
 
             //Agregar materiales a cada categoria
             try {
-                ResultSet rs = Conexion.customQuery("SELECT * FROM material WHERE material.Producto_idProducto=" + productos.get(i).getIdProducto());
+                Connection con = Conexion.getConnection();
+                PreparedStatement st = con.prepareStatement("SELECT * FROM material WHERE material.Producto_idProducto=" + productos.get(i).getIdProducto());
+                ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     producto.add(new DefaultMutableTreeNode(new MaterialPOJO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4))));
 
                 }
-
+                rs.close();
+                st.close();
+                con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(MaterialVista.class.getName()).log(Level.SEVERE, null, ex);
             }
