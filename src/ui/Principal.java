@@ -172,6 +172,7 @@ public class Principal extends javax.swing.JFrame {
 
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
         eliminar.setText("Eliminar Pestaña Actual");
+        eliminar.setEnabled(false);
         eliminar.setFocusable(false);
         eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         eliminar.addActionListener(new java.awt.event.ActionListener() {

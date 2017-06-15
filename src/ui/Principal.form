@@ -152,6 +152,7 @@
               <Image iconType="3" name="/img/eliminar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Eliminar Pesta&#xf1;a Actual"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
