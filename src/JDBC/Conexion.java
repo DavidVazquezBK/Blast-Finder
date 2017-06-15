@@ -94,16 +94,6 @@ public class Conexion {
         }
     }
 
-    public static void closeAll() {
-        try {
-            rs.close();
-            st.close();
-            con.close();
-        } catch (SQLException ex) {
-            System.out.println("Error cerrando recursos: " + ex);
-        }
-    }
-
     public static void inicializa() {
 
         Properties props = new Properties();
