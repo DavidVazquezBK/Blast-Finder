@@ -474,11 +474,11 @@ public class Ubicacion extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        agregar.setVisible(false);        // TODO add your handling code here:
+        agregar.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        editar.setVisible(false);        // TODO add your handling code here:
+        editar.setVisible(false);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -498,7 +498,7 @@ public class Ubicacion extends javax.swing.JPanel {
             System.out.println("Error agregando Ubicación ui.abc.Ubicacion: " + e);
         }
 
-        agregar.setVisible(false);        // TODO add your handling code here:
+        agregar.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -516,7 +516,7 @@ public class Ubicacion extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error editando ubicación: ui.abc.Ubicación", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Error editando ubicación ui.abc.ubicación: " + e);
         }
-        editar.setVisible(false);        // TODO add your handling code here:
+        editar.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -544,7 +544,7 @@ public class Ubicacion extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error eliminando ubicación(es) : ui.abc.Ubicación", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Error eliminando ubicación(s)ui.abc.Ubicacion: " + e);
         }
-        cargaTabla();           // TODO add your handling code here:
+        cargaTabla();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void agregarNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_agregarNombreKeyTyped

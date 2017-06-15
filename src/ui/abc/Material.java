@@ -745,11 +745,11 @@ public class Material extends javax.swing.JPanel {
     }//GEN-LAST:event_agregarGuardarActionPerformed
 
     private void agregarCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCerrarActionPerformed
-        agregar.setVisible(false);        // TODO add your handling code here:
+        agregar.setVisible(false);        
     }//GEN-LAST:event_agregarCerrarActionPerformed
 
     private void editarCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarCerrarActionPerformed
-        editar.setVisible(false);        // TODO add your handling code here:
+        editar.setVisible(false);        
     }//GEN-LAST:event_editarCerrarActionPerformed
 
     private void editarComboCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_editarComboCategoriaItemStateChanged

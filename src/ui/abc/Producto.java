@@ -574,7 +574,7 @@ public class Producto extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        agregar.setVisible(false);        // TODO add your handling code here:
+        agregar.setVisible(false);        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -602,11 +602,11 @@ public class Producto extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error eliminando producto(s) : ui.abc.Producto", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Error eliminando producto(s)ui.abc.Producto: " + e);
         }
-        cargaTabla();        // TODO add your handling code here:
+        cargaTabla();        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        editar.setVisible(false);        // TODO add your handling code here:
+        editar.setVisible(false);        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
