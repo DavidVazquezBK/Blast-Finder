@@ -833,10 +833,7 @@ public class Material extends javax.swing.JPanel {
         MaterialPOJO pojo = new MaterialPOJO();
         pojo.setIdMaterial(Integer.parseInt(editarId.getText()));
         pojo.setNotas(editarNotas.getText());
-
-        //TODO 
-        pojo.setNombre("Generando");
-
+        pojo.setNombre(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
         ProductoPOJO productoPOJO = (ProductoPOJO) editarComboProducto.getSelectedItem();
         pojo.setProducto_idProducto(productoPOJO.getIdProducto());
 
