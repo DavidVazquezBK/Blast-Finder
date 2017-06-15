@@ -94,13 +94,6 @@ public class Conexion {
         }
     }
 
-    public static ResultSet customQuery(String query) throws SQLException {
-        con = Conexion.getConnection();
-        st = con.prepareStatement(query);
-        rs = st.executeQuery();
-        return rs;
-    }
-
     public static void closeAll() {
         try {
             rs.close();
