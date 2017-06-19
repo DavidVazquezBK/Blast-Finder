@@ -199,7 +199,7 @@ public class Principal extends javax.swing.JFrame {
         jToolBar4.setRollover(true);
         jToolBar4.setPreferredSize(new java.awt.Dimension(139, 25));
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Info_16px.png"))); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/info.png"))); // NOI18N
         jButton7.setText("Ayuda y Contacto");
         jButton7.setFocusable(false);
         jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -283,7 +283,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        agregarPestaña(new Ayuda(), "Ayuda y Contacto", createIcon("/img/lnfo_16.png"));
+        agregarPestaña(new Ayuda(), "Ayuda y Contacto", createIcon("/img/info.png"));
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
