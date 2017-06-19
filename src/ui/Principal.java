@@ -27,6 +27,7 @@ import ui.abc.Movimiento;
 import ui.abc.Producto;
 import ui.abc.Ubicacion;
 import ui.misc.Ajustes;
+import ui.misc.Ayuda;
 import ui.misc.GeneradorQR;
 import ui.misc.MaterialVista;
 import ui.misc.MoverMaterial;
@@ -202,6 +203,11 @@ public class Principal extends javax.swing.JFrame {
         jButton7.setText("Ayuda y Contacto");
         jButton7.setFocusable(false);
         jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         jToolBar4.add(jButton7);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -275,6 +281,10 @@ public class Principal extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         agregarPestaña(new MoverMaterial(), "Mover Materiales", createIcon("/img/movimiento.png"));
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        agregarPestaña(new Ayuda(), "Ayuda y Contacto", createIcon("/img/lnfo_16.png"));
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
