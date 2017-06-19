@@ -113,6 +113,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="burnkillreach@gmail.com"/>
           </Properties>
         </Component>
@@ -123,6 +124,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField2">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="profesorbastar@hotmail.com"/>
           </Properties>
         </Component>
@@ -133,11 +135,13 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField3">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="22 99 52 52 51"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField4">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="22 99 52 52 51"/>
           </Properties>
         </Component>
@@ -153,6 +157,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField5">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="Computaci&#xf3;n del Golfo, Gozales Pages #1115, entre Alacio y Mina C.P. 91700"/>
           </Properties>
         </Component>
