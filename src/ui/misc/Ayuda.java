@@ -60,7 +60,7 @@ public class Ayuda extends javax.swing.JPanel {
         jTextField3.setText("22 99 52 52 51");
 
         jTextField4.setEditable(false);
-        jTextField4.setText("22 99 52 52 51");
+        jTextField4.setText("1 62 62 10");
 
         jLabel5.setText("Teléfono 2:");
 
