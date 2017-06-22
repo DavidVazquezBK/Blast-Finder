@@ -123,7 +123,7 @@ public class Ayuda extends javax.swing.JPanel {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/PDF_16px.png"))); // NOI18N
         jButton1.setText("Manual");
 
-        jLabel7.setText("Guardar manual en ruta:");
+        jLabel7.setText("Guardar manual como:");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         jButton2.setText("Crear copia");
