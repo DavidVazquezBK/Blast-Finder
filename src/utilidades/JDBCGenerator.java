@@ -69,12 +69,10 @@ public class JDBCGenerator {
                 + "import POJO." + tabla + "POJO;\n"
                 + "\n"
                 + "public class " + tabla + "JDBC {");
-        System.out.println("");
     }
 
     public static void imprime2Variables(String tabla, int numeroPropiedades, String[] nombrePropiedades) {
         System.out.print(" private static final String TABLE = \"" + tabla + "\";" + "\n");
-        System.out.println("");
         System.out.print("private static final String SQL_INSERT = \"INSERT INTO \" + TABLE + \"(");
 
         for (int i = 0; i < numeroPropiedades; i++) {
@@ -99,12 +97,9 @@ public class JDBCGenerator {
         System.out.println(")\";");
 
         //SQL_QUERY_ALL
-        System.out.println("");
         System.out.println("private static final String SQL_QUERY_ALL = \"Select * from \" + TABLE;");
-        System.out.println("");
         //SQL_QUERY
         System.out.println("private static final String SQL_QUERY = \"Select * from \" + TABLE + \" where id=?\";");
-        System.out.println("");
         //SQL UPDATE
         System.out.print("private static final String SQL_UPDATE = \"UPDATE \" + TABLE + \" set ");
 
@@ -121,7 +116,6 @@ public class JDBCGenerator {
         //SQL_DELETE
         System.out.println(" private static final String SQL_DELETE = \"Delete from \" + TABLE\n"
                 + "            + \" where id" + tabla + "=?\";");
-        System.out.println("");
     }
 
     public static void imprime3Inserta(String tabla, int numeroPropiedades, String[] nombrePropiedades, String[] tipoPropiedades) {
@@ -145,7 +139,6 @@ public class JDBCGenerator {
                 + "            Conexion.close(st);\n"
                 + "        }\n"
                 + "    }");
-        System.out.println("");
     }
 
     public static void imprime4Consultar(String tabla, int numeroPropiedades, String[] nombrePropiedades, String[] tipoPropiedades) {
@@ -176,7 +169,6 @@ public class JDBCGenerator {
                 + "            Conexion.close(st);\n"
                 + "        }\n"
                 + "        return pojo;\n}");
-        System.out.println("");
     }
 
     public static void imprime5Carga(String tabla, int numeroPropiedades, String[] nombrePropiedades, String[] tipoPropiedades, String[] encabezados) {
@@ -221,7 +213,6 @@ public class JDBCGenerator {
                 + "        }\n"
                 + "        return dt;\n"
                 + "    }");
-        System.out.println("");
     }
 
     public static void imprime6Elimina(String tabla, int numeroPropiedades, String[] nombrePropiedades, String[] tipoPropiedades, String[] encabezados) {
@@ -245,7 +236,6 @@ public class JDBCGenerator {
                 + "        }\n"
                 + "        return true;\n"
                 + "    }");
-        System.out.println("");
     }
 
     public static void imprime7Actualiza(String tabla, int numeroPropiedades, String[] nombrePropiedades, String[] tipoPropiedades, String[] encabezados) {
@@ -274,6 +264,5 @@ public class JDBCGenerator {
                 + "        }\n"
                 + "        return true;\n"
                 + "    }");
-        System.out.println("");
     }
 }
