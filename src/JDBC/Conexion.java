@@ -33,6 +33,7 @@ public class Conexion {
                 DriverManager.registerDriver(controlador);
             } catch (Exception e) {
                 System.out.println("Error en el driver " + e);
+                e.printStackTrace();
             }
         }
         inicializa();
