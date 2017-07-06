@@ -235,7 +235,7 @@ public class Ayuda extends javax.swing.JPanel {
 
         Path tempOutput;
         try {
-            tempOutput = Files.createTempFile("Manual de Usuario - Blast Finder - Blast Bit (Temporal)", ".pdf");
+            tempOutput = Files.createTempFile("Manual de Usuario - Blast Finder - Blast Bit (Temporal) ", ".pdf");
             tempOutput.toFile().deleteOnExit();
             Files.copy(in,
                     tempOutput, StandardCopyOption.REPLACE_EXISTING);
