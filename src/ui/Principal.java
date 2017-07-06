@@ -303,9 +303,11 @@ public class Principal extends javax.swing.JFrame {
                 try {
                     new Principal().setVisible(true);
                 } catch (SQLException ex) {
+                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, ex, "Error de base de datos", JOptionPane.ERROR_MESSAGE);
                     System.exit(0);
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, ex, "Error iniciando", JOptionPane.ERROR_MESSAGE);
                     System.exit(0);
                 }
