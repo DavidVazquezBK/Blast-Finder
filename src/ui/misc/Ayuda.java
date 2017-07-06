@@ -6,11 +6,15 @@ package ui.misc;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import ui.Principal;
 
 /**
  *
@@ -201,28 +205,48 @@ public class Ayuda extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (Desktop.isDesktopSupported()) {
-            try {
-                File myFile = new File("src/Manual de Usuario - Blast Finder - Blast Bit.pdf");
-                Desktop.getDesktop().open(myFile);
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.ERROR_MESSAGE);
-                ex.printStackTrace();
-            }
-}    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (jFileChooser1.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            try {
-                if (jFileChooser1.getSelectedFile().isDirectory()) {
-                    copyFileUsingChannel(new File("src/Manual de Usuario - Blast Finder - Blast Bit.pdf"), new File(jFileChooser1.getSelectedFile().getAbsolutePath() + File.separator + "Manual de Usuario - Blast Finder - Blast Bit.pdf"));
+            if (jFileChooser1.getSelectedFile().isDirectory()) {
+
+                InputStream in = getClass().getResourceAsStream("/utilidades/Manual de Usuario - Blast Finder - Blast Bit.pdf");
+
+                Path tempOutput;
+                try {
+                    tempOutput = Files.createTempFile("Manual de Usuario - Blast Finder - Blast Bit", ".pdf");
+                    tempOutput.toFile().deleteOnExit();
+                    Files.copy(in, tempOutput, StandardCopyOption.REPLACE_EXISTING);
+                    File userManual = new File(tempOutput.toFile().getPath());
+//                    if (userManual.exists()) {
+//                        Desktop.getDesktop().open(userManual);
+//                    }
+                    Files.copy(userManual.toPath(), new File(jFileChooser1.getSelectedFile() + File.separator + "Manual de Usuario - Blast Finder - Blast Bit.pdf").toPath());
+                    JOptionPane.showMessageDialog(null, "Copia creada correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                } catch (IOException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(Ayuda.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        InputStream in = getClass().getResourceAsStream("/utilidades/Manual de Usuario - Blast Finder - Blast Bit.pdf");
+
+        Path tempOutput;
+        try {
+            tempOutput = Files.createTempFile("Manual de Usuario - Blast Finder - Blast Bit (Temporal)", ".pdf");
+            tempOutput.toFile().deleteOnExit();
+            Files.copy(in,
+                    tempOutput, StandardCopyOption.REPLACE_EXISTING);
+            File userManual = new File(tempOutput.toFile().getPath());
+            if (userManual.exists()) {
+                Desktop.getDesktop().open(userManual);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -244,7 +268,7 @@ public class Ayuda extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
-private static void copyFileUsingChannel(File fuente, File dest) throws IOException {
-        Files.copy(fuente.toPath(), dest.toPath());
+private static void copyFileUsingChannel(InputStream fuente, File dest) throws IOException {
+        Files.copy(fuente, dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 }
