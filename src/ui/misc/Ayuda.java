@@ -6,6 +6,10 @@ package ui.misc;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,6 +34,7 @@ public class Ayuda extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -46,6 +51,8 @@ public class Ayuda extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+
+        jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Blast Bit"));
 
@@ -137,6 +144,11 @@ public class Ayuda extends javax.swing.JPanel {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         jButton2.setText("Crear copia");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -192,7 +204,7 @@ public class Ayuda extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (Desktop.isDesktopSupported()) {
             try {
-                File myFile = new File("src/bf.pdf");
+                File myFile = new File("src/Manual de Usuario - Blast Finder - Blast Bit.pdf");
                 Desktop.getDesktop().open(myFile);
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.ERROR_MESSAGE);
@@ -200,10 +212,24 @@ public class Ayuda extends javax.swing.JPanel {
             }
 }    }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (jFileChooser1.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            System.out.println(jFileChooser1.getSelectedFile().toPath());
+            try {
+                if (jFileChooser1.getSelectedFile().isDirectory()) {
+                    copyFileUsingChannel(new File("src/Manual de Usuario - Blast Finder - Blast Bit.pdf"), new File(jFileChooser1.getSelectedFile().getAbsolutePath() + File.separator + "Manual de Usuario - Blast Finder - Blast Bit.pdf"));
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Ayuda.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -219,4 +245,7 @@ public class Ayuda extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
+private static void copyFileUsingChannel(File fuente, File dest) throws IOException {
+        Files.copy(fuente.toPath(), dest.toPath());
+    }
 }
