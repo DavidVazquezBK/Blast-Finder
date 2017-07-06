@@ -572,7 +572,6 @@ public class GeneradorQR extends javax.swing.JPanel {
                 muestraError(ex);
             } catch (WriterException ex) {
                 muestraError(ex);
-                muestraError(ex);
             } catch (IOException ex) {
                 muestraError(ex);
             } catch (Exception ex) {
