@@ -214,7 +214,6 @@ public class Ayuda extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (jFileChooser1.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            System.out.println(jFileChooser1.getSelectedFile().toPath());
             try {
                 if (jFileChooser1.getSelectedFile().isDirectory()) {
                     copyFileUsingChannel(new File("src/Manual de Usuario - Blast Finder - Blast Bit.pdf"), new File(jFileChooser1.getSelectedFile().getAbsolutePath() + File.separator + "Manual de Usuario - Blast Finder - Blast Bit.pdf"));
