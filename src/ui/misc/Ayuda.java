@@ -79,7 +79,7 @@ public class Ayuda extends javax.swing.JPanel {
         jLabel6.setText("Domicilio:");
 
         jTextField5.setEditable(false);
-        jTextField5.setText("Computación del Golfo, Gozales Pages #1115, entre Alacio y Mina C.P. 91700");
+        jTextField5.setText("Computación del Golfo, Gozález Pages #1115, entre Alacio y Mina C.P. 91700");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

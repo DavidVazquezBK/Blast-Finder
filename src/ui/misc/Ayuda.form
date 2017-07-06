@@ -165,7 +165,7 @@
         <Component class="javax.swing.JTextField" name="jTextField5">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="Computaci&#xf3;n del Golfo, Gozales Pages #1115, entre Alacio y Mina C.P. 91700"/>
+            <Property name="text" type="java.lang.String" value="Computaci&#xf3;n del Golfo, Goz&#xe1;lez Pages #1115, entre Alacio y Mina C.P. 91700"/>
           </Properties>
         </Component>
       </SubComponents>
