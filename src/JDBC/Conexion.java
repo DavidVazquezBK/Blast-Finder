@@ -109,8 +109,8 @@ public class Conexion {
 //            System.out.println(jdbcPass);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.ERROR_MESSAGE);
-            jdbcHost = "localhost";
-            jdbcUser = "root";
+            jdbcHost = "";
+            jdbcUser = "";
             jdbcPass = "";
         }
     }
