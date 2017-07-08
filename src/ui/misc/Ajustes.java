@@ -44,9 +44,9 @@ public class Ajustes extends javax.swing.JPanel {
             defaultProps.setProperty("ruta", "Ruta no definida");
             defaultProps.setProperty("usarRuta", "false");
             defaultProps.setProperty("iniciarConSo", "false");
-            defaultProps.setProperty("host", "localhost");
-            defaultProps.setProperty("user", "root");
-            defaultProps.setProperty("pass", "");
+            defaultProps.setProperty("host", "johnny.heliohost.org");
+            defaultProps.setProperty("user", "bkreach_root");
+            defaultProps.setProperty("pass", "123456");
 
             jTextField1.setText(defaultProps.getProperty("ruta"));
             jCheckBox2.setSelected(Boolean.valueOf(defaultProps.getProperty("usarRuta")));

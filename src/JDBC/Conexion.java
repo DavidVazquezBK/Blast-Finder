@@ -106,7 +106,7 @@ public class Conexion {
             jdbcUser = props.getProperty("user");
             jdbcPass = props.getProperty("pass");
             jdbcUrl = "jdbc:mysql://" + jdbcHost + "/" + JDBC_BD;
-            System.out.println(jdbcPass);
+//            System.out.println(jdbcPass);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex, "Error", JOptionPane.ERROR_MESSAGE);
             jdbcHost = "localhost";
