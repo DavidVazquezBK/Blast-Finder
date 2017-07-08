@@ -16,7 +16,7 @@ public class Conexion {
     private static String jdbcHost;
     private static String jdbcUser;
     private static String jdbcPass;
-    private static final String JDBC_BD = "blastfinder";
+    private static final String JDBC_BD = "bkreach_blastfinder";
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static String jdbcUrl;
     private static Driver controlador = null;

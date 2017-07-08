@@ -23,7 +23,7 @@ public class Inicio extends javax.swing.JPanel {
     public Inicio() throws SQLException {
         initComponents();
         Connection con = Conexion.getConnection();
-        PreparedStatement st = con.prepareStatement("SELECT table_name, TABLE_ROWS FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'blastfinder' LIMIT 5");
+        PreparedStatement st = con.prepareStatement("SELECT table_name, TABLE_ROWS FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bkreach_blastfinder' LIMIT 5");
         ResultSet datos = st.executeQuery();
         datos.next();
         l1.setText(datos.getString(2));
