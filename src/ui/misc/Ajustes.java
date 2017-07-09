@@ -4,8 +4,8 @@
 package ui.misc;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +28,7 @@ public class Ajustes extends javax.swing.JPanel {
         initComponents();
         props = new Properties();
         try {
-            InputStream inputStream = new FileInputStream(new File("prefs.properties"));
+            InputStream inputStream = Ajustes.class.getResourceAsStream("/config/prefs.properties");
             props.load(inputStream);
             inputStream.close();
             jTextField1.setText(props.getProperty("ruta"));
@@ -214,11 +214,7 @@ public class Ajustes extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        File file = new File("prefs.properties");
         try {
-            file.createNewFile();
-            FileWriter writer = new FileWriter(file);
 
             props.setProperty("ruta", jTextField1.getText());
             props.setProperty("usarRuta", String.valueOf(jCheckBox2.isSelected()));
@@ -226,15 +222,12 @@ public class Ajustes extends javax.swing.JPanel {
             props.setProperty("user", user.getText());
             props.setProperty("pass", pass.getText());
 
-            props.store(writer, "Preferencias");
+            props.store(new FileOutputStream(new File(this.getClass().getResource("/config/prefs.properties").getPath())), null);
             JOptionPane.showMessageDialog(null, "Configuración guardada correctamente", "Hecho", JOptionPane.PLAIN_MESSAGE);
-            writer.close();
         } catch (FileNotFoundException ex) {
             System.out.println("No existe el archivo: " + ex);
         } catch (IOException ex) {
             System.out.println("Error guardando: " + ex);
-        } finally {
-
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
