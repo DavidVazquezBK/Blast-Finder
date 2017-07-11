@@ -291,11 +291,11 @@ public class Principal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        splashInit();
-        appInit();
-        if (mySplash != null) {
-            mySplash.close();
-        }
+//        splashInit();
+//        appInit();
+//        if (mySplash != null) {
+//            mySplash.close();
+//        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
