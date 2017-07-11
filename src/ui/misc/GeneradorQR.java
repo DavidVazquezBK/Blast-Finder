@@ -77,7 +77,7 @@ public class GeneradorQR extends javax.swing.JPanel {
 
         props = new Properties();
         try {
-            InputStream inputStream = new FileInputStream(new File("prefs.properties"));
+            InputStream inputStream = GeneradorQR.class.getResourceAsStream("/config/prefs.properties");
             props.load(inputStream);
             inputStream.close();
             if (Boolean.valueOf(props.getProperty("usarRuta"))) {
