@@ -38,38 +38,9 @@ public class Ajustes extends javax.swing.JPanel {
             pass.setText(props.getProperty("pass"));
 
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Error cargando archivo, inicializando: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
-
-            Properties defaultProps = new Properties();
-            defaultProps.setProperty("ruta", "Ruta no definida");
-            defaultProps.setProperty("usarRuta", "false");
-            defaultProps.setProperty("iniciarConSo", "false");
-            defaultProps.setProperty("host", "johnny.heliohost.org");
-            defaultProps.setProperty("user", "bkreach_root");
-            defaultProps.setProperty("pass", "123456");
-
-            jTextField1.setText(defaultProps.getProperty("ruta"));
-            jCheckBox2.setSelected(Boolean.valueOf(defaultProps.getProperty("usarRuta")));
-            host.setText(defaultProps.getProperty("host"));
-            user.setText(defaultProps.getProperty("user"));
-            pass.setText(defaultProps.getProperty("pass"));
+            JOptionPane.showMessageDialog(null, "Error cargando archivo: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
         } catch (NullPointerException ex) {
-
             JOptionPane.showMessageDialog(null, "Archivo de configuración inxistente, inicializando: " + ex, "Error", JOptionPane.INFORMATION_MESSAGE);
-
-            Properties defaultProps = new Properties();
-            defaultProps.setProperty("ruta", "Ruta no definida");
-            defaultProps.setProperty("usarRuta", "false");
-            defaultProps.setProperty("iniciarConSo", "false");
-            defaultProps.setProperty("host", "localhost");
-            defaultProps.setProperty("user", "root");
-            defaultProps.setProperty("pass", "");
-
-            jTextField1.setText(defaultProps.getProperty("ruta"));
-            jCheckBox2.setSelected(Boolean.valueOf(defaultProps.getProperty("usarRuta")));
-            host.setText(defaultProps.getProperty("host"));
-            user.setText(defaultProps.getProperty("user"));
-            pass.setText(defaultProps.getProperty("pass"));
         }
         cambiaEnabled();
     }
