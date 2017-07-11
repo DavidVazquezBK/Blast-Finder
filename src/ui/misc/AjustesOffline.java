@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -26,7 +27,7 @@ public class AjustesOffline extends javax.swing.JFrame {
      */
     public AjustesOffline() {
         initComponents();
-
+        this.setIconImage(new ImageIcon(this.getClass().getResource("/img/icon.png")).getImage());
         props = new Properties();
         try {
             InputStream inputStream = Ajustes.class.getResourceAsStream("/config/prefs.properties");
