@@ -47,7 +47,7 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() throws SQLException {
         initComponents();
-        this.setIconImage(new ImageIcon(this.getClass().getResource("/img/icon.png")).getImage());
+        this.setIconImage(new ImageIcon(this.getClass().getResource("/img/icon16.png")).getImage());
         //      Límite de edición
         final JPopupMenu popup = new JPopupMenu();
 

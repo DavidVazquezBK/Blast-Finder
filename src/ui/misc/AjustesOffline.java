@@ -27,7 +27,7 @@ public class AjustesOffline extends javax.swing.JFrame {
      */
     public AjustesOffline() {
         initComponents();
-        this.setIconImage(new ImageIcon(this.getClass().getResource("/img/icon.png")).getImage());
+        this.setIconImage(new ImageIcon(this.getClass().getResource("/img/icon16.png")).getImage());
         props = new Properties();
         try {
             InputStream inputStream = Ajustes.class.getResourceAsStream("/config/prefs.properties");

@@ -416,7 +416,7 @@ public class Categoria extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        agregar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
+        agregar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon16.png")));
         agregar.setModal(true);
         agregar.setSize(419 + 30, 40 + 134);
         agregar.setLocationRelativeTo(editar.getParent());
@@ -428,7 +428,7 @@ public class Categoria extends javax.swing.JPanel {
             editarId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
             editarNombre.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
             editarIniciales.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-            editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon.png")));
+            editar.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon16.png")));
             editar.setModal(true);
             editar.setSize(419 + 30, 40 + 170);
             editar.setLocationRelativeTo(editar.getParent());
