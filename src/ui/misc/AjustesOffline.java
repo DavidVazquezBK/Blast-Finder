@@ -74,6 +74,7 @@ public class AjustesOffline extends javax.swing.JFrame {
             pass.setText(defaultProps.getProperty("pass"));
         }
         cambiaEnabled();
+        setLocationRelativeTo(null);
     }
 
     /**
