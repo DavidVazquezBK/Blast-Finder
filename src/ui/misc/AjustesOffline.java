@@ -115,7 +115,7 @@ public class AjustesOffline extends javax.swing.JFrame {
         jTextField1.setText("Ruta no definida");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        jButton2.setText("Guardar");
+        jButton2.setText("Guardar y salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -238,6 +238,7 @@ public class AjustesOffline extends javax.swing.JFrame {
         } catch (IOException ex) {
             System.out.println("Error guardando: " + ex);
         }
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
