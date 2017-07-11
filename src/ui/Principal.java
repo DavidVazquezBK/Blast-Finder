@@ -27,6 +27,7 @@ import ui.abc.Movimiento;
 import ui.abc.Producto;
 import ui.abc.Ubicacion;
 import ui.misc.Ajustes;
+import ui.misc.AjustesOffline;
 import ui.misc.Ayuda;
 import ui.misc.GeneradorQR;
 import ui.misc.MaterialVista;
@@ -305,10 +306,18 @@ public class Principal extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, ex, "Error de base de datos", JOptionPane.ERROR_MESSAGE);
-                    System.exit(0);
+                    pregunta();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, ex, "Error iniciando", JOptionPane.ERROR_MESSAGE);
+                    pregunta();
+                }
+            }
+
+            private void pregunta() {
+                if (JOptionPane.showConfirmDialog(null, "¿Iniciar ajutes en modo desconectado?", "Error", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    new AjustesOffline().setVisible(true);
+                }else{
                     System.exit(0);
                 }
             }
