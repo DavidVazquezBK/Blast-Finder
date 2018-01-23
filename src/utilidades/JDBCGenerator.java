@@ -1,4 +1,4 @@
-package utilidades;
+package util;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  * Creador de JDBC's para aplicaciones Java y MySQL.
- * Versión: 1.3.1
+ * Versión: 1.3.2
  *
  * @author BurnKill
  */
@@ -66,7 +66,7 @@ public class JDBCGenerator {
                 + "import java.sql.PreparedStatement;\n"
                 + "import java.sql.ResultSet;\n"
                 + "import javax.swing.table.DefaultTableModel;\n"
-                + "import POJO." + tabla + "POJO;\n"
+                + "import pojo." + tabla + "POJO;\n"
                 + "\n"
                 + "public class " + tabla + "JDBC {");
     }
